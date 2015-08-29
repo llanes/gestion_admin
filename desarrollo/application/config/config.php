@@ -17,7 +17,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = '';
+//$config['base_url'] = '';
+// christian llanes
+// Con este sencillo código ya podemos trasladar nuestra apliación sin necesidad de preocuparnos de configurar correctamente su URL.
+
+$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
+if (!isset($_SERVER['ORIG_SCRIPT_NAME']))
+{
+  $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+}
+else
+{
+  $config['base_url'] .= str_replace(basename($_SERVER['ORIG_SCRIPT_NAME']),"",$_SERVER['ORIG_SCRIPT_NAME']);
+}
+
+/*
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +85,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'spanish';
 
 /*
 |--------------------------------------------------------------------------
@@ -308,7 +323,7 @@ $config['cache_query_string'] = FALSE;
 | http://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = '3754c3a4461848af0d4b8a529b6c778d';
 
 /*
 |--------------------------------------------------------------------------
