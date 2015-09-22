@@ -5,14 +5,14 @@
              <ul id="revolutionul" style="display:none;">
                  <!-- 1st slide -->
                  <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="">
-                 <!--  <img src="<?php echo base_url();?>clienteStilo/img/banner/red-bg.jpg" alt=""> -->
+                 <!--  <img src="<?= base_url();?>clienteStilo/img/banner/red-bg.jpg" alt=""> -->
                      <div class="caption lfl slide_item_left"
                           data-x="10"
                           data-y="70"
                           data-speed="400"
                           data-start="1500"
                           data-easing="easeOutBack">
-                         <img src="<?php echo base_url();?>clienteStilo/img/banner/ban2.png" alt="Image 1">
+                         <img src="<?= base_url();?>clienteStilo/img/banner/ban2.png" alt="Image 1">
                      </div>
                      <div class="caption lfr slide_title"
                           data-x="670"
@@ -62,7 +62,7 @@
                  <!-- 2nd slide  -->
                  <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="">
                      <!-- THE MAIN IMAGE IN THE FIRST SLIDE -->
-                     <img src="<?php echo base_url();?>clienteStilo/img/banner/banner_bg.jpg" alt="">
+                     <img src="<?= base_url();?>clienteStilo/img/banner/banner_bg.jpg" alt="">
                      <div class="caption lft slide_title"
                           data-x="10"
                           data-y="125"
@@ -109,7 +109,7 @@
                           data-speed="400"
                           data-start="2000"
                           data-easing="easeOutBack"  >
-                         <img src="<?php echo base_url();?>clienteStilo/img/banner/man.png" alt="man">
+                         <img src="<?= base_url();?>clienteStilo/img/banner/man.png" alt="man">
                      </div>
 
                  </li>
@@ -123,7 +123,7 @@
                           data-speed="1200"
                           data-start="1500"
                           data-easing="easeOutBack">
-                         <img src="<?php echo base_url();?>clienteStilo/img/banner/imac.png" alt="Image 1">
+                         <img src="<?= base_url();?>clienteStilo/img/banner/imac.png" alt="Image 1">
                      </div>
                      <div class="caption lfl slide_item_right"
                           data-x="25"
@@ -131,7 +131,7 @@
                           data-speed="1200"
                           data-start="2000"
                           data-easing="easeOutBack">
-                         <img src="<?php echo base_url();?>clienteStilo/img/banner/tab.png" alt="Image 1">
+                         <img src="<?= base_url();?>clienteStilo/img/banner/tab.png" alt="Image 1">
                      </div>
                      <div class="caption lfl slide_item_right"
                           data-x="200"
@@ -139,7 +139,7 @@
                           data-speed="1200"
                           data-start="2500"
                           data-easing="easeOutBack">
-                         <img src="<?php echo base_url();?>clienteStilo/img/banner/mobile.png" alt="Image 1">
+                         <img src="<?= base_url();?>clienteStilo/img/banner/mobile.png" alt="Image 1">
                      </div>
                      <div class="caption lfl slide_item_right"
                           data-x="250"
@@ -147,7 +147,7 @@
                           data-speed="1200"
                           data-start="3000"
                           data-easing="easeOutBack">
-                         <img src="<?php echo base_url();?>clienteStilo/img/banner/laptop.png" alt="Image 1">
+                         <img src="<?= base_url();?>clienteStilo/img/banner/laptop.png" alt="Image 1">
                      </div>
                      <div class="caption lfr slide_title slide_item_left yellow-txt"
                           data-x="670"

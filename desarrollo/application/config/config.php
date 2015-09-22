@@ -17,20 +17,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-//$config['base_url'] = '';
+$config['base_url'] = '//gestion-admin-llanes.c9.io/desarrollo/';
 // christian llanes
 // Con este sencillo código ya podemos trasladar nuestra apliación sin necesidad de preocuparnos de configurar correctamente su URL.
 
-$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
-if (!isset($_SERVER['ORIG_SCRIPT_NAME']))
-{
-  $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-}
-else
-{
-  $config['base_url'] .= str_replace(basename($_SERVER['ORIG_SCRIPT_NAME']),"",$_SERVER['ORIG_SCRIPT_NAME']);
-}
+// $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+// $config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
+// if (!isset($_SERVER['ORIG_SCRIPT_NAME']))
+// {
+//   $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+// }
+// else
+// {
+//   $config['base_url'] .= str_replace(basename($_SERVER['ORIG_SCRIPT_NAME']),"",$_SERVER['ORIG_SCRIPT_NAME']);
+// }
 
 
 /*
