@@ -40,7 +40,7 @@
                           Gestioná tus eventos
 
                      </div>
-                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Home_admin" target="_blank"
+                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>Home_admin" target="_blank"
                         data-x="670"
                         data-y="400"
                         data-speed="400"
