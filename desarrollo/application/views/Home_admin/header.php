@@ -19,7 +19,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="<?= base_url();?>admin_stilo/dist/img/avatar.png" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">User</span>
+                  <span class="hidden-xs"><?php echo $this->session->userdata('Usuario')?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -36,7 +36,7 @@
                       <a href="#" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Cerrar Seccion</a>
+                      <a href="<?= site_url('index.php/Login/login/logout')?>" class="btn btn-default btn-flat">Cerrar Seccion</a>
                     </div>
                   </li>
                 </ul>

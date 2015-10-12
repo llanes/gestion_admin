@@ -9,12 +9,13 @@
     <link rel="shortcut icon" href="<?= base_url();?>clienteStilo/img/favicon.png">
 
     <title>{titulo}</title>
-
+    <link href="<?= base_url();?>admin_stilo/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url();?>clienteStilo/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url();?>clienteStilo/assets/revolution_slider/css/rs-style.css" media="screen">
     <link rel="stylesheet" href="<?= base_url();?>clienteStilo/assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
     <!-- Custom styles for this template -->
+
     <link href="<?= base_url();?>clienteStilo/css/style.css" rel="stylesheet">
     <link href="<?= base_url();?>clienteStilo/css/style-responsive.css" rel="stylesheet" />
   </head>

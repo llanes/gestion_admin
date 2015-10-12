@@ -1,4 +1,4 @@
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="home">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -14,7 +14,16 @@
         <!-- Main content -->
         <section class="content">
 
-          <!-- Your Page Content Here -->
+         
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
+      <div id="cliente_vista" class="cliente_vista">
+
+      </div>
+      <div id="empleado_vista" class="empleado_vista">
+
+      </div>
+      <div id="productos_vista" class="productos_vista">
+
+      </div>

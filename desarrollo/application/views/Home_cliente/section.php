@@ -5,7 +5,7 @@
              <ul id="revolutionul" style="display:none;">
                  <!-- 1st slide -->
                  <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="">
-                 <!--  <img src="<?= base_url();?>clienteStilo/img/banner/red-bg.jpg" alt=""> -->
+                  <img src="<?= base_url();?>clienteStilo/img/banner/1.jpg" alt="">
                      <div class="caption lfl slide_item_left"
                           data-x="10"
                           data-y="70"
@@ -23,7 +23,7 @@
                          Gestion & Administracion
                      </div>
 
-                     <div class="caption lfr slide_subtitle dark-text"
+                     <div class="caption lfr slide_subtitle slide_item_left"
                           data-x="670"
                           data-y="190"
                           data-speed="400"
@@ -40,7 +40,7 @@
                           Gestioná tus eventos
 
                      </div>
-                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>Home_admin" target="_blank"
+                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login/login" target=""
                         data-x="670"
                         data-y="400"
                         data-speed="400"
@@ -48,7 +48,7 @@
                         data-easing="easeOutExpo">
                          Acceder
                      </a>
-                     <a class="caption lfr btn btn-success yellow slide_btn" href="#" target="_blank"
+                     <a class="caption lfr btn btn-success yellow slide_btn" href="<?= base_url();?>index.php/Login/login/registro" target=""
                         data-x="800"
                         data-y="400"
                         data-speed="400"
@@ -62,7 +62,7 @@
                  <!-- 2nd slide  -->
                  <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="">
                      <!-- THE MAIN IMAGE IN THE FIRST SLIDE -->
-                     <img src="<?= base_url();?>clienteStilo/img/banner/banner_bg.jpg" alt="">
+                     <img src="<?= base_url();?>clienteStilo/img/banner/2.jpg" alt="">
                      <div class="caption lft slide_title"
                           data-x="10"
                           data-y="125"
@@ -87,7 +87,7 @@
                           data-easing="easeOutExpo">
 							Gestioná tus eventos
                      </div>
-                     <a class="caption lft slide_btn btn red slide_item_left" href="#" target="_blank"
+                     <a class="caption lft slide_btn btn red slide_item_left" href="<?= base_url();?>index.php/Login/login" target=""
                         data-x="10"
                         data-y="300"
                         data-speed="400"
@@ -95,7 +95,7 @@
                         data-easing="easeOutExpo">
                         Acceder
                      </a>
-                     <a class="caption lft slide_btn btn red slide_item_left" href="#" target="_blank"
+                     <a class="caption lft slide_btn btn red slide_item_left" href="<?= base_url();?>index.php/Login/login/registro" target=""
                         data-x="120"
                         data-y="300"
                         data-speed="400"
@@ -116,7 +116,7 @@
 
                  <!-- 3rd slide  -->
                  <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-delay="9400" data-thumb="">
-                    
+                  <img src="<?= base_url();?>clienteStilo/img/banner/3.jpg" alt="">
                      <div class="caption lfl slide_item_right"
                           data-x="10"
                           data-y="105"
@@ -173,7 +173,7 @@
                           data-easing="easeOutExpo">
 							Gestioná tus eventos
                      </div>
-                     <a class="caption lfr btn yellow slide_btn" href="#" target="_blank"
+                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login/login" target=""
                         data-x="670"
                         data-y="400"
                         data-speed="400"
@@ -181,7 +181,7 @@
                         data-easing="easeOutExpo">
                          Acceder
                      </a>
-                     <a class="caption lfr btn yellow slide_btn" href="#" target="_blank"
+                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login/login/registro" target=""
                         data-x="800"
                         data-y="400"
                         data-speed="400"

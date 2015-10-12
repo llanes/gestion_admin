@@ -6,6 +6,7 @@
     <script type="text/javascript" src="<?= base_url();?>clienteStilo/assets/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
     <script type="text/javascript" src="<?= base_url();?>clienteStilo/assets/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="<?= base_url();?>clienteStilo/js/revulation-slide.js"></script>
+    <script src="<?= base_url();?>clienteStilo/js/ajax.js"></script>
 =
 
   <script>

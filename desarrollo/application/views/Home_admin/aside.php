@@ -17,35 +17,36 @@
             <li class="header">Navegacion</li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Layout Options</span>
-                <span class="label label-primary pull-right">4</span>
+                <i class="fa fa-cogs"></i>
+                <span>Administrar</span>
+                <span class="fa fa-angle-left pull-right"></span>
               </a>
               <ul class="treeview-menu">
-                <li><a href=""><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Boxed</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Fixed</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                <li id=""><a href="#" ><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> Empleado</a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
               </ul>
             </li>
-            <li>
-              <a href="">
-                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
+            <li id="cliente" class="" data-tabs="tabs">
+              <a href="#" data-toggle="tab" >
+                <i class="fa fa-users"></i> <span>Clientes</span>  
+                <small class="label pull-right bg-red">{num_cliente}</small>
               </a>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
-                <i class="fa fa-angle-left pull-right"></i>
+            <li id="empleado" class="" data-tabs="tabs">
+              <a href="#" data-toggle="tab" >
+               <i class="fa fa-user-secret"></i> <span>Empleados</span>  
+                <small class="label pull-right bg-red">{num_empleado}</small>
               </a>
-              <ul class="treeview-menu">
-                <li><a href=""><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Inline charts</a></li>
-              </ul>
             </li>
+            <li id="productos" class="" data-tabs="tabs">
+              <a href="#" data-toggle="tab" >
+               <i class="fa fa-cart-arrow-down"></i> <span>Productos</span>  
+                <small class="label pull-right bg-red">{num_productos}</small>
+              </a>
+            </li>
+
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>

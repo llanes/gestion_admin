@@ -10,7 +10,7 @@
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Inicio</a></li>
+                        <!-- <li class="active"><a href="index.html">Inicio</a></li> -->
                         <li><a href="contact.html">Contacto</a></li>
                         <li class="dropdown language">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
