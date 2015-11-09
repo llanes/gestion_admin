@@ -6,9 +6,9 @@ class Productos extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model("Productos_Model");
+		$this->load->model("Productos_model");
 		if($this->session->userdata('Permiso_idPermiso')!='1') { // si la seccion no existe me quedo en el homo
-			redirect('/Home');
+			redirect('/');
 		}
 	}
 
@@ -32,13 +32,13 @@ class Productos extends CI_Controller {
 	}
 		public function ajax_list()
 	{
-		$list = $this->Productos_Model->get_cliente();
+		$list = $this->Productos_model->get_cliente();
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $producto_servicio) {
 			$no++;
 			$row = array();
-			$row[] = '<a href="javascript:void()" title="Edit" onclick="ver_mas('."'".$producto_servicio->idProducto_Servicio."'".')">
+			$row[] = '<a href="javascript:void(0);" title="Edit" onclick="ver_mas('."'".$producto_servicio->idProducto_Servicio."'".')">
 			<i class="fa fa-plus-square"></i></a>' ;
 			$row[] = $producto_servicio->Codigo;
 			$row[] = $producto_servicio->Nombre;
@@ -50,9 +50,9 @@ class Productos extends CI_Controller {
 
 			//add html for action
 			$row[] = '<div class="btn-group">
-			<a class="btn btn-success btn-sm" href="javascript:void()" title="Edit" onclick="edit_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
+			<a class="btn btn-success btn-sm" href="javascript:void(0);" title="Edit" onclick="edit_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
 			<i class="fa fa-pencil-square"></i></a>
-			<a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
+			<a class="btn btn-sm btn-danger" href="javascript:void(0);" title="Hapus" onclick="delete_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
 			<i class="fa fa-trash-o"></i></a>
 			</div>';
 
@@ -60,8 +60,8 @@ class Productos extends CI_Controller {
 		}
 		$output = array(
 						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->Productos_Model->count_todas(),
-						"recordsFiltered" => $this->Productos_Model->count_filtro(),
+						"recordsTotal" => $this->Productos_model->count_todas(),
+						"recordsFiltered" => $this->Productos_model->count_filtro(),
 						"data" => $data,
 				);
 		//output to json format
@@ -69,7 +69,7 @@ class Productos extends CI_Controller {
 	}
 	public function ajax_edit($idProducto_Servicio)
 	{
-		$data = $this->Productos_Model->get_by_id($idProducto_Servicio);
+		$data = $this->Productos_model->get_by_id($idProducto_Servicio);
 		echo json_encode($data);
 	}
 
@@ -82,17 +82,17 @@ class Productos extends CI_Controller {
 						$data = array(
 								'Codigo'          => form_error('Codigo'),
 								'Nombre'          => form_error('Nombre'),
-								'Descripcion'     => form_error('Descripcion'),
+								'idCategoria'     => form_error('idCategoria'),
 								'Precio_Unitario' => form_error('Precio_Unitario'),
 								'Cantidad'        => form_error('Cantidad'),
 								'Descuento'       => form_error('Descuento'),
 								'Iva'             => form_error('Iva'),
-								'Img'             => form_error('Img'),
-								'idCategoria'     => form_error('idCategoria'),
+								'Descripcion'     => form_error('Descripcion'),
+								// 'Img'             => form_error('Img'),
 								'res'             => 'error');
 					echo json_encode($data);		
 				}else{
-					$id_producto = $this->Productos_Model->count_todas();
+					$id_producto = $this->Productos_model->count_todas();
 					$code = $id_producto + 10000;
 					$data                         = array(
 					'Codigo'                => $this->security->xss_clean( $this->input->post('Codigo',FALSE)),
@@ -103,10 +103,10 @@ class Productos extends CI_Controller {
 					'Cantidad'              => $this->security->xss_clean( $this->input->post('Cantidad',FALSE)),
 					'Descuento'              => $this->security->xss_clean( $this->input->post('Descuento',FALSE)),
 					'Iva'                   => $this->security->xss_clean( $this->input->post('Iva',FALSE)),
-					'Img'                   => $this->security->xss_clean( $this->input->post('Img',FALSE)),
+					// 'Img'                   => $this->security->xss_clean( $this->input->post('Img',FALSE)),
 					'Categoria_idCategoria' => $this->security->xss_clean( $this->input->post('idCategoria',FALSE))
 					);
-					$insert = $this->Productos_Model->save($data);
+					$insert = $this->Productos_model->save($data);
 					echo json_encode(array("status" => TRUE));
 				}
         }else{
@@ -145,7 +145,7 @@ class Productos extends CI_Controller {
 					'Img'                   => $this->security->xss_clean( $this->input->post('Img',FALSE)),
 					'Categoria_idCategoria' => $this->security->xss_clean( $this->input->post('idCategoria',FALSE))
 					);
-					$this->Productos_Model->update(array('idProducto_Servicio' => $this->input->post('idProducto_Servicio')), $data);
+					$this->Productos_model->update(array('idProducto_Servicio' => $this->input->post('idProducto_Servicio')), $data);
 					echo json_encode(array("status" => TRUE));
 				}
         }else{
@@ -154,7 +154,7 @@ class Productos extends CI_Controller {
 	}
 	public function ajax_delete($idProducto_Servicio)
 	{
-		$this->Productos_Model->delete_by_id($idProducto_Servicio);
+		$this->Productos_model->delete_by_id($idProducto_Servicio);
 		echo json_encode(array("status" => TRUE));
 	}
 		// comprovar si existe nobre de usuario para registro cliente
@@ -188,7 +188,7 @@ class Productos extends CI_Controller {
 	{
 		// resivimos los datos del input a traves de la uri, por segment
 		$datos= $this->uri->segment(4);
-		$this->Productos_Model->busqueda_Categoria($datos);
+		$this->Productos_model->busqueda_Categoria($datos);
 
 	}
 

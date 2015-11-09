@@ -15,17 +15,21 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">Navegacion</li>
-            <li class="treeview">
+
+           <li class="treeview">
               <a href="#">
-                <i class="fa fa-cogs"></i>
-                <span>Administrar</span>
+                 <i class="fa fa-codepen"></i>
+                <span>Presupuesto Alquileres</span>
                 <span class="fa fa-angle-left pull-right"></span>
               </a>
-              <ul class="treeview-menu">
-                <li id=""><a href="#" ><i class="fa fa-circle-o"></i> Clientes</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Empleado</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+              <ul class="treeview-menu"  data-tabs="tabs">
+                <li id="presupuesto" class=""  data-tabs="tabs">
+                    <a id="presupuesto" href="#"><i class="fa fa-angle-double-right"></i> Presupuesto</a>
+                </li>
+                <li id="listados" class=""  data-tabs="tabs"  >
+                    <a  id="listados"href=""><i class="fa fa-angle-double-right"></i>Listados de Presupuestos</a>
+                </li>
+
               </ul>
             </li>
             <li id="cliente" class="" data-tabs="tabs">
@@ -45,6 +49,21 @@
                <i class="fa fa-cart-arrow-down"></i> <span>Productos</span>  
                 <small class="label pull-right bg-red">{num_productos}</small>
               </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-cogs"></i>
+                <span>Administrar</span>
+                <span class="fa fa-angle-left pull-right"></span>
+              </a>
+              <ul class="treeview-menu" data-tabs="tabs">
+                <li id="stock" data-tabs="tabs">
+                    <a id="stock" href="#" ><i class="fa fa-circle-o"></i> Stock</a>
+                </li>
+                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+              </ul>
             </li>
 
             <li class="treeview">

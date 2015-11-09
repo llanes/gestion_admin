@@ -182,8 +182,7 @@
 			callingContextNotSliderInstance : "Calling context element does not have instance of Slider bound to it. Check your code to make sure the JQuery object returned from the call to the slider() initializer is calling the method"
 		};
 
-
-
+Toggle
 		/*************************************************
 						
 							CONSTRUCTOR
@@ -625,7 +624,7 @@
 
 			toggle: function() {
 				if(this.options.enabled) {
-					this.disable();
+					this.enable();
 				} else {
 					this.enable();
 				}

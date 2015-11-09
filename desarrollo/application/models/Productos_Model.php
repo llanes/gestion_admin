@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Productos_Model extends CI_Model {
+class Productos_model extends CI_Model {
 	var $table = 'producto_servicio';
 	var $categoria = 'categoria';
 	var $where = 'producto_servicio.Categoria_idCategoria = categoria.idCategoria';

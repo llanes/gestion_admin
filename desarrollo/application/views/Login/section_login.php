@@ -5,7 +5,7 @@
 .User,.Pass{display: none;}
 </style>
    <div class="container">
-      <form class="form-signin" id="for_login" action="<?= site_url('index.php/Login/login/logeo')?> ">
+      <form class="form-signin" id="for_login" action="<?= site_url('index.php/Login/logeo')?> ">
         <h2 class="form-signin-heading">Inicio de Seccion</h2>
         <div class="login-wrap">
               <input type="text" required  class="form-control" placeholder="Usuario"  id="usuario" name="usuario" onfocus="autofocus" autocomplete="off" pattern="[A-Za-z ]{3,100}"  >
@@ -37,7 +37,7 @@
             </div>
             <div class="registration">
                 ¿No tienes una cuenta?  
-                <a class="" href="<?= base_url();?>index.php/Login/login/registro">
+                <a class="" href="<?= base_url();?>index.php/Login/registro">
                     Crea una cuenta
                 </a>
             </div>
@@ -92,7 +92,7 @@
                        $(".Pass").append(json.password).css({"display":"block"}); /// mostar validation  de iten pass
                     }
                   }else{ // si pasa la validation redireccionar al ligin del control de acceso
-                      var url = "<?= site_url('index.php/Login/login')?>";
+                      var url = "<?php echo site_url('index.php/Login')?>";
                       // $(location).attr('href',url);
                       // setTimeout($(location).attr('href',url), 10000); 
                       $("#for_login").hide();

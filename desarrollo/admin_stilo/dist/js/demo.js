@@ -49,55 +49,55 @@
   //Layout options
   demo_settings.append(
           "<h4 class='control-sidebar-heading'>"
-          + "Layout Options"
+          + "Opciones de diseño"
           + "</h4>"
           //Fixed layout
           + "<div class='form-group'>"
           + "<label class='control-sidebar-subheading'>"
           + "<input type='checkbox' data-layout='fixed' class='pull-right'/> "
-          + "Fixed layout"
+          + "diseño fijo"
           + "</label>"
-          + "<p>Activate the fixed layout. You can't use fixed and boxed layouts together</p>"
+          + "<p>Active el diseño fijo . No se puede utilizar diseños fijos y en caja en conjunto</p>"
           + "</div>"
           //Boxed layout
           + "<div class='form-group'>"
           + "<label class='control-sidebar-subheading'>"
           + "<input type='checkbox' data-layout='layout-boxed'class='pull-right'/> "
-          + "Boxed Layout"
+          + "caja de diseño"
           + "</label>"
-          + "<p>Activate the boxed layout</p>"
+          + "<p>Activar el diseño en caja</p>"
           + "</div>"
           //Sidebar Toggle
           + "<div class='form-group'>"
           + "<label class='control-sidebar-subheading'>"
           + "<input type='checkbox' data-layout='sidebar-collapse' class='pull-right'/> "
-          + "Toggle Sidebar"
+          + "Activar la barra lateral"
           + "</label>"
-          + "<p>Toggle the left sidebar's state (open or collapse)</p>"
+          + "<p>Cambia el estado de la barra lateral izquierda (open or collapse)</p>"
           + "</div>"
           //Sidebar mini expand on hover toggle
           + "<div class='form-group'>"
           + "<label class='control-sidebar-subheading'>"
           + "<input type='checkbox' data-enable='expandOnHover' class='pull-right'/> "
-          + "Sidebar Expand on Hover"
+          + "Sidebar Expandir el Hover"
           + "</label>"
-          + "<p>Let the sidebar mini expand on hover</p>"
+          + "<p>Deje que el mini- barra lateral ampliar en vuelo estacionario</p>"
           + "</div>"
           //Control Sidebar Toggle
           + "<div class='form-group'>"
           + "<label class='control-sidebar-subheading'>"
           + "<input type='checkbox' data-controlsidebar='control-sidebar-open' class='pull-right'/> "
-          + "Toggle Right Sidebar Slide"
+          + "Alternar derecho Sidebar Slide"
           + "</label>"
-          + "<p>Toggle between slide over content and push content effects</p>"
+          + "<p>Alternar entre diapositivas sobre el contenido y empuje efectos de contenido</p>"
           + "</div>"
           //Control Sidebar Skin Toggle
           + "<div class='form-group'>"
           + "<label class='control-sidebar-subheading'>"
           + "<input type='checkbox' data-sidebarskin='toggle' class='pull-right'/> "
-          + "Toggle Right Sidebar Skin"
+          + "Alternar derecho Sidebar Piel"
           + "</label>"
-          + "<p>Toggle between dark and light skins for the right sidebar</p>"
+          + "<p>Alternar entre las pieles claras y oscuras de la barra lateral derecha</p>"
           + "</div>"
           );
   var skins_list = $("<ul />", {"class": 'list-unstyled clearfix'});
@@ -255,7 +255,7 @@
     if (typeof (Storage) !== "undefined") {
       localStorage.setItem(name, val);
     } else {
-      alert('Please use a modern browser to properly view this template!');
+      alert('Por favor, use un navegador moderno para ver correctamente esta plantillae!');
     }
   }
 
@@ -269,7 +269,7 @@
     if (typeof (Storage) !== "undefined") {
       return localStorage.getItem(name);
     } else {
-      alert('Please use a modern browser to properly view this template!');
+      alert('Por favor, use un navegador moderno para ver correctamente esta plantilla!');
     }
   }
 

@@ -1,16 +1,15 @@
   <script type="text/javascript">
-
     var save_method; //for save method string
-    var table;
+    var table_cliente;
     $(document).ready(function() {
-      table = $('#table').DataTable({ 
+      table_cliente = $('#table_cliente').DataTable({ 
         
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('index.php/Cliente/cliente/ajax_list')?>",
+            "url": "<?php echo site_url('index.php/Cliente/ajax_list'); ?>",
             "type": "POST"
         },
 
@@ -27,7 +26,9 @@
 
     function add_cliente()
     {
-     $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+     $(".CI,.N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+      $("#cliente_aler").hide();
+      $(".modal-body,.modal-header").show();
       save_method = 'add';
       $('#form')[0].reset(); // reset form on modals
       $('#modal_form').modal('show'); // show bootstrap modal
@@ -36,32 +37,32 @@
 
     function edit_person(idCliente)
     {
-      $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+     $(".CI,.N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+       $("#cliente_aler").hide();
+       $(".modal-body,.modal-header").show();
       save_method = 'update';
       // $('#PF').hide();
       $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/Cliente/cliente/ajax_edit/')?>/" + idCliente,
+        url : "<?php echo site_url('index.php/Cliente/ajax_edit/'); ?>/" + idCliente,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
-           
+            $('[name="ci_ruc"]').val(data.ci_ruc);
             $('[name="idCliente"]').val(data.idCliente);
             $('[name="Nombres"]').val(data.Nombres);
             $('[name="Apellidos"]').val(data.Apellidos);
             $('[name="Direccion"]').val(data.Direccion);
             $('[name="Telefono"]').val(data.Telefono);
             $('[name="Email"]').val(data.Email);
-             $('[name="usuario"]').val(data.Usuario);
-              $('[name="password"]').val(data.Password);
-                $('[name="passconf"]').val(data.Password);
-            
+            $('[name="usuario"]').val(data.Usuario);
+            $('[name="password"]').val(data.Password);
+            $('[name="passconf"]').val(data.Password);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar Cliente'); // Set title to Bootstrap modal title
-            
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -72,18 +73,18 @@
 
     function reload_table()
     {
-      table.ajax.reload(null,false); //reload datatable ajax 
+      table_cliente.ajax.reload(null,false); //reload datatable ajax 
     }
     $(function() {
     $('#form').submit(function(e) {
       var url;
       if(save_method == 'add') 
       {
-        url = "<?php echo site_url('index.php/Cliente/cliente/ajax_add')?>";
+        url = "<?php echo site_url('index.php/Cliente/ajax_add'); ?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/Cliente/cliente/ajax_update')?>";
+        url = "<?php echo site_url('index.php/Cliente/ajax_update'); ?>";
       }
            $.ajax({
                       type : 'POST',
@@ -93,6 +94,9 @@
                          var json = JSON.parse(data);// parseo la dada devuelta por json
                           $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
                           if (json.res == "error") {
+                            if (json.ci_ruc) {
+                               $(".CI").append(json.ci_ruc).css({"display":"block"}); // mostrar validation de iten usuario
+                            }
                             if (json.Nombres) {
                                $(".N").append(json.Nombres).css({"display":"block"}); // mostrar validation de iten usuario
                             }
@@ -117,15 +121,20 @@
                            if (json.passconf) {
                                $(".PF").append(json.passconf).css({"display":"block"}); /// mostar validation  de iten pass
                             }
-                          }else{ // si pasa la validation redireccionar al ligin del control de acceso
-                              // var url = "<?= site_url('index.php/Login/login')?>";
-                              // $(location).attr('href',url);
-                              // setTimeout($(location).attr('href',url), 10000); 
-                              // $("#for_login-registro").hide();
-                              // $("#mensaje").show();
-                             // setTimeout('document.location.reload()',500);
-                                         $('#modal_form').modal('hide');
-                                          reload_table();
+                          }else{ 
+                                        $(".modal-body,.modal-header").hide();
+                                         $('#cliente_aler').show()
+                                          if (save_method == 'add') {
+                                            $('.title').text('Registrado Correctamente');
+                                          } else {
+                                            $('.title').text('Datos Actualizado correctamente');
+                                          }
+                                          setTimeout(function() {
+                                                $("#cliente_aler").fadeOut(1500);
+                                                $('#modal_form').modal('hide');
+                                            },2000);
+                                        // $('#modal_form').modal('hide');
+                                        reload_table();
                            }
                      },
                       // código a ejecutar si la petición falla;
@@ -139,13 +148,25 @@
     });
 
 
+
     function delete_person(id)
     {
-      if(confirm('¿Seguro borrar estos datos?'))
-      {
-        // ajax delete data to database
+        swal({
+        title: "Estas seguro?",
+        text: "Usted no será capaz de recuperar este Articulo!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Eliminar !",
+        cancelButtonText: "Cancelar !",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+      // ajax delete data to database
           $.ajax({
-            url : "<?php echo site_url('index.php/Cliente/cliente/ajax_delete')?>/"+id,
+            url : "<?php echo site_url('index.php/Cliente/ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -159,8 +180,9 @@
                 alert('Error al intentar borrar');
             }
         });
-         
-      }
+          swal("Deleted!", "Articulo ha sido borrado.", "success");
+        } else {
+          swal("Cancelled", "Sin accion:)", "error");
+        }
+      });
     }
-
-

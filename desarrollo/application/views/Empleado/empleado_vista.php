@@ -16,13 +16,13 @@
                     <table id="table_" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th><i class="fa fa-user"></i>  Nombre</th>
-                          <th><i class="fa fa-user-plus"></i>  Apellidos</th>
-                          <th><i class="fa fa-road"></i>  Direccion</th>
-                          <th><i class="fa fa-mobile"></i> Telefono</th>
-                          <th><i class="fa fa-envelope"></i> Sueldo</th>
-                           <th><i class="fa fa-key"></i>  Cargo</th>
-                          <th style="width:125px;"><i class="fa fa-cogs"></i> Acciones</th>
+                           <th class  ="text-danger"><i class="fa fa-user"></i>  Nombre</th>
+                           <th class  ="text-danger"><i class="fa fa-user-plus"></i>  Apellidos</th>
+                           <th class  ="text-danger"><i class="fa fa-road"></i>  Direccion</th>
+                           <th class  ="text-danger"><i class="fa fa-mobile"></i> Telefono</th>
+                           <th class  ="text-danger"><i class="fa fa-envelope"></i> Sueldo</th>
+                           <th class  ="text-danger"><i class="fa fa-key"></i>  Cargo</th>
+                           <th  class ="text-danger"style="width:125px;"><i class="fa fa-cogs"></i> Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -46,7 +46,10 @@
       <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">Formulario Cliente</h3>
+        <h3 class="modal-title">Formulario Empleado</h3>
+      </div>
+       <div class="alert alert-info" id="empleadao_aler" >
+        <strong class="title empleado_title" ></strong>
       </div>
       <div class="modal-body form">
         <form action="#" id="form_empleado" class="form-signin">
@@ -71,7 +74,7 @@
                         <td>
                         <span class ="A text-danger"></span>
                         <div class="form-group has-feedback">
-                          <input required  type ="text" id="Apellidos" name="Apellidos" class="form-control " placeholder="Apellidos" size='45' title="ingrese Nombre"pattern="[A-Za-z ]{4,50}" maxlength="50" maxlength="30"  autofocus   >
+                          <input   type ="text" id="Apellidos" name="Apellidos" class="form-control " placeholder="Apellidos" size='45' title="ingrese Nombre"pattern="[A-Za-z ]{4,50}" maxlength="50" maxlength="30"  autofocus   >
                           <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
                         </td>
@@ -131,10 +134,8 @@
                           <span class="glyphicon glyphicon-magnet form-control-feedback"></span>
                         </div>
                         </td>
-                                              </tr> 
-                      <tr id="transparente"> 
                         <td >
-                          <a> Password </a>
+                          <a> Contraseña </a>
                         </td>
                         <td>
                         <span class ="P text-danger"></span>
@@ -143,6 +144,8 @@
                           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
                         </td>
+                        </tr> 
+                        <tr id="transparente"> 
                         <td >
                           <a> Confirmar </a>
                         </td>
@@ -158,8 +161,15 @@
                 </table>
               </div>
           <div class="modal-footer">
-            <button type="submit" id="btnSave"  class="btn btn-primary"> Guardar</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="submit" id="btnSave"  class="btn btn-sm btn-success">
+                     <span class="glyphicon glyphicon-floppy-disk"></span> Guardar
+            </button>&nbsp;&nbsp;&nbsp;     
+            <button type="reset"  class="btn btn-sm btn-info">
+                    <i class="fa fa-refresh "></i> Limpiar
+            </button>
+             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" >
+                     <span class="glyphicon glyphicon-floppy-remove"></span> Cancelar
+             </button>     
           </div>
            </form>
                  </div>

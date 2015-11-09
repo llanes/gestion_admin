@@ -1,10 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cliente_Model extends CI_Model {
+class Cliente_model extends CI_Model {
 	var $table = 'cliente';
 	var $user = 'usuario';
 	var $where = 'usuario.Empleado_idEmpleado = cliente.idCliente and usuario.Permiso_idPermiso = 2';
-	var $column = array('Nombres','Apellidos','Direccion','Telefono','Email');
+	var $column = array('ci_ruc','Nombres','Apellidos','Direccion','Telefono','Email');
 	var $order = array('idCliente' => 'desc');
 
 	public function __construct()

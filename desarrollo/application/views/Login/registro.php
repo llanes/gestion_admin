@@ -5,7 +5,7 @@
 .User,.Pass,#mensaje {display: none;}
 </style>
  <div class="container">
-         <form class="form-signin" id="for_login-registro"  action="registro_add">
+         <form class="form-signin" id="for_login-registro"  action="<?= base_url();?>index.php/Login/registro_add">
         <h2 class="form-signin-heading">Registro de Cliente</h2>
         <div class="login-wrap">
                     <span class ="N text-danger"></span>
@@ -29,7 +29,7 @@
 
             <div class="registration">
                Ya registrado.
-                <a class="" href="<?= base_url();?>index.php/Login/login">
+                <a class="" href="<?= base_url();?>index.php/Login">
                    Iniciar sesión.
                 </a>
             </div> 

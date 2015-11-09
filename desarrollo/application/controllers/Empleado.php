@@ -5,10 +5,10 @@ class Empleado extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model("Empleado_Model");
+		$this->load->model("Empleado_model");
 		$this->load->model('Logeo_model');
 		if($this->session->userdata('Permiso_idPermiso')!='1') { // si la seccion no existe me quedo en el homo
-			redirect('/Home');
+			redirect('/');
 		}
 	}
 
@@ -33,7 +33,7 @@ class Empleado extends CI_Controller {
 	public function ajax_list()
 	{ 
 		// $this->output->enable_profiler(true);
-		$list = $this->Empleado_Model->get_empleado();
+		$list = $this->Empleado_model->get_empleado();
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $empleado) {
@@ -49,17 +49,17 @@ class Empleado extends CI_Controller {
 
 			//add html for action
 			$row[] = '<div class="btn-group">
-			<a class="btn btn-success btn-sm" href="javascript:void()" title="Edit" onclick="edit_person('."'".$empleado->idEmpleado."'".')">
+			<a class="btn btn-success btn-sm" href="javascript:void(0);" title="Edit" onclick="edit_person('."'".$empleado->idEmpleado."'".')">
 			<i class="fa fa-pencil-square"></i></a>
-			<a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$empleado->idEmpleado."'".')">
+			<a class="btn btn-sm btn-danger" href="javascript:void(0);" title="Hapus" onclick="delete_person('."'".$empleado->idEmpleado."'".')">
 			<i class="fa fa-trash-o"></i></a></div>';
 
 			$data[] = $row;
 		}
 		$output = array(
 						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->Empleado_Model->count_todas(),
-						"recordsFiltered" => $this->Empleado_Model->count_filtro(),
+						"recordsTotal" => $this->Empleado_model->count_todas(),
+						"recordsFiltered" => $this->Empleado_model->count_filtro(),
 						"data" => $data,
 				);
 		//output to json format
@@ -67,7 +67,7 @@ class Empleado extends CI_Controller {
 	}
 	public function ajax_edit($idEmpleado)
 	{
-		$data = $this->Empleado_Model->get_by_id($idEmpleado);
+		$data = $this->Empleado_model->get_by_id($idEmpleado);
 		echo json_encode($data);
 	}
 
@@ -100,7 +100,7 @@ class Empleado extends CI_Controller {
 					'Cargo'                       => $this->security->xss_clean( $this->input->post('Cargo',FALSE)),
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)
 					);
-					$insert = $this->Empleado_Model->save($data);
+					$insert = $this->Empleado_model->save($data);
 					$Empleado_idEmpleado = $this->	ultimoempleado();
 					$Permiso_idPermiso   = 1;
 					$data                = array(
@@ -109,7 +109,7 @@ class Empleado extends CI_Controller {
 					'Empleado_idEmpleado' => $this->security->xss_clean($Empleado_idEmpleado),
 					'Permiso_idPermiso'   =>$this->security->xss_clean($Permiso_idPermiso),
 					);
-					$insert = $this->Empleado_Model->save2($data);
+					$insert = $this->Empleado_model->save2($data);
 					echo json_encode(array("status" => TRUE));
 				}
         }else{
@@ -146,7 +146,7 @@ class Empleado extends CI_Controller {
 					'Cargo'                       => $this->security->xss_clean( $this->input->post('Cargo',FALSE)),
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)
 					);
-					$this->Empleado_Model->update(array('idEmpleado' => $this->input->post('idEmpleado')), $data);
+					$this->Empleado_model->update(array('idEmpleado' => $this->input->post('idEmpleado')), $data);
 					$Permiso_idPermiso   = 1;
 					$data                = array(
 					'usuario'             => $this->security->xss_clean($this->input->post('usuario',FALSE)),
@@ -155,7 +155,7 @@ class Empleado extends CI_Controller {
 					'Permiso_idPermiso'   =>$this->security->xss_clean($Permiso_idPermiso),
 					);
 					$idEmpleado = $this->security->xss_clean($this->input->post('idEmpleado',FALSE));
-					$this->Empleado_Model->update2($idEmpleado,$data);
+					$this->Empleado_model->update2($idEmpleado,$data);
 					echo json_encode(array("status" => TRUE));
 				}
         }else{
@@ -164,7 +164,7 @@ class Empleado extends CI_Controller {
 	}
 	public function ajax_delete($idEmpleado)
 	{
-		$this->Empleado_Model->delete_by_id($idEmpleado);
+		$this->Empleado_model->delete_by_id($idEmpleado);
 		echo json_encode(array("status" => TRUE));
 	}
 		//funcion ultimo empleado para guardar el Empleado_idEmpleado

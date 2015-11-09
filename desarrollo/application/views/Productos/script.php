@@ -10,7 +10,7 @@
         
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('index.php/Productos/productos/ajax_list')?>",
+            "url": "<?php echo site_url('index.php/Productos/ajax_list'); ?>",
             "type": "POST"
         },
 
@@ -28,6 +28,8 @@
     function add_Productos()
     {
      $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+     $("#producto_aler").hide();
+     $(".modal-body,.modal-header").show();
       save_method_producro = 'add';
       $('#form_productos')[0].reset(); // reset form on modals
       $('#modal_form_productos').modal('show'); // show bootstrap modal
@@ -37,13 +39,15 @@
         function edit_producto(idProducto_Servicio)
     {
       $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+      $("#producto_aler").hide();
+      $(".modal-body,.modal-header").show();
       save_method_producro = 'update';
       // $('#PF').hide();
       $('#form_productos')[0].reset(); // reset form on modals
       // $('#Iva').html('');
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/Productos/productos/ajax_edit/')?>/" + idProducto_Servicio,
+        url : "<?php echo site_url('index.php/Productos/ajax_edit/'); ?>/" + idProducto_Servicio,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -59,7 +63,7 @@
                 $('[name="usuario"]').val(data.Usuario);
                 $('[name="Descuento"]').val(data.Descuento);
                 $('[name="Iva"]').val(data.Iva);
-                $('[name="Img"]').val(data.Img);
+                // $('[name="Img"]').val(data.Img);
                 $('[name="Categoria"]').val(data.Categoria);
                 $('[name="idCategoria"]').val(data.idCategoria);
             $('#modal_form_productos').modal('show'); // show bootstrap modal when complete loaded
@@ -80,20 +84,23 @@
     $(function() {
     $('#form_productos').submit(function(e) {
       var url;
+      var form = new FormData(document.getElementById('form_productos'));
       if(save_method_producro == 'add') 
       {
-        url = "<?php echo site_url('index.php/Productos/productos/ajax_add')?>";
+        url = "<?php echo site_url('index.php/Productos/ajax_add'); ?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/Productos/productos/ajax_update')?>";
+        url = "<?php echo site_url('index.php/Productos/ajax_update'); ?>";
       }
            $.ajax({
                       type : 'POST',
                       url : url, // octengo la url del formulario
+                      data: form,
                       data: $(this).serialize(), // serilizo el formulario
                       success : function(data) {
                          var json = JSON.parse(data);// parseo la dada devuelta por json
+                          // console.log(data);
                           $(".N,.A,.cate,.T,.E,.U,.P,.PF,.IMG").html("").css({"display":"none"});
                           if (json.res == "error") {
                             if (json.Codigo) {
@@ -117,15 +124,26 @@
                             if (json.Iva) {
                                $(".P").append(json.Iva).css({"display":"block"}); /// mostar validation  de iten pass
                             }
-                           if (json.Img) {
-                               $(".IMG").append(json.Img).css({"display":"block"}); /// mostar validation  de iten pass
-                            }
+                           // if (json.Img) {
+                           //     $(".IMG").append(json.Img).css({"display":"block"}); /// mostar validation  de iten pass
+                           //  }
                               if (json.idCategoria) {
                                $(".cate").append(json.idCategoria).css({"display":"block"}); /// mostar validation  de iten pass
                             }
                           }else{ // si pasa la validation redireccionar al ligin del control de acceso
-                              $('#modal_form_productos').modal('hide');
-                               reload_table();
+                                         $(".modal-body,.modal-header").hide();
+                                         $('#producto_aler').show()
+                                          if (save_method_producro == 'add') {
+                                            $('.title').text('Registrado Correctamente');
+                                          } else {
+                                            $('.title').text('Datos Actualizado correctamente');
+                                          }
+                                          setTimeout(function() {
+                                                $("#producto_aler").fadeOut(1500);
+                                                 $('#modal_form_productos').modal('hide');
+                                            },1500);
+                                        // $('#modal_form').modal('hide');
+                                        reload_table();
                            }
                      },
                       // código a ejecutar si la petición falla;
@@ -145,7 +163,7 @@
       {
         // ajax delete data to database
           $.ajax({
-            url : "<?php echo site_url('index.php/Productos/productos/ajax_delete')?>/"+id,
+            url : "<?php echo site_url('index.php/Productos/ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -169,17 +187,18 @@
       // $('#reset')[0].reset(); // reset form on modals
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/Productos/productos/ajax_edit/')?>/" + idProducto_Servicio,
+        url : "<?php echo site_url('index.php/Productos/ajax_edit/'); ?>/" + idProducto_Servicio,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
-                 $('.modal-title_productos_ver').text(data.Img);
+                 // $('.modal-title_productos_ver').text(data.Img);
                  $('.Codigo_Barra').text(data.Codigo_Barra);
                  $('.Descripcion').text(data.Descripcion);
                  $('.Descuento').text(data.Descuento);
                  $('.Iva').text(data.Iva);
        $('#ver_mas').modal('show'); // show bootstrap modal when complete loaded
+       $(".modal-body,.modal-header").show();
        $('.modal-title_productos').text('Listados'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -191,7 +210,7 @@
 
     $(function(){
   $('.cliente_bus').autocomplete({
-    serviceUrl:  "<?php echo site_url('index.php/Productos/productos/busqueda_Categoria')?>",
+    serviceUrl:  "<?php echo site_url('index.php/Productos/busqueda_Categoria'); ?>",
 
     onSelect: function (suggestions) {
       document.formulario.idCategoria.value = suggestions.data;

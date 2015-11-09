@@ -40,7 +40,7 @@
                           Gestioná tus eventos
 
                      </div>
-                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login/login" target=""
+                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login" target=""
                         data-x="670"
                         data-y="400"
                         data-speed="400"
@@ -48,7 +48,7 @@
                         data-easing="easeOutExpo">
                          Acceder
                      </a>
-                     <a class="caption lfr btn btn-success yellow slide_btn" href="<?= base_url();?>index.php/Login/login/registro" target=""
+                     <a class="caption lfr btn btn-success yellow slide_btn" href="<?= base_url();?>index.php/Login/registro" target=""
                         data-x="800"
                         data-y="400"
                         data-speed="400"
@@ -87,7 +87,7 @@
                           data-easing="easeOutExpo">
 							Gestioná tus eventos
                      </div>
-                     <a class="caption lft slide_btn btn red slide_item_left" href="<?= base_url();?>index.php/Login/login" target=""
+                     <a class="caption lft slide_btn btn red slide_item_left" href="<?= base_url();?>index.php/Login" target=""
                         data-x="10"
                         data-y="300"
                         data-speed="400"
@@ -95,7 +95,7 @@
                         data-easing="easeOutExpo">
                         Acceder
                      </a>
-                     <a class="caption lft slide_btn btn red slide_item_left" href="<?= base_url();?>index.php/Login/login/registro" target=""
+                     <a class="caption lft slide_btn btn red slide_item_left" href="<?= base_url();?>index.php/Login/registro" target=""
                         data-x="120"
                         data-y="300"
                         data-speed="400"
@@ -173,7 +173,7 @@
                           data-easing="easeOutExpo">
 							Gestioná tus eventos
                      </div>
-                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login/login" target=""
+                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login" target=""
                         data-x="670"
                         data-y="400"
                         data-speed="400"
@@ -181,7 +181,7 @@
                         data-easing="easeOutExpo">
                          Acceder
                      </a>
-                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login/login/registro" target=""
+                     <a class="caption lfr btn yellow slide_btn" href="<?= base_url();?>index.php/Login/registro" target=""
                         data-x="800"
                         data-y="400"
                         data-speed="400"

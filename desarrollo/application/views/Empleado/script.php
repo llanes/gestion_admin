@@ -1,6 +1,6 @@
   <script type="text/javascript">
 
-    var save_metod; //for save method string
+    var save; //for save method string
     var table;
     $(document).ready(function() {
       table = $('#table_').DataTable({
@@ -10,7 +10,7 @@
         
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('index.php/Empleado/empleado/ajax_list')?>",
+            "url": "<?php echo site_url('index.php/Empleado/ajax_list'); ?>",
             "type": "POST"
         },
 
@@ -27,23 +27,27 @@
 
     function add_empleado()
     {
-     $(".N,.A,.D,.T,.S,.C,.U,.P,.PF").html("").css({"display":"none"});
-      save_metod = 'add';
-      $('#form_empleado')[0].reset(); // reset form on modals
-      $('#modal_form_empleado').modal('show'); // show bootstrap modal
-      $('.modal-title').text('Agregar Empleado'); // Set Title to Bootstrap modal title
+           $(".N,.A,.D,.T,.S,.C,.U,.P,.PF").html("").css({"display":"none"});
+           $("#empleadao_aler").hide();
+           $(".modal-body,.modal-header").show();
+           save = 'add';
+           $('#form_empleado')[0].reset(); // reset form on modals
+           $('#modal_form_empleado').modal('show'); // show bootstrap modal
+           $('.modal-title').text('Agregar Empleado'); // Set Title to Bootstrap modal title
     }
 
     function edit_person(idCliente)
     {
        $(".N,.A,.D,.T,.S,.C,.U,.P,.PF").html("").css({"display":"none"});
-      save_metod = 'update';
-      // $('#PF').hide();
-      $('#form_empleado')[0].reset(); // reset form on modals
+       $("#empleadao_aler").hide();
+       $(".modal-body,.modal-header").show();
+       save = 'update';
+       // $('#PF').hide();
+       $('#form_empleado')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/Empleado/empleado/ajax_edit/')?>/" + idCliente,
+        url : "<?php echo site_url('index.php/Empleado/ajax_edit/'); ?>/" + idCliente,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -78,13 +82,13 @@
     $(function() {
     $('#form_empleado').submit(function(e) {
       var url;
-      if(save_metod == 'add') 
+      if(save == 'add') 
       {
-        url = "<?php echo site_url('index.php/Empleado/empleado/ajax_add')?>";
+        url = "<?php echo site_url('index.php/Empleado/ajax_add'); ?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/Empleado/empleado/ajax_update')?>";
+        url = "<?php echo site_url('index.php/Empleado/ajax_update'); ?>";
       }
            $.ajax({
                       type : 'POST',
@@ -122,14 +126,19 @@
                                $(".PF").append(json.passconf).css({"display":"block"}); /// mostar validation  de iten pass
                             }
                           }else{ // si pasa la validation redireccionar al ligin del control de acceso
-                              // var url = "<?= site_url('index.php/Login/login')?>";
-                              // $(location).attr('href',url);
-                              // setTimeout($(location).attr('href',url), 10000); 
-                              // $("#for_login-registro").hide();
-                              // $("#mensaje").show();
-                             // setTimeout('document.location.reload()',500);
-                                         $('#modal_form_empleado').modal('hide');
-                                          reload_table();
+                                         $(".modal-body,.modal-header").hide();
+                                         $('#empleadao_aler').show()
+                                          if (save == 'add') {
+                                            $('.empleado_title').text('Registrado Correctamente');
+                                          } else {
+                                            $('.empleado_title').text('Datos Actualizado correctamente');
+                                          }
+                                          setTimeout(function() {
+                                                $("#empleadao_aler").fadeOut(1500);
+                                                 $('#modal_form_empleado').modal('hide');
+                                            },2000);
+                                        // $('#modal_form').modal('hide');
+                                        reload_table();
                            }
                      },
                       // código a ejecutar si la petición falla;
@@ -149,7 +158,7 @@
       {
         // ajax delete data to database
           $.ajax({
-            url : "<?php echo site_url('index.php/Empleado/empleado/ajax_delete')?>/"+id,
+            url : "<?php echo site_url('index.php/Empleado/ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)

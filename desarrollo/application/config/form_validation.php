@@ -23,6 +23,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////Validacion registro_cliente///////////////////////////////////////////////////////////////////////
                 'registro_cliente' => array(
+                                    array(
+                                            'field' => 'ci_ruc',
+                                            'label' => 'CI O RUC',
+                                            'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
+                                         ),
 
                                     array(
                                             'field' => 'Nombres',
@@ -71,6 +76,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////Validacion update_cliente///////////////////////////////////////////////////////////////////////
                 'ajax_update' => array(
+                                    array(
+                                            'field' => 'ci_ruc',
+                                            'label' => 'CI O RUC',
+                                            'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
+                                         ),
 
                                     array(
                                             'field' => 'Nombres',
@@ -223,6 +233,55 @@
                                        // final
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////Validacion registro_cliente///////////////////////////////////////////////////////////////////////
+                'add_productos' => array(
+
+                                    array(
+                                            'field' => 'Codigo',
+                                            'label' => 'Codigo',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Nombre',
+                                            'label' => 'Nombre',
+                                            'rules' => 'trim|required|min_length[3]|max_length[45]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Descripcion',
+                                            'label' => 'Descripcion',
+                                            'rules' => 'trim|required|min_length[5]|max_length[45]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Precio_Unitario',
+                                            'label' => 'Precio',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Cantidad',
+                                            'label' => 'Cantidad',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Descuento',
+                                            'label' => 'Descuento',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                     array(
+                                            'field' => 'Iva',
+                                            'label' => 'Iva',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    // array(
+                                    //         'field' => 'Img',
+                                    //         'label' => 'Imagen',
+                                    //         'rules' => 'trim|min_length[1]|max_length[45]|strip_tags'
+                                    //      ),
+                                     array(
+                                            'field' => 'idCategoria',
+                                            'label' => 'Categoria',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+
+                    ),
                 'update_productos' => array(
 
                                     array(
@@ -260,11 +319,11 @@
                                             'label' => 'Iva',
                                             'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
                                          ),
-                                    array(
-                                            'field' => 'Img',
-                                            'label' => 'Imagen',
-                                            'rules' => 'trim|min_length[1]|max_length[45]|strip_tags'
-                                         ),
+                                    // array(
+                                    //         'field' => 'Img',
+                                    //         'label' => 'Imagen',
+                                    //         'rules' => 'trim|min_length[1]|max_length[45]|strip_tags'
+                                    //      ),
                                      array(
                                             'field' => 'idCategoria',
                                             'label' => 'Categoria',
@@ -274,6 +333,48 @@
                     ),
                                        // final
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////Validacion registro_cliente///////////////////////////////////////////////////////////////////////
+                'add_stock' => array(
+
+                                    array(
+                                            'field' => 'Cantidad_stock',
+                                            'label' => 'Cantidad',
+                                            'rules' => 'trim|required|callback_check_cantidad|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'idProducto_Servicio',
+                                            'label' => 'Producto',
+                                            'rules' => 'trim|required|callback_check_servicio|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                     ),
+                'update_stock' => array(
+
+                                    array(
+                                            'field' => 'Cantidad_stock',
+                                            'label' => 'Cantidad',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'idProducto_Servicio',
+                                            'label' => 'Producto',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                     ),
+/////////////////////////////////////////////Validacion registro_cliente///////////////////////////////////////////////////////////////////////
+                'agregar_carrito' => array(
+
+                                    array(
+                                            'field' => 'Cantidad',
+                                            'label' => 'Cantidad',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'idProducto_Servicio',
+                                            'label' => 'Producto',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+
+                     ),
                );
 
 
