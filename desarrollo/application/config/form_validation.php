@@ -23,11 +23,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////Validacion registro_cliente///////////////////////////////////////////////////////////////////////
                 'registro_cliente' => array(
-                                    array(
-                                            'field' => 'ci_ruc',
-                                            'label' => 'CI O RUC',
-                                            'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
-                                         ),
 
                                     array(
                                             'field' => 'Nombres',
@@ -76,11 +71,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////Validacion update_cliente///////////////////////////////////////////////////////////////////////
                 'ajax_update' => array(
-                                    array(
-                                            'field' => 'ci_ruc',
-                                            'label' => 'CI O RUC',
-                                            'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
-                                         ),
 
                                     array(
                                             'field' => 'Nombres',
@@ -105,7 +95,7 @@
                                     array(
                                             'field' => 'Email',
                                             'label' => 'Correo',
-                                            'rules' => 'trim|required|valid_email|min_length[1]|max_length[30]|strip_tags'
+                                            'rules' => 'trim|required|valid_emails|min_length[1]|max_length[30]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'usuario',
@@ -352,7 +342,7 @@
                                     array(
                                             'field' => 'Cantidad_stock',
                                             'label' => 'Cantidad',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'rules' => 'trim|required|callback_check_cantidad|min_length[1]|max_length[11]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'idProducto_Servicio',
@@ -360,21 +350,119 @@
                                             'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
                                          ),
                      ),
-/////////////////////////////////////////////Validacion registro_cliente///////////////////////////////////////////////////////////////////////
-                'agregar_carrito' => array(
+/////////////////////////////////////////////Validacion caaaaaaaaaaaarrito servicio///////////////////////////////////////////////////////////////////////
+                 'agregar_carrito_serv' => array(
 
+                                    array(
+                                            'field' => 'id_articulo',
+                                            'label' => 'Articulo',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'cantidad',
+                                            'label' => 'cantidad',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+
+                     ),
+                'agregar_servicio' => array(
+
+                                    array(
+                                            'field' => 'servicio',
+                                            'label' => 'Servicio',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Descripcion',
+                                            'label' => 'Descripcion',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+
+                     ),
+                'actualizar_servicio' => array(
+
+                                    array(
+                                            'field' => 'servicio',
+                                            'label' => 'Servicio',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Descripcion',
+                                            'label' => 'Descripcion',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+
+                     ),
+/////////////////////////////////////////////Validacion caaaaaaaaaaaarrito servicio///////////////////////////////////////////////////////////////////////
+                 'agregar_carrito' => array(
+
+                                    array(
+                                            'field' => 'idProducto_Servicio',
+                                            'label' => 'Articulo',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
                                     array(
                                             'field' => 'Cantidad',
-                                            'label' => 'Cantidad',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
-                                         ),
-                                    array(
-                                            'field' => 'idProducto_Servicio',
-                                            'label' => 'Producto',
+                                            'label' => 'cantidad',
                                             'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
                                          ),
 
                      ),
+                'add_presupuesto' => array(
+
+                                    array(
+                                            'field' => 'idCliente',
+                                            'label' => 'Cliente',
+                                            'rules' => 'trim|required|numeric|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'ci_ruc',
+                                            'label' => 'Ci R.U.C',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Fecha_Pre_Arqui',
+                                            'label' => 'Fecha Alquiler',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Fecha_Devolucion',
+                                            'label' => 'Fecha Devolucion',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Nombres_servicios',
+                                            'label' => 'Nombre Servicio',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                     ),
+                'actualizar_servicio' => array(
+
+                                    array(
+                                            'field' => 'servicio',
+                                            'label' => 'Servicio',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Descripcion',
+                                            'label' => 'Descripcion',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+
+                     ),
+
+
+
+
+
+
+
+
+
+
+
+
+
                );
 
 
