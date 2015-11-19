@@ -8,7 +8,7 @@ class Stock extends CI_Controller {
 		parent::__construct();
 		$this->load->model("Stock_model");
 		if($this->session->userdata('Permiso_idPermiso')!='1') { // si la seccion no existe me quedo en el homo
-			redirect('/');
+			redirect('index.php/Home','refresh');
 		}
 	}
 
@@ -50,12 +50,11 @@ class Stock extends CI_Controller {
 
 			}
 			//add html for action
-			$row[] = '<div class="btn-group">
-			<a class="btn btn-success btn-sm" href="javascript:void(0);" title="Edit" onclick="edit_stock('."'".$stock->idStock."'".')">
+			$row[] = '<div class="pull-right hidden-phone">
+			<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_stock('."'".$stock->idStock."'".')">
 			<i class="fa fa-pencil-square"></i></a>
-			<a class="btn btn-sm btn-danger" href="javascript:void(0);" title="Hapus" onclick="delete_stock('."'".$stock->idStock."'".')">
-			<i class="fa fa-trash-o"></i></a>
-			</div>';
+			<a class="btn btn-danger btn-xs" href="javascript:void(0);" title="Hapus" onclick="delete_stock('."'".$stock->idStock."'".')">
+			<i class="fa fa-trash-o"></i></a>			</div>';
 
 			$data[] = $row;
 		}

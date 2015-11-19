@@ -1,8 +1,8 @@
   <script type="text/javascript">
     var save_methodstock; //for save method string
-    var table;
+    var table_stock;
     $(document).ready(function() {
-      table = $('#table_stock').DataTable({ 
+      table_stock = $('#table_stock').DataTable({ 
         
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -52,6 +52,7 @@
         url : "<?php echo site_url('index.php/Stock/ajax_edit/'); ?>/" + idStock,
         type: "GET",
         dataType: "JSON",
+        cache: false,
         success: function(data)
         {
             $('[name="idStock"]').val(data.idStock);
@@ -86,6 +87,7 @@
            $.ajax({
                       type : 'POST',
                       url : url, // octengo la url del formulario
+                      cache: false,
                       data: $(this).serialize(), // serilizo el formulario
                       success : function(data) {
                          var json = JSON.parse(data);// parseo la dada devuelta por json
@@ -125,18 +127,28 @@
 
 
     function delete_stock(id)
-    {
-      if(confirm('¿Seguro borrar estos datos?'))
-      {
-        // ajax delete data to database
+        {
+     swal({
+        title: "Estas seguro?",
+        text: "Usted no será capaz de recuperar este Presupuesto!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Eliminar !",
+        cancelButtonText: "Cancelar !",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+      // ajax delete data to database
           $.ajax({
             url : "<?php echo site_url('index.php/Stock/ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
+             cache: false,
             success: function(data)
             {
-               //if success reload ajax table
-               $('#modal_form_stock').modal('hide');
                reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -144,9 +156,13 @@
                 alert('Error al intentar borrar');
             }
         });
-         
-      }
-    };
+          swal("Deleted!", "Presupuesto ha sido borrado.", "success");
+        } else {
+          swal("Cancelled", "Sin accion:)", "error");
+        }
+      });
+    }
+
     $(function(){
   $('.servicio_select').autocomplete({
 

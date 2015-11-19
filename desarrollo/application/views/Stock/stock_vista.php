@@ -19,7 +19,7 @@
                           <th class ="text-danger"><i class="fa fa-archive"></i>  Nombre</th>
                           <th class ="text-danger"><i class="fa fa-usd"></i>  Precio Unitario</th>
                           <th class ="text-danger"><i class="fa fa-cc"></i> Stock</th>
-                          <th class ="text-danger" style="width:125px;"><i class="fa fa-cogs"></i> Acciones</th>
+                          <th  class ="text-danger"style="width:75px;"><i class="fa fa-cogs"></i> Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
