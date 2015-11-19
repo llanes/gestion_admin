@@ -2,18 +2,18 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Home
-            <small>Occional Descriccion</small>
+            Page Header
+            <small>Optional description</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Inicio</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
-          <div class="row">
+        <div class="row">
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-aqua">
@@ -22,7 +22,7 @@
                   <p>New Orders</p>
                 </div>
                 <div class="icon">
-                  <!-- <i class="ion ion-bag"></i> -->
+                  <i class="ion ion-bag"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -35,7 +35,7 @@
                   <p>Bounce Rate</p>
                 </div>
                 <div class="icon">
-                  <!-- <i class="ion ion-stats-bars"></i> -->
+                  <i class="ion ion-stats-bars"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -48,7 +48,7 @@
                   <p>User Registrations</p>
                 </div>
                 <div class="icon">
-                  <!-- <i class="ion ion-person-add"></i> -->
+                  <i class="ion ion-person-add"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -61,17 +61,19 @@
                   <p>Unique Visitors</p>
                 </div>
                 <div class="icon">
-                  <!-- <i class="ion ion-pie-graph"></i> -->
+                  <i class="ion ion-pie-graph"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-                  </div>
+          </div>
 
         </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+     <div id="presupuesto_vista" class="presupuesto_vista">
 
-   </div><!-- /.content-wrapper -->
-   <div id="presupuesto_vista" class="presupuesto_vista">
+      </div>
+      <div id="servicios_vista" class="servicios_vista">
 
       </div>
       <div id="cliente_vista" class="cliente_vista">

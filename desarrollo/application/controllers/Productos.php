@@ -8,7 +8,7 @@ class Productos extends CI_Controller {
 		parent::__construct();
 		$this->load->model("Productos_model");
 		if($this->session->userdata('Permiso_idPermiso')!='1') { // si la seccion no existe me quedo en el homo
-			redirect('/');
+			redirect('/Home');
 		}
 	}
 
@@ -38,7 +38,7 @@ class Productos extends CI_Controller {
 		foreach ($list as $producto_servicio) {
 			$no++;
 			$row = array();
-			$row[] = '<a href="javascript:void(0);" title="Edit" onclick="ver_mas('."'".$producto_servicio->idProducto_Servicio."'".')">
+			$row[] = '<a href="javascript:void()" title="Edit" onclick="ver_mas('."'".$producto_servicio->idProducto_Servicio."'".')">
 			<i class="fa fa-plus-square"></i></a>' ;
 			$row[] = $producto_servicio->Codigo;
 			$row[] = $producto_servicio->Nombre;
@@ -49,14 +49,12 @@ class Productos extends CI_Controller {
 			// $row[] = $producto_servicio->Password;
 
 			//add html for action
-			$row[] = '<div class="btn-group">
-			<a class="btn btn-success btn-sm" href="javascript:void(0);" title="Edit" onclick="edit_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
+			$row[] = '<div class="pull-right hidden-phone">
+			<a class="btn btn-primary btn-xs" href="javascript:void()" title="Edit" onclick="edit_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
 			<i class="fa fa-pencil-square"></i></a>
-			<a class="btn btn-sm btn-danger" href="javascript:void(0);" title="Hapus" onclick="delete_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
-			<i class="fa fa-trash-o"></i></a>
-			</div>';
-
-			$data[] = $row;
+			<a class="btn btn-danger btn-xs"  href="javascript:void()" title="Hapus" onclick="delete_producto('."'".$producto_servicio->idProducto_Servicio."'".')">
+			<i class="fa fa-trash-o"></i></a></div>';
+		$data[] = $row;
 		}
 		$output = array(
 						"draw" => $_POST['draw'],
@@ -82,13 +80,13 @@ class Productos extends CI_Controller {
 						$data = array(
 								'Codigo'          => form_error('Codigo'),
 								'Nombre'          => form_error('Nombre'),
-								'idCategoria'     => form_error('idCategoria'),
+								'Descripcion'     => form_error('Descripcion'),
 								'Precio_Unitario' => form_error('Precio_Unitario'),
 								'Cantidad'        => form_error('Cantidad'),
 								'Descuento'       => form_error('Descuento'),
 								'Iva'             => form_error('Iva'),
-								'Descripcion'     => form_error('Descripcion'),
-								// 'Img'             => form_error('Img'),
+								'Img'             => form_error('Img'),
+								'idCategoria'     => form_error('idCategoria'),
 								'res'             => 'error');
 					echo json_encode($data);		
 				}else{
@@ -103,7 +101,7 @@ class Productos extends CI_Controller {
 					'Cantidad'              => $this->security->xss_clean( $this->input->post('Cantidad',FALSE)),
 					'Descuento'              => $this->security->xss_clean( $this->input->post('Descuento',FALSE)),
 					'Iva'                   => $this->security->xss_clean( $this->input->post('Iva',FALSE)),
-					// 'Img'                   => $this->security->xss_clean( $this->input->post('Img',FALSE)),
+					'Img'                   => $this->security->xss_clean( $this->input->post('Img',FALSE)),
 					'Categoria_idCategoria' => $this->security->xss_clean( $this->input->post('idCategoria',FALSE))
 					);
 					$insert = $this->Productos_model->save($data);

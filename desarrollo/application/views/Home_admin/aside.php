@@ -15,23 +15,33 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">Navegacion</li>
-
-           <li class="treeview">
-              <a href="#">
-                 <i class="fa fa-codepen"></i>
-                <span>Presupuesto Alquileres</span>
-                <span class="fa fa-angle-left pull-right"></span>
+             <li id="Caaja" class="" data-tabs="tabs">
+              <a href="#" data-toggle="tab" >
+                <i class="fa fa-dropbox"></i> <span>Caja</span>  
+                <small class="label pull-right bg-red"></small>
               </a>
-              <ul class="treeview-menu"  data-tabs="tabs">
-                <li id="presupuesto" class=""  data-tabs="tabs">
-                    <a id="presupuesto" href="#"><i class="fa fa-angle-double-right"></i> Presupuesto</a>
-                </li>
-                <li id="listados" class=""  data-tabs="tabs"  >
-                    <a  id="listados"href=""><i class="fa fa-angle-double-right"></i>Listados de Presupuestos</a>
-                </li>
-
-              </ul>
             </li>
+
+            <li id="presupuesto" class="" data-tabs="tabs">
+              <a href="#" data-toggle="tab" >
+                <i class="fa fa-calculator"></i> <span>Presupuesto Alquiler</span>  
+                <small class="label pull-right bg-red"></small>
+              </a>
+            </li>
+
+             <li id="agenda" class="" data-tabs="tabs">
+              <a href="#" data-toggle="tab" >
+                <i class="fa fa-calendar"></i><span>Mi Agenda Evento</span>  
+                <small class="label pull-right bg-red"></small>
+              </a>
+            </li>
+            <li id="servicios" class="" data-tabs="tabs">
+              <a href="#" data-toggle="tab" >
+                <i class="fa fa-wrench"></i> <span>Servicios</span>  
+                <small class="label pull-right bg-red"></small>
+              </a>
+            </li>
+
             <li id="cliente" class="" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
                 <i class="fa fa-users"></i> <span>Clientes</span>  
@@ -46,7 +56,7 @@
             </li>
             <li id="productos" class="" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
-               <i class="fa fa-cart-arrow-down"></i> <span>Productos</span>  
+               <i class="fa fa-cart-arrow-down"></i> <span>Articulos</span>  
                 <small class="label pull-right bg-red">{num_productos}</small>
               </a>
             </li>
@@ -56,17 +66,28 @@
                 <span>Administrar</span>
                 <span class="fa fa-angle-left pull-right"></span>
               </a>
-              <ul class="treeview-menu" data-tabs="tabs">
-                <li id="stock" data-tabs="tabs">
-                    <a id="stock" href="#" ><i class="fa fa-circle-o"></i> Stock</a>
-                </li>
+              <ul class="treeview-menu">
+                <li id="Stock"><a href="#" ><i class="fa fa-circle-o"></i> Stock</a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> Empleado</a></li>
                 <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+              </ul>
+            </li>
+             <li class="treeview">
+              <a href="#">
+               <i class="fa fa-indent"></i>
+                <span>Reportes</span>
+                <span class="fa fa-angle-left pull-right"></span>
+              </a>
+              <ul class="treeview-menu">
+                <li id=""><a href="#" ><i class="fa fa-circle-o"></i> Stock</a></li>
+                <li><a href=""><i class="fa fa-circle-o"></i> Empleado</a></li>
                 <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
                 <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
               </ul>
             </li>
 
-            <li class="treeview">
+<!--             <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>UI Elements</span>
@@ -131,7 +152,7 @@
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-          </ul>
+          </ul> -->
         </section>
         <!-- /.sidebar -->
       </aside>

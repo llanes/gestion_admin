@@ -156,20 +156,29 @@
     })
     });
 
-
     function delete_producto(id)
-    {
-      if(confirm('¿Seguro borrar estos datos?'))
-      {
-        // ajax delete data to database
+   {
+     swal({
+        title: "Estas seguro?",
+        text: "Usted no será capaz de recuperar este Presupuesto!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Eliminar !",
+        cancelButtonText: "Cancelar !",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+      // ajax delete data to database
           $.ajax({
-            url : "<?php echo site_url('index.php/Productos/ajax_delete'); ?>/"+id,
+            url : "<?php echo site_url('index.php/Productos/ajax_delete')?>/"+id,
             type: "POST",
             dataType: "JSON",
+             cache: false,
             success: function(data)
             {
-               //if success reload ajax table
-               $('#modal_form_productos').modal('hide');
                reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -177,8 +186,11 @@
                 alert('Error al intentar borrar');
             }
         });
-         
-      }
+          swal("Deleted!", "Presupuesto ha sido borrado.", "success");
+        } else {
+          swal("Cancelled", "Sin accion:)", "error");
+        }
+      });
     }
 
 
@@ -187,18 +199,17 @@
       // $('#reset')[0].reset(); // reset form on modals
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/Productos/ajax_edit/'); ?>/" + idProducto_Servicio,
+        url : "<?php echo site_url('index.php/Productos/ajax_edit/')?>/" + idProducto_Servicio,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
-                 // $('.modal-title_productos_ver').text(data.Img);
+                 $('.modal-title_productos_ver').text(data.Img);
                  $('.Codigo_Barra').text(data.Codigo_Barra);
                  $('.Descripcion').text(data.Descripcion);
                  $('.Descuento').text(data.Descuento);
                  $('.Iva').text(data.Iva);
        $('#ver_mas').modal('show'); // show bootstrap modal when complete loaded
-       $(".modal-body,.modal-header").show();
        $('.modal-title_productos').text('Listados'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -210,10 +221,11 @@
 
     $(function(){
   $('.cliente_bus').autocomplete({
-    serviceUrl:  "<?php echo site_url('index.php/Productos/busqueda_Categoria'); ?>",
+    serviceUrl:  "<?php echo site_url('index.php/Productos/busqueda_Categoria')?>",
 
     onSelect: function (suggestions) {
-      document.formulario.idCategoria.value = suggestions.data;
+     $('[name="idCategoria"]').val(data.idProducto_Servicio);
+
       }
   });
 });

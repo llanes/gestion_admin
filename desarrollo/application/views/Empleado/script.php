@@ -153,18 +153,28 @@
 
 
     function delete_person(id)
-    {
-      if(confirm('¿Seguro borrar estos datos?'))
-      {
-        // ajax delete data to database
+   {
+     swal({
+        title: "Estas seguro?",
+        text: "Usted no será capaz de recuperar este Presupuesto!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Eliminar !",
+        cancelButtonText: "Cancelar !",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+      // ajax delete data to database
           $.ajax({
             url : "<?php echo site_url('index.php/Empleado/ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
+             cache: false,
             success: function(data)
             {
-               //if success reload ajax table
-               $('#modal_form_empleado').modal('hide');
                reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -172,7 +182,10 @@
                 alert('Error al intentar borrar');
             }
         });
-         
-      }
-    }
+          swal("Deleted!", "Presupuesto ha sido borrado.", "success");
+        } else {
+          swal("Cancelled", "Sin accion:)", "error");
+        }
+      });
+    }/aSome/.test(aSome)
 

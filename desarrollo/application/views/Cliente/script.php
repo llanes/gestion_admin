@@ -26,7 +26,7 @@
 
     function add_cliente()
     {
-     $(".CI,.N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+     $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
       $("#cliente_aler").hide();
       $(".modal-body,.modal-header").show();
       save_method = 'add';
@@ -37,7 +37,7 @@
 
     function edit_person(idCliente)
     {
-     $(".CI,.N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
+      $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
        $("#cliente_aler").hide();
        $(".modal-body,.modal-header").show();
       save_method = 'update';
@@ -51,7 +51,6 @@
         dataType: "JSON",
         success: function(data)
         {
-            $('[name="ci_ruc"]').val(data.ci_ruc);
             $('[name="idCliente"]').val(data.idCliente);
             $('[name="Nombres"]').val(data.Nombres);
             $('[name="Apellidos"]').val(data.Apellidos);
@@ -94,9 +93,6 @@
                          var json = JSON.parse(data);// parseo la dada devuelta por json
                           $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
                           if (json.res == "error") {
-                            if (json.ci_ruc) {
-                               $(".CI").append(json.ci_ruc).css({"display":"block"}); // mostrar validation de iten usuario
-                            }
                             if (json.Nombres) {
                                $(".N").append(json.Nombres).css({"display":"block"}); // mostrar validation de iten usuario
                             }
@@ -148,12 +144,11 @@
     });
 
 
-
     function delete_person(id)
-    {
-        swal({
+     {
+     swal({
         title: "Estas seguro?",
-        text: "Usted no será capaz de recuperar este Articulo!",
+        text: "Usted no será capaz de recuperar este Presupuesto!",
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -169,10 +164,9 @@
             url : "<?php echo site_url('index.php/Cliente/ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
+             cache: false,
             success: function(data)
             {
-               //if success reload ajax table
-               $('#modal_form').modal('hide');
                reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -180,9 +174,10 @@
                 alert('Error al intentar borrar');
             }
         });
-          swal("Deleted!", "Articulo ha sido borrado.", "success");
+          swal("Deleted!", "Presupuesto ha sido borrado.", "success");
         } else {
           swal("Cancelled", "Sin accion:)", "error");
         }
       });
     }
+

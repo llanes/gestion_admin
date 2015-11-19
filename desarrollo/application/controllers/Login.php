@@ -75,7 +75,6 @@ class Login extends CI_Controller {
 	// cerrar seccion
 	public function logout()
 	{
-		$this->cart->destroy();
 		$this->session->sess_destroy();
 		redirect('index.php/Home','refresh');
 	}

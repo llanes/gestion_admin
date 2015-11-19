@@ -38,7 +38,6 @@ class Cliente extends CI_Controller {
 		foreach ($list as $cliente) {
 			$no++;
 			$row = array();
-			$row[] = $cliente->ci_ruc;
 			$row[] = $cliente->Nombres;
 			$row[] = $cliente->Apellidos;
 			$row[] = $cliente->Direccion;
@@ -48,10 +47,10 @@ class Cliente extends CI_Controller {
 			// $row[] = $cliente->Password;
 
 			//add html for action
-			$row[] = '<div class="btn-group">
-			<a class="btn btn-success btn-sm" href="javascript:void(0);" title="Edit" onclick="edit_person('."'".$cliente->idCliente."'".')">
+			$row[] = '<div class="pull-right hidden-phone">
+			<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_person('."'".$cliente->idCliente."'".')">
 			<i class="fa fa-pencil-square"></i></a>
-			<a class="btn btn-sm btn-danger" href="javascript:void(0);" title="Hapus" onclick="delete_person('."'".$cliente->idCliente."'".')">
+			<a class="btn btn-danger btn-xs" href="javascript:void(0);" title="Hapus" onclick="delete_person('."'".$cliente->idCliente."'".')">
 			<i class="fa fa-trash-o"></i></a></div>';
 
 			$data[] = $row;
@@ -78,7 +77,6 @@ class Cliente extends CI_Controller {
 				if ($this->form_validation->run('registro_cliente') == FALSE)
 				{
 						$data = array(
-							'ci_ruc'   => form_error('ci_ruc'),
 							'Nombres'   => form_error('Nombres'),
 							'Apellidos'   => form_error('Apellidos'),
 							'Direccion'   => form_error('Direccion'),
@@ -92,7 +90,6 @@ class Cliente extends CI_Controller {
 				}else{
 					$Geo_posicion_idGeo_posicion = 1;
 					$data                         = array(
-					'ci_ruc'                     => $this->security->xss_clean( $this->input->post('ci_ruc',FALSE)),
 					'Nombres'                     => $this->security->xss_clean( $this->input->post('Nombres',FALSE)),
 					'Apellidos'                   => $this->security->xss_clean( $this->input->post('Apellidos',FALSE)),
 					'Direccion'                   => $this->security->xss_clean( $this->input->post('Direccion',FALSE)),
@@ -124,7 +121,6 @@ class Cliente extends CI_Controller {
 				if ($this->form_validation->run('ajax_update') == FALSE)
 				{
 						$data = array(
-							'ci_ruc'   => form_error('ci_ruc'),
 							'Nombres'   => form_error('Nombres'),
 							'Apellidos'   => form_error('Apellidos'),
 							'Direccion'   => form_error('Direccion'),
@@ -138,7 +134,6 @@ class Cliente extends CI_Controller {
 				}else{
 					$Geo_posicion_idGeo_posicion = 1;
 					$data                         = array(
-					'ci_ruc'                     => $this->security->xss_clean( $this->input->post('ci_ruc',FALSE)),
 					'Nombres'                     => $this->security->xss_clean( $this->input->post('Nombres',FALSE)),
 					'Apellidos'                   => $this->security->xss_clean( $this->input->post('Apellidos',FALSE)),
 					'Direccion'                   => $this->security->xss_clean( $this->input->post('Direccion',FALSE)),

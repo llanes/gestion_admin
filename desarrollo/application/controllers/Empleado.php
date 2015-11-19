@@ -8,7 +8,7 @@ class Empleado extends CI_Controller {
 		$this->load->model("Empleado_model");
 		$this->load->model('Logeo_model');
 		if($this->session->userdata('Permiso_idPermiso')!='1') { // si la seccion no existe me quedo en el homo
-			redirect('/');
+			redirect('/Home');
 		}
 	}
 
@@ -48,10 +48,10 @@ class Empleado extends CI_Controller {
 			// $row[] = $empleado->Password;
 
 			//add html for action
-			$row[] = '<div class="btn-group">
-			<a class="btn btn-success btn-sm" href="javascript:void(0);" title="Edit" onclick="edit_person('."'".$empleado->idEmpleado."'".')">
+			$row[] = '<div class="pull-right hidden-phone">
+			<a class="btn btn-primary btn-xs" href="javascript:void()" title="Edit" onclick="edit_person('."'".$empleado->idEmpleado."'".')">
 			<i class="fa fa-pencil-square"></i></a>
-			<a class="btn btn-sm btn-danger" href="javascript:void(0);" title="Hapus" onclick="delete_person('."'".$empleado->idEmpleado."'".')">
+			<a class="btn btn-danger btn-xs" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$empleado->idEmpleado."'".')">
 			<i class="fa fa-trash-o"></i></a></div>';
 
 			$data[] = $row;

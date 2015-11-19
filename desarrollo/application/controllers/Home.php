@@ -5,24 +5,14 @@ class Home extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-	
-	}
-		public function index()
-	{
-		if(!$this->session->userdata('idUsuario')) {
-			$this->inicio();
-		}else{
-			if ($this->session->userdata('Permiso_idPermiso')==='1'){
-			redirect('index.php/Home_admin');
-			} else{
-			redirect('Home_cliente');
-			}
-
-
+		if(!$this->session->userdata('idUsuario')) { // si la seccion no existe me quedo en el homo
+			$this->index();
+		} else{
+			redirect('index.php/Login/login','refresh');
 		}
 	}
 
-	public function inicio()
+	public function index()
 	{
 
 		$data = array //arreglo para mandar datos a la vista

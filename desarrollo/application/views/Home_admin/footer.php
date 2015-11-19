@@ -6,5 +6,3 @@
         <strong>Copyright &copy; 2015 <a href="http://almsaeedstudio.com">Administracion</a>.</strong> Todos los derechos reservados 
       </footer>
     <!--footer end-->
-
-

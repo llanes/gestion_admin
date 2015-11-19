@@ -92,7 +92,7 @@
                        $(".Pass").append(json.password).css({"display":"block"}); /// mostar validation  de iten pass
                     }
                   }else{ // si pasa la validation redireccionar al ligin del control de acceso
-                      var url = "<?php echo site_url('index.php/Login')?>";
+                      var url = "<?= site_url('index.php/Login')?>";
                       // $(location).attr('href',url);
                       // setTimeout($(location).attr('href',url), 10000); 
                       $("#for_login").hide();
