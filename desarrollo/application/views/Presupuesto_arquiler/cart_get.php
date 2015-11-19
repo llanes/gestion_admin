@@ -42,31 +42,15 @@
                                                       <?php echo $this->cart->format_number($items['subtotal']); ?>
                                                   </td>
                                                   <td style="text-align:right" width="130">
-                                                    <div class="btn-group">
-                                                 <!--      <a 
-                                                               class="btn btn-sm btn-success mas" 
-                                                               data-qty=""
-                                                               href="#" title="Hapus">
-                                                        <i class="fa fa-plus"></i>
-                                                      </a>
-                                                       <a
-                                                               class="btn btn-sm btn-warning menos"
-                                                               data-qty=""
-                                                        href="#" title="Hapus" >
-                                                      <i class="fa fa-minus"></i></a> -->
-                                                       <a 
-                                                       class="btn btn-sm btn-danger"
-                                                        href="#" 
-                                                        title="Hapus"
-                                                        onclick="delete_rowid('<?php echo $items['rowid']?>')">
-                                                       <i class="fa fa-trash-o"></i></a>
-                                                    </div>
+                                                        <div class="pull-right hidden-phone">
+                                                              <a class="btn btn-danger btn-xs fa fa-trash-o"  
+                                                                      onclick="delete_rowid('<?php echo $items['rowid']?>')">
+                                                              </a>
+                                                         </div>
                                                   </td>
                                           </tr>
                                   <?php $i++; ?>
                                   <?php endforeach; ?>
-
-                                  <tr>
                                           <td width="130" colspan="6">
                                               <strong>Total IVA 5 %&nbsp;&nbsp;</strong>₲. <span class='total_iva_cinco'></span>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -76,34 +60,42 @@
                                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                               <strong>Monto Total &nbsp;</strong>₲. <?php echo $this->cart->format_number($this->cart->total()); ?>
                                           </td>
-                                  </tr>
+                                   </tr>
                                         </tbody>
 
                             </table >
                           <table class="" cellspacing="30" width="100%">
                             <thead>
-                                   <tr>
+                            <?php if ($this->cart->format_number($this->cart->total()) != '0') { ?>
+                                 <tr id="generar">
                                           <td colspan="4"> </td>
                                           <td class="right"  style="text-align:right">
-                                                       <button type="submit" id="guardar"  class="btn btn-sm btn-success">
-                                                                <i class="fa fa-archive"></i> Guarda Presupuesto
+                                                       <button type="submit" id="Presupuesto" class="btn btn-sm btn-success">
+                                                                <i class="fa fa-archive" ></i> Guarda Presupuesto
                                                         </button>
-                                                        <button type="submit" id="agregar_carrito"  class="btn btn-sm btn-success">
-                                                                <span class="glyphicon glyphicon-floppy-disk"></span> Generar Arquiler
+                                                        <button type="submit" id="Alquiler" onclick="add_alquiler(0)" class="btn btn-sm btn-success">
+                                                                <span class="glyphicon glyphicon-floppy-disk"></span> Generar Alquiler
                                                         </button>
                                           </td>
                                   </tr>
+
+                          <?php } ?>
+
                             </thead>
+                             <input type="hidden" name="iva_cinco" id="iva_cinco" value='' class="form-control" value="">
+                            <input type="hidden" name="iva_diez" id="iva_diez"    value='' class="form-control" value="">
+                            <input type="hidden" name="lesiva" id="lesiva"      value=''class="form-control" value=""> 
                           </table>
                            <!-- cierre de carrito -->
                     </div>
                 </form>
               </div>
           </div>
-
           <!-- ///////////////////////////////////////////// -->
       </section>
 </div>
+
+
 <script type="text/javascript" charset="utf-8" async defer>
   $(function() {
         var inpuesto_cinco = 0;
@@ -118,12 +110,15 @@
         $('.idRecorrer td.inpuesto').each(function(){ //filas con clase 'contenido_caja', especifica una clase, asi no tomas el nombre de las columnas
          iva = $(this).attr('data-id');
          if (iva == '') {
+
          } else {
                 if (iva == 5) {
                  inpuesto_cinco += parseFloat($(this).attr('data-subtotal').replace(',', ','));
                  num1 = inpuesto_cinco/21;
                  total_cinco = num1.toFixed(3);
                  $(".total_iva_cinco").html(total_cinco);
+                 $("#iva_cinco").val(total_cinco);
+                 
                }
                if (iva == 10) {
                  inpuesto_diez += parseFloat($(this).attr('data-subtotal').replace(',', ','));
@@ -131,10 +126,13 @@
                  num2 = inpuesto_diez/11;
                  total_diez = num2.toFixed(3);
                  $(".total_iva_diez").html(total_diez);
+                 $("#iva_diez").val(total_diez);
                }
                 var num3 = num1 + num2;
                 total_iva = num3.toFixed(3);
                 $(".totalesiva").html(total_iva);
+                $("#lesiva").val(total_iva);
+
          }
         });
 });

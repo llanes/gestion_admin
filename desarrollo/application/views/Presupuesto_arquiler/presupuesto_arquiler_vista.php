@@ -1,21 +1,49 @@
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            {titulo1}
-            <small>{titulo2}</small>     
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> {titulo3}</a></li>
-            <li class="active">{titulo4}</li>
-          </ol>
-        </section>
-        <section class='content'>
+                <section class="panel panel-success">
+                          <header class="panel-heading">
+                              <ul class="nav nav-tabs">
+                                  <li class="active" id="presupuesto1">
+                                      <a data-toggle="tab" href="#presupuesto_alquiler">
+                                      <i class="fa fa-calculator"></i>
+                                      Crear Presupuesto Alquiler</a>
+                                  </li>
+                                  <li class="" id="lista_presus">
+                                      <a data-toggle="tab" href="#listados_presupuesto">
+                                      <i class="fa fa-list"></i>
+                                      Listados Presupuesto </a>
+                                  </li>
+                                  <li class="" id="lista_alquiler">
+                                      <a data-toggle="tab" href="#listados_alquiler">
+                                      <i class="fa fa-list"></i>
+                                      Listados Alquiler</a>
+                                  </li>
+                                  <li>
+                                    <a >
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </a>
+                                  </li>
+                                   <li class="">
+                                      <a>{titulo1}</a>
+                                  </li>
+                                  <li ><a>
+                                      <i class="fa fa-dashboard"></i> {titulo3}  {titulo4}
+                                  </a></li>
+                              </ul>
+                          </header>
+                          <div class="panel-body">
+                              <div id="" class="tab-content">
+ <div id="presupuesto_alquiler" class="tab-pane active">  
+                          <!-- comienzo de presupuesto -->
+        <section class=''>
           <div class="row">
-             <div class="box box-primary"> 
+             <div class=""> 
                 <!-- /////////////////////// -->
-               <form class="form-horizontal" method="post" name="formulario" id="formulario" role="form" action="<?php echo base_url('index.php/Presupuesto_arquiler/agregar_carrito') ?>">
+               <form class="form-horizontal" method="post" name="formulario" id="formulario" role="form" action="#" >
+               <input type="hidden" name="fecha_expedicion" id="fecha_expedicion" value="<?php echo date("Y-m-d");?>">
                     <div class="container" >
                               <!-- cabecera cliente -->
-                              <div class="table-responsive col-xs-7">
+                              <div class="col-xs-7">
                                 <table class="table"  >
                                     <tr>
                                       <td colspan="" colspan="" headers="" height="10" width="">
@@ -35,14 +63,30 @@
                                     </tr>
                                     <tr>
                                       <td colspan="" colspan="" headers="" hheight="10" width="">
-                                                  <label for="" class="col-xs-1">Fecha</label>
-                                                   <div class="col-xs-4">
-                                                      <input required type="date" class="form-control input-sm" name="" value="" placeholder="">
-                                                  </div>
+                                                  <label for="" class="col-xs-1">Entrega</label>
+                                      <div class="col-md-4">
+                                           <div class='input-group date' id='datetimepicker6'>
+                                              <!-- <input required type="text" id="Fecha_Pre_Arqui" name="Fecha_Pre_Arqui" class="form-control input-sm " readonly="" size="16" value=""> -->
+                                              <input type='text' class="form-control input-sm" id="Fecha_Pre_Arqui" name="Fecha_Pre_Arqui"  size="16" value=""/>
+                                              <div class="input-group-btn">
+                                                  <button type="button" class="btn btn-sm btn-info date-set"><i class="fa fa-calendar"></i></button>
+                                              </div>
+                                          </div>
+                                      </div>
                                                    <label for="" class="col-xs-2">Devolucion</label>
-                                                   <div class="col-xs-4">
-                                                      <input required type="date" class="form-control input-sm" name="" value="" placeholder="">
-                                                  </div>
+
+
+                                      <div class="col-md-4">
+                                          <div class='input-group date' id='datetimepicker7'>
+                                              <!-- <input required type="text" id="Fecha_Devolucion" name="Fecha_Devolucion" class="form-control input-sm " readonly="" size="16"> -->
+                                              <input type='text' class="form-control input-sm" id="Fecha_Devolucion" name="Fecha_Devolucion" size="16" value=""/>
+                                              <div class="input-group-btn">
+                                                  <button type="button" class="btn btn-sm btn-info date-set"><i class="fa fa-calendar"></i></button>
+                                              </div>
+                                          </div>
+                                      </div>
+
+
                                       </td>
                                     </tr>
                                     <tr>
@@ -54,12 +98,22 @@
                                                               <option class="juridica" value="2">Juridica</option>
                                                             </select>
                                                   </div>
-                                                   <label for="" class="col-xs-2">Articulos</label>
-                                                   <span class ="pro text-danger"></span>
+                                                  <label for="" class="col-xs-2">Servicios</label>
                                                    <div class="col-xs-4">
-                                                       <input  type='text' id='autocomplete busqueda_producto Nombre' name="Nombre" class="autocomplete form-control input-sm busqueda_producto" value="<?php echo set_value('Nombre');?>" placeholder="Nombre del Producto "  title="Buscar"/>
-                                                        <input required id="idProducto_Servicio" name="idProducto_Servicio" class="form-control" placeholder="idProducto_Servicio" value="<?php echo set_value('idProducto_Servicio');?>" type="hidden"  />
-                                                  </div>
+                                              <input
+                                              required
+                                              type='text' 
+                                              id='autocomplete busqueda_servicio' 
+                                              data-id=''
+                                              name="Nombres_servicios" 
+                                              class="autocomplete form-control input-sm busqueda_servicio" 
+                                              value="" 
+                                              placeholder="Busqueda...."  
+                                              title="Seleciona Categoriaa"/>
+                                              <input  id="idServicio" name="idServicio" class="form-control" placeholder="idServicio" value="" type="hidden"  />
+
+                                                   </div>
+
                                       </td>
                                     </tr>
                                 </table>
@@ -90,39 +144,44 @@
                             <!-- //////ciere cliente cabecera////////////////// -->
                             <!-- apertura buscador producto -->
                             <div class="table-responsive col-xs-11" >  
-                                <table  class="table " >
-                                    <tr>
-                                      <td>
-                                          <label for  ="" class="control-label text-danger">Precio</label>
-                                      </td>
-                                      <td colspan="" rowspan="" headers="">
-                                          <div class  ="">
-                                               <input disabled style="border: none;" type ="text" id="Precio_Unitario1" name="Precio_Unitario1" value="" class="input-sm" placeholder="" >
-                                              <input type ="hidden" id="Precio_Unitario" name="Precio_Unitario" value="" class="form-control input-sm" placeholder="" >
-                                          </div>
-                                      </td>
-                                      <td>
-                                          <label for  ="" class="control-label text-danger">Stock</label>
-                                      </td>
-                                      <td colspan="" rowspan="" headers="">
-                                          <div class  ="col-xs-3">
-                                             <input disabled style="border: none;" type ="text" id="Cantidad_stock1" name="Cantidad_stock1" value="" class="input-sm" placeholder="" >
+                                <table  class="table ">
                                              <input type ="hidden" id="stock" name="stock" value="" class="form-control input-sm" placeholder="" >
-                                          </div>
+                                              <input type ="hidden" id="Precio_Unitario" name="Precio_Unitario" value="" class="form-control input-sm" placeholder="" >
+                                    <tr>
+                                    <td colspan="" rowspan="" headers="" style="width: 60px;" >
+                                       <label for="" class="control-label text-danger">Articulos</label>
+                                    </td>
+                                    <td colspan="" rowspan="" headers="" style="width: 180px; ">
+                                       <input  type='text' id='autocomplete busqueda_producto Nombre' name="Nombre" class="autocomplete form-control input-sm busqueda_producto" value="<?php echo set_value('Nombre');?>" placeholder="Nombre del Articulo "  title="Buscar"/>
+                                       <input required id="idProducto_Servicio" name="idProducto_Servicio" class="form-control" placeholder="idProducto_Servicio" value="<?php echo set_value('idProducto_Servicio');?>" type="hidden"  />
+                                    </td>
+
+                                      <td style="width: 140px;">
+                                          <label for  ="" class="control-label text-danger">Precio</label> : 
+                                          <label id="Precio_Unitario1" name="Precio_Unitario1"  class="control-label text-info"></label>
                                       </td>
-                                      <td>
-                                          <label for  ="" class="control-label text-danger">Cantidad</label>
+                                         <td style="width: 80px; text-align:right ">
+                                            <label for  ="" class="control-label text-danger">Descunto</label>
+                                        </td>
+                                        <td style="width: 110px; ">
+                                        <div class  ="">
+                                                  <div class="checkbox">
+                                                    <label id="max">
+                                                    </label>
+                                                  </div>
+                                        </td>
+                                      <td style="width: 90px; text-align:right">
+                                        <label for  ="" class="control-label text-danger">Cantidad</label>
                                       </td>
-                                      <td colspan="" rowspan="" headers="">
-                                        <span class ="can text-danger"></span>
-                                          <div class="col-xs-6" id="max">
+                                      <td colspan="" rowspan="" headers="" style="width: 90px; ">
+                                          <div class="" id="max">
                                             <input type ="number" class="form-control input-sm" id="Cantidad" name="Cantidad" maxlength="" pattern="{10,15}" placeholder="">
                                           </div>
                                       </td>
-                                      <td>
+                                      <td style="width: 90px; text-align:right ">
                                           <label for  ="" class="control-label text-danger">Inpuesto</label>
                                       </td>
-                                      <td colspan="" rowspan="" headers="">
+                                      <td style="width: 90px; ">
                                                   <div class  ="">
                                                       <select name="opciones[inpuesto]" id="opciones_input" class="form-control input-sm di " >
                                                              <option value="10">10 %</option>
@@ -130,9 +189,9 @@
                                                         </select>
                                                   </div>
                                       </td>
-                                      <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      </td>
-                                     <td colspan="" rowspan="" headers="" style="text-align:right">
+                                      <!-- <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      </td> -->
+                                     <td colspan="" rowspan="" headers="" style="width: 110px; text-align:right">
                                               <button type="button" id="agregar_carrito"  class="btn btn-sm btn-info">
                                                     <i class="fa fa-cart-plus"></i> Agregar
                                             </button>
@@ -140,7 +199,17 @@
                                     </tr>
                                 </table>
                             </div>
-                            <!-- cierre buscaador producto -->
+              <!--                          <div class="form-group">
+                                              <div class='input-group date' id='datetimepicker1'  >
+                                                  <input type="text" class="form-control" name="fecha_agenda" id="fecha_agenda" value="" placeholder="" required>
+                                                  <span class="input-group-addon">
+                                                      <span class="glyphicon glyphicon-calendar"></span>
+                                                  </span>
+                                              </div>
+                                                  <?php echo form_error('fecha_agenda'); ?>
+                                          </div> -->
+
+     <!-- cierre buscaador producto -->
                             <!-- carrito item -->
                        <div class="col-lg-11 col-md-offset-0 " id="detalle" >  
 
