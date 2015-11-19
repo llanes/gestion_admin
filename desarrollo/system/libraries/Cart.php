@@ -546,7 +546,7 @@ class CI_Cart {
 	 */
 	public function format_number($n = '')
 	{
-		return ($n === '') ? '' : number_format( (float) $n,0, '', ',');
+		return ($n === '') ? '' : number_format( (float) $n, 2, '.', ',');
 	}
 
 	// --------------------------------------------------------------------
