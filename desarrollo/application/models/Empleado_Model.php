@@ -1,8 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Empleado_model extends CI_Model {
-	var $table = 'empleado';
-	var $table2 = 'usuario';
+	var $table = 'empleado,usuario';
 	var $where = 'usuario.Empleado_idEmpleado = empleado.idEmpleado and usuario.Permiso_idPermiso = 1';
 	var $column = array('Nombres','Apellidos','Direccion','Telefono','Sueldo','Cargo');
 	var $order = array('idEmpleado' => 'desc');
@@ -16,7 +15,7 @@ class Empleado_model extends CI_Model {
 	private function _get_datatables_query()
 	{
 		$this->db->from($this->table);
-	$this->db->from($this->table2);
+
 		$i = 0;
 
 		foreach ($this->column as $item)
@@ -59,7 +58,6 @@ class Empleado_model extends CI_Model {
 	public function count_todas()
 	{
 		$this->db->from($this->table);
-		$this->db->from($this->table2);
 		$this->db->where($this->where);
 		return $this->db->count_all_results();
 	}
@@ -67,7 +65,6 @@ class Empleado_model extends CI_Model {
 	public function get_by_id($id)
 	{
 		$this->db->from($this->table);
-		$this->db->from($this->table2);
 		$this->db->where($this->where);
 		$this->db->where('idEmpleado',$id);
 		$query = $this->db->get();

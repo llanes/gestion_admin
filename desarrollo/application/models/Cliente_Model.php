@@ -3,8 +3,8 @@
 class Cliente_model extends CI_Model {
 	var $table = 'cliente';
 	var $user = 'usuario';
-	var $where = 'usuario.Empleado_idEmpleado = cliente.idCliente and usuario.Permiso_idPermiso = 2';
-	var $column = array('ci_ruc','Nombres','Apellidos','Direccion','Telefono','Email');
+	var $where = 'usuario.Cliente_idCliente = cliente.idCliente and usuario.Permiso_idPermiso = 2';	
+	var $column = array('Nombres','Apellidos','Direccion','Telefono','Email');
 	var $order = array('idCliente' => 'desc');
 
 	public function __construct()
