@@ -21,9 +21,8 @@ class Seeder extends CI_Controller {
 		echo "Seeding cliente table".PHP_EOL;
 		$this->db->truncate('cliente');
 		// $this->db->truncate('usuario');
-		for ($i=0; $i < 15; $i++) { 
+		for ($i=0; $i < 50; $i++) { 
 			$object = array(
-				'ci_ruc' => $this->faker->latitude,
 				'Nombres' => $this->faker->firstName,
 				'Apellidos' =>  $this->faker->lastName,
 				'Direccion' =>  $this->faker->streetAddress,
@@ -39,6 +38,7 @@ class Seeder extends CI_Controller {
 				'Password' =>  $this->faker->password,
 				'Empleado_idEmpleado' =>  $id,
 				'Permiso_idPermiso' => $permiso,
+				'Cliente_idCliente' =>$id,
 				);
 			$this->db->insert('usuario', $user);
 			$id2 = $this->db->insert_id();
@@ -52,7 +52,7 @@ class Seeder extends CI_Controller {
 		echo "Seeding empleado table".PHP_EOL;
 		$this->db->truncate('empleado');
 		// $this->db->truncate('usuario');
-		for ($i=0; $i < 5; $i++) { 
+		for ($i=0; $i < 50; $i++) { 
 			$object = array(
 				'Nombres' => $this->faker->firstName,
 				'Apellidos' =>  $this->faker->lastName,
@@ -82,39 +82,30 @@ class Seeder extends CI_Controller {
 	{
 		echo "Seeding categoria table".PHP_EOL;
 		$this->db->truncate('categoria');
-		$this->db->truncate('producto_servicio');
-		$this->db->truncate('stock');
-
+			$this->db->truncate('producto_servicio');
 		// $this->db->truncate('usuario');
-		for ($i=0; $i < 20; $i++) { 
+		for ($i=0; $i < 50; $i++) { 
 			$cate = array(
 				'Categoria' => $this->faker->colorName,
 				'Descrip' =>  $this->faker->catchPhrase,
 				);
 			$this->db->insert('categoria', $cate);
 			$id2 = $this->db->insert_id();
-			$iva = 10;
 			$object = array(
 				'Codigo' => $this->faker->postcode,
 				'Nombre' => $this->faker->firstName,
 				'Codigo_Barra' => $this->faker->creditCardNumber,
 				'Descripcion' =>  $this->faker->catchPhrase,
-				'Precio_Unitario' =>  5000,
+				'Precio_Unitario' =>  $this->faker->randomDigit(5),
 				'Cantidad' =>  $id2,
 				'Descuento' =>  $this->faker->ean8,
-				'Iva' =>  $iva,
+				'Iva' =>  $id2,
 				'Img' =>  $this->faker->imageUrl($width = 640, $height = 480),
 				'Categoria_idCategoria' =>  $id2,
 				);
 			$this->db->insert('producto_servicio', $object);
 			$id = $this->db->insert_id();
-			$object_2 = array(
-				'Cantidad_stock' => $id2 ,
-				'Producto_Servicio_idProducto_Servicio' => $id,
-				);
-			$this->db->insert('stock', $object_2);
-			$id3 = $this->db->insert_id();
-			echo 'producto_servicio+Categoria+stock tres en una' .$id3. PHP_EOL;
+			echo 'producto_servicio' .$id. PHP_EOL;
 		}
 		echo "tavicho table";
 	}

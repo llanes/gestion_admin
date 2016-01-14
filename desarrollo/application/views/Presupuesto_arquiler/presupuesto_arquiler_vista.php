@@ -11,17 +11,15 @@
                                   <li class="" id="lista_presus">
                                       <a data-toggle="tab" href="#listados_presupuesto">
                                       <i class="fa fa-list"></i>
-                                      Listados Presupuesto </a>
+                                      Administrar Presupuesto </a>
                                   </li>
-                                  <li class="" id="lista_alquiler">
+                                  <li class="" id="lista_alqui">
                                       <a data-toggle="tab" href="#listados_alquiler">
                                       <i class="fa fa-list"></i>
-                                      Listados Alquiler</a>
+                                      Administrar Alquiler</a>
                                   </li>
                                   <li>
-                                    <a >
-                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </a>
+
                                   </li>
                                    <li class="">
                                       <a>{titulo1}</a>
@@ -42,21 +40,22 @@
                <form class="form-horizontal" method="post" name="formulario" id="formulario" role="form" action="#" >
                <input type="hidden" name="fecha_expedicion" id="fecha_expedicion" value="<?php echo date("Y-m-d");?>">
                     <div class="container" >
-                              <!-- cabecera cliente -->
-                              <div class="col-xs-7">
+                               <!-- cabecera cliente -->
+                                 <div class="col-xs-7">
                                 <table class="table"  >
+
                                     <tr>
                                       <td colspan="" colspan="" headers="" height="10" width="">
                                            <label for="" class="col-xs-1">Cliente</label>
                                          <div class="col-xs-4">
                                                <span class ="cli text-danger"></span>
-                                              <input required  type='text' id='autocomplete busqueda_cliente' name="Nombres" class="autocomplete form-control input-sm busqueda_cliente" value="<?php echo set_value('Nombres');?>" placeholder="Nombre del Cliente "  title="Seleciona Categoriaa"/>
-                                              <input  id="idCliente" name="idCliente" class="form-control" placeholder="idCliente" value="<?php echo set_value('idCliente');?>" type="hidden"  />
+                                              <input required  type='text' id='autocomplete busqueda_cliente' name="Nombres" class="autocomplete form-control input-sm busqueda_cliente" value="" placeholder="Nombre del Cliente "  title="Seleciona Categoriaa"/>
+                                              <input  id="idCliente" name="idCliente" class="form-control" placeholder="idCliente" value="{idCliente}" type="hidden"  />
                                         </div>
                                         <label for="" class="col-xs-2 ">C.I/R.U.C</label>
                                          <div class="col-xs-4">
                                               <span class ="cli text-danger"></span>
-                                              <input required  type="number" step="any" id='autocomplete busqueda_cliente2' name="ci_ruc" class="autocomplete form-control input-sm busqueda_cliente2" value="<?php echo set_value('ci_ruc');?>" placeholder="Cedula-R.U.C"  title="Seleciona Categoriaa"/>
+                                              <input required  type="number" step="any" id='autocomplete busqueda_cliente2' name="ci_ruc" class="autocomplete form-control input-sm busqueda_cliente2" value="" placeholder="Cedula-R.U.C"  title="Seleciona Categoriaa"/>
                                               <input  id="idCliente2" name="idCliente2" class="form-control" placeholder="idCliente2" value="<?php echo set_value('idCliente2');?>" type="hidden"  />
                                         </div>
                                       </td>
@@ -67,7 +66,7 @@
                                       <div class="col-md-4">
                                            <div class='input-group date' id='datetimepicker6'>
                                               <!-- <input required type="text" id="Fecha_Pre_Arqui" name="Fecha_Pre_Arqui" class="form-control input-sm " readonly="" size="16" value=""> -->
-                                              <input type='text' class="form-control input-sm" id="Fecha_Pre_Arqui" name="Fecha_Pre_Arqui"  size="16" value=""/>
+                                              <input required type='text' class="form-control input-sm" id="Fecha_Pre_Arqui" name="Fecha_Pre_Arqui"  size="16" value=""/>
                                               <div class="input-group-btn">
                                                   <button type="button" class="btn btn-sm btn-info date-set"><i class="fa fa-calendar"></i></button>
                                               </div>
@@ -79,7 +78,7 @@
                                       <div class="col-md-4">
                                           <div class='input-group date' id='datetimepicker7'>
                                               <!-- <input required type="text" id="Fecha_Devolucion" name="Fecha_Devolucion" class="form-control input-sm " readonly="" size="16"> -->
-                                              <input type='text' class="form-control input-sm" id="Fecha_Devolucion" name="Fecha_Devolucion" size="16" value=""/>
+                                              <input required type='text' class="form-control input-sm" id="Fecha_Devolucion" name="Fecha_Devolucion" size="16" value=""/>
                                               <div class="input-group-btn">
                                                   <button type="button" class="btn btn-sm btn-info date-set"><i class="fa fa-calendar"></i></button>
                                               </div>
@@ -199,17 +198,8 @@
                                     </tr>
                                 </table>
                             </div>
-              <!--                          <div class="form-group">
-                                              <div class='input-group date' id='datetimepicker1'  >
-                                                  <input type="text" class="form-control" name="fecha_agenda" id="fecha_agenda" value="" placeholder="" required>
-                                                  <span class="input-group-addon">
-                                                      <span class="glyphicon glyphicon-calendar"></span>
-                                                  </span>
-                                              </div>
-                                                  <?php echo form_error('fecha_agenda'); ?>
-                                          </div> -->
 
-     <!-- cierre buscaador producto -->
+    <!-- cierre buscaador producto -->
                             <!-- carrito item -->
                        <div class="col-lg-11 col-md-offset-0 " id="detalle" >  
 

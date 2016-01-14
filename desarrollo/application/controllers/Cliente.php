@@ -11,7 +11,10 @@ class Cliente extends CI_Controller {
 			redirect('/');
 		}
 	}
-
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
 	public function index()
 	{
 		// $this->output->enable_profiler(true);

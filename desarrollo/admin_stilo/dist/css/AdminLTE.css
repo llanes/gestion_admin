@@ -10,6 +10,7 @@
  * Core: Genral Layout Style
  * -------------------------
  */
+modal
 html,
 body {
   min-height: 100%;
@@ -2843,11 +2844,11 @@ table.text-center th {
   display: inline-block;
   margin-top: -20px;
 }
-/*
+/*aaaa
  * Component: modal
  * ----------------
  */
-.modal {
+/*.modal {
   background: rgba(0, 0, 0, 0.3);
 }
 .modal-content {
@@ -2887,7 +2888,7 @@ table.text-center th {
 .modal-danger .modal-header,
 .modal-danger .modal-footer {
   border-color: #c23321;
-}
+}*/
 /*
  * Page: Mailbox
  * -------------

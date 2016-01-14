@@ -6,7 +6,7 @@
 </style>
    <div class="container">
       <form class="form-signin" id="for_login" action="<?= site_url('index.php/Login/logeo')?> ">
-        <h2 class="form-signin-heading">Inicio de Seccion</h2>
+        <h2 class="form-signin-heading">Inicio de Sesion</h2>
         <div class="login-wrap">
               <input type="text" required  class="form-control" placeholder="Usuario"  id="usuario" name="usuario" onfocus="autofocus" autocomplete="off" pattern="[A-Za-z ]{3,100}"  >
                 <span class="User text-danger">

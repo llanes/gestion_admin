@@ -199,14 +199,3 @@
       </div>
     </div>
   </div>
-<script type="text/javascript" charset="utf-8" async defer>
-// $(":file").filestyle('input', false); 
-// $(":file").filestyle('buttonName', 'btn-primary');
-// $(":file").filestyle('buttonText', '&nbsp;&nbsp;Cargar Imagen');
-// $(":file").filestyle('placeholder', 'Crga una imagen no mayor a 4 megas');
-// $(function() {
-//   $('#ss').click(function() {
-//   $(":file").filestyle('clear');
-// });
-// });
- </script> 

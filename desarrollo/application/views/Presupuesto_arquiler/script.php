@@ -16,103 +16,131 @@
         });
 });
         $(function () {
-         $("#lista_alquiler").click(function(){
+         $("#lista_alqui").click(function(){
         $('#listados_alquiler').show();
         $('#presupuesto_alquiler,#listados_presupuesto,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
-        // $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler"); ?>');
+        $("#listados_alquiler").load('<?php echo base_url("index.php/Presupuesto_arquiler/listados_alquiler"); ?>');
         });
 });
-    var save_method_presupuesto; //for save method string
+    var save_method_presupuesto
+    /**
+     * [modal_view funcion para mostrar modal de agregar alquiler]
+     * @return {[type]} [html]
+     */
+    function modal_view()
+    {
+            save_method_presupuesto = 'modal';
+            $('#formulario').submit(function(e) {
+                  if (save_method_presupuesto == 'modal') {
+                    $('#modal_form_alquiler').modal('show'); // show bootstrap modal
+                    $('.modal-title').text('Configurar Alquiler'); // Set Title to Bootstrap modal title
+                          var id      = $( "select[name=credi_cont]").val();
+                          if (id == 1) {
+                             $('.cuotas').hide();
+                             // $('.Vencimiento').hide();
+
+                          } if (id == 2) {
+                              $('.cuotas').show();
+                              // $('.Vencimiento').show();
+                          }
+                  }
+              e.preventDefault();
+            })
+    }
+    /**
+     * [add_presupuesto funcion que direcciona aal controller add_presupuesto donde se genera un presupuesto  ]
+     */
+    function add_presupuesto()
+    {
+               save_method_presupuesto = 'presu';
+               $('#formulario').submit(function(e) {
+                var url = "<?php echo site_url('index.php/Presupuesto_arquiler/add_presupuesto');?>/"+2;
+                    if (save_method_presupuesto == 'presu') {
+                                             $.ajax({
+                          type : 'POST',
+                          url : url, // octengo la url del formulario
+                           cache: false,
+                          data: $(this).serialize(), // serilizo el formulario
+                          success : function(data) {
+                               var json = JSON.parse(data);// parseo la dada devuelta por json
+                               if (json.res == "error") {
+                                if (json.ci_ruc) {
+                                            swal(json.ci_ruc);
+                                }
+                                if (json.Fecha_Pre_Arqui) {
+                                            swal(json.Fecha_Pre_Arqui,json.Fecha_Devolucion);
+
+                                }
+                                if (json.Fecha_Devolucion) {
+                                            swal(json.Fecha_Devolucion,json.Fecha_Pre_Arqui);
+                                    }
+                               }else{
+                                            swal({   
+                                              title: "Presupuesto Registrado Correctamente",   
+                                              text: "  ",
+                                              timer: 1500,   
+                                              showConfirmButton: false 
+                                            });
+                                             // $('#modal_form_alquiler').modal('hide');
+                                            $('#formulario')[0].reset(); // reset form on modals
+                                              $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler"); ?>');
+                               }
+                         },
+                          // código a ejecutar si la petición falla;
+                          error : function(xhr, status) {
+                              alert('Disculpe, existió un problema');
+                              console.log('error(jqXHR, textStatus, errorThrown)');
+                          },
+                      });
+                    }
+                  e.preventDefault();
+
+                  })
+    }
     function add_alquiler()
     {
-     $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
-      save_method_presupuesto = 'alquiler';
-    }
-  $(function() {
+               save_method_presupuesto = 'alquiler';
                $('#formulario').submit(function(e) {
-                        var url;
-                        if(save_method_presupuesto == 'alquiler') 
-                        {
-                          url = "<?php echo site_url('index.php/Presupuesto_arquiler/add_presupuesto');?>/"+1;
-                        }
-                        else
-                        {
-                          url = "<?php echo site_url('index.php/Presupuesto_arquiler/add_presupuesto');?>/"+2;
-                        }
-                       $.ajax({
-                                  type : 'POST',
-                                  url : url, // octengo la url del formulario
-                                   cache: false,
-                                  data: $(this).serialize(), // serilizo el formulario
-                                  success : function(data) {
-                                       var json = JSON.parse(data);// parseo la dada devuelta por json
-                                       if (json.res == "error") {
-                                        if (json.ci_ruc) {
-                                                    swal(json.ci_ruc);
-                                        }
-                                        if (json.Fecha_Pre_Arqui) {
-                                                    swal(json.Fecha_Pre_Arqui,json.Fecha_Devolucion);
+                var url = "<?php echo site_url('index.php/Presupuesto_arquiler/add_presupuesto');?>/"+1;
+                 if (save_method_presupuesto == 'alquiler') {
+                         $.ajax({
+                          type : 'POST',
+                          url : url, // octengo la url del formulario
+                           cache: false,
+                          data: $(this).serialize(), // serilizo el formulario
+                          success : function(data) {
+                               var json = JSON.parse(data);// parseo la dada devuelta por json
+                               if (json.res == "error") {
+                               }else{
+                                            $('#modal_form_alquiler').modal('hide');
+                                            swal({   
+                                              title: "Alquiler Registrado Correctamente",   
+                                              text: " ",
+                                              timer: 1500,   
+                                              showConfirmButton: false 
+                                            });
+                                            $('#formulario')[0].reset(); // reset form on modals
+                                            // $( "#detalle" ).load( "<?php echo site_url('index.php/Presupuesto_arquiler/loader');?>" );
+                                             setTimeout(function() {
+                                                // $("#detalle").fadeOut(150);
+                                                $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler"); ?>');
+                                            },200);
 
-                                        }
-                                        if (json.Fecha_Devolucion) {
-                                                    swal(json.Fecha_Devolucion,json.Fecha_Pre_Arqui);
-                                            }
-                                       }else{
-                                                    swal('Registrado Correctamente');
-                                                    $('#formulario')[0].reset(); // reset form on modals
-                                                       $( "#detalle" ).load( "<?php echo site_url('index.php/Presupuesto_arquiler/loader');?>" );
-                                       }
-                                 },
-                                  // código a ejecutar si la petición falla;
-                                  error : function(xhr, status) {
-                                      alert('Disculpe, existió un problema');
-                                      console.log('error(jqXHR, textStatus, errorThrown)');
-                                  },
-                              });
+                               }
+                         },
+                          // código a ejecutar si la petición falla;
+                          error : function(xhr, status) {
+                              alert('Disculpe, existió un problema');
+                              // console.log('error(jqXHR, textStatus, errorThrown)');
+                          },
+                      });
+                 }
                   e.preventDefault();
-                  })
-    });
-  
 
-    function edit_producto(idProducto_Servicio)
-    {
-      $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
-      save_method_producro = 'update';
-      // $('#PF').hide();
-      $('#form_productos')[0].reset(); // reset form on modals
-      // $('#Iva').html('');
-      //Ajax Load data from ajax
-      $.ajax({
-        url : "<?php echo site_url('index.php/Productos/ajax_edit/'); ?>/" + idProducto_Servicio,
-        type: "GET",
-        dataType: "JSON",
-        cache: false,
-        success: function(data)
-        {
-        
-                $('[name="idProducto_Servicio"]').val(data.idProducto_Servicio);
-                $('[name="Codigo"]').val(data.Codigo);
-                 $('[name="Codigo_Barra"]').val(data.Codigo_Barra);
-                $('[name="Nombre"]').val(data.Nombre);
-                $('[name="Descripcion"]').val(data.Descripcion);
-                $('[name="Precio_Unitario"]').val(data.Precio_Unitario);
-                $('[name="Cantidad"]').val(data.Cantidad);
-                $('[name="usuario"]').val(data.Usuario);
-                $('[name="Descuento"]').val(data.Descuento);
-                $('[name="Iva"]').val(data.Iva);
-                // $('[name="Img"]').val(data.Img);
-                $('[name="Categoria"]').val(data.Categoria);
-                $('[name="idCategoria"]').val(data.idCategoria);
-            $('#modal_form_productos').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title_productos').text('Editar Cliente'); // Set title to Bootstrap modal title
-            
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error al obtener datos');
-        }
-    });
+                  })
     }
+
+
     $(function() {
     $('#agregar_carrito').click(function(e) {
       var url ="<?php echo site_url('index.php/Presupuesto_arquiler/agregar_carrito'); ?>";
@@ -197,30 +225,11 @@
       });
     }
 
-    function ver_mas(idProducto_Servicio)
+    function edit_presupuesto(idArquiler)
     {
-      // $('#reset')[0].reset(); // reset form on modals
-      //Ajax Load data from ajax
-      $.ajax({
-        url : "<?php echo site_url('index.php/Productos/ajax_edit/'); ?>/" + idProducto_Servicio,
-        type: "GET",
-        dataType: "JSON",
-        cache: false,
-        success: function(data)
-        {
-                 $('.modal-title_productos_ver').text(data.Img);
-                 $('.Codigo_Barra').text(data.Codigo_Barra);
-                 $('.Descripcion').text(data.Descripcion);
-                 $('.Descuento').text(data.Descuento);
-                 $('.Iva').text(data.Iva);
-       $('#ver_mas').modal('show'); // show bootstrap modal when complete loaded
-       $('.modal-title_productos').text('Listados'); // Set title to Bootstrap modal title
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error al obtener datos');
-        }
-    });
+          $('#presupuesto_vista').show()
+          $('#listados_presupuesto,#listados_alquiler,#listados_presupuesto,#home,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
+          $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler/edit_presupuesto"); ?>/' + idArquiler);
     }
 
     $(function(){
@@ -321,8 +330,6 @@
             }
                           });
     });
-
-
 // datetime picker start
 
 // $(".form_datetime-adv").datetimepicker({

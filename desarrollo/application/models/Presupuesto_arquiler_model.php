@@ -4,10 +4,11 @@ class Presupuesto_arquiler_model extends CI_Model {
 	var $table = 'presupuesto_arquiler pa';
 	var $pa = 'presupuesto_arquiler';
 	var $da = 'detalle_arquiler';
-	var $select = 'pa.Monto_Alquiler_Presupuesto,pa.Arquiler_Presupuesto ,pa.idArquiler ,pa.fecha_expedicion ,pa.Nombre_servicio ,c.idCliente ,c.Nombres,c.Apellidos ,u.Usuario ,u.idUsuario ';
+	var $select = 'pa.Monto_Alquiler_Presupuesto,pa.Arquiler_Presupuesto ,pa.idArquiler ,pa.fecha_expedicion ,pa.Nombre_servicio ,pa.Entrega ,pa.Devolucion ,c.idCliente ,c.Nombres,c.Apellidos ,u.Usuario ,u.idUsuario ';
 	var $where = 'Arquiler_Presupuesto = 2';
-	var $column = array('Monto_Alquiler_Presupuesto','idArquiler','fecha_expedicion','Nombre_servicio','idCliente','Nombres','Usuario','idUsuario');
-	var $order = array('pa.idArquiler idArquiler' => 'desc');
+	var $where2 = 'Arquiler_Presupuesto = 1';
+	var $column = array('Entrega','Devolucion','Monto_Alquiler_Presupuesto','idArquiler','fecha_expedicion','Nombre_servicio','idCliente','Nombres','Usuario','idUsuario');
+	var $order = array('Entrega  ,Devolucion' => 'desc');
 
 	public function __construct()
 	{
@@ -40,6 +41,7 @@ class Presupuesto_arquiler_model extends CI_Model {
 		{
 			$order = $this->order;
 			$this->db->order_by(key($order), $order[key($order)]);
+
 		}
 	}
 
@@ -52,7 +54,6 @@ class Presupuesto_arquiler_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-
 	function count_filtro()
 	{
 		$this->_get_datatables_query();
@@ -69,7 +70,96 @@ class Presupuesto_arquiler_model extends CI_Model {
 		$this->db->where($this->where);
 		return $this->db->count_all_results();
 	}
+	///////////////////////////////////////////////////////
+		private function _get_datatables_query2()
+	{
+		$this->db->select($this->select);
+		$this->db->from($this->table);
+		$this->db->join('cliente c', 'pa.Cliente_idCliente = c.idCliente', 'INNER');
+		$this->db->join('usuario u', 'pa.Usuario_idUsuario = u.idUsuario', 'INNER');
+		$i = 0;
 
+		foreach ($this->column as $item)
+		{
+			$this->db->where($this->where2);
+			if($_POST['search']['value'])
+				($i===0) ? $this->db->like($item, $_POST['search']['value']) : $this->db->or_like($item, $_POST['search']['value']);
+			$column[$i] = $item;
+			$i++;
+		}
+
+		if(isset($_POST['order']))
+		{
+			$this->db->order_by($column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+		}
+		else if(isset($this->order))
+		{
+		$order = $this->order;
+			$this->db->order_by(key($order), $order[key($order)]);
+		}
+	}
+	function get_alquiler()
+	{
+		$this->_get_datatables_query2();
+		if($_POST['length'] != -1)
+		$this->db->where($this->where2);
+		$this->db->order_by('fecha_expedicion', 'desc');
+		$this->db->order_by('Entrega,Devolucion', 'desc');
+		$this->db->limit($_POST['length'], $_POST['start']);
+		$query = $this->db->get();
+		return $query->result();
+	}
+		function count_filter()
+	{
+		$this->_get_datatables_query2();
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
+	public function count_alquiler()
+	{
+		$this->db->select($this->select);
+		$this->db->from($this->table);
+		$this->db->join('cliente c', 'pa.Cliente_idCliente = c.idCliente', 'INNER');
+		$this->db->join('usuario u', 'pa.Usuario_idUsuario = u.idUsuario', 'INNER');
+		$this->db->where($this->where2);
+		$this->db->order_by('fecha_expedicion', 'desc');
+		$this->db->order_by('Entrega,Devolucion', 'desc');
+		return $this->db->count_all_results();
+	}
+	public function update_entrega($idArquiler,$entrega)
+	{
+		if ($entrega == 0) {
+			$this->db->set('Entrega', 1);
+			$this->db->where('idArquiler', $idArquiler);
+			$this->db->update($this->table);
+			return $this->db->affected_rows();
+		} else if ($entrega == 1) {
+			$this->db->set('Entrega', 0);
+			$this->db->set('Devolucion', 0);
+			$this->db->where('idArquiler', $idArquiler);
+			$this->db->update($this->table);
+			return $this->db->affected_rows();
+		}
+
+	}
+	public function update_devolucion($idArquiler,$devolucion)
+	{
+		if ($devolucion == 0) {
+			$this->db->set('Devolucion', 1);
+			$this->db->where('idArquiler', $idArquiler);
+			$this->db->update($this->table);
+			return $this->db->affected_rows();
+		} else if ($devolucion == 1) {
+			$this->db->set('Devolucion', 0);
+			$this->db->where('idArquiler', $idArquiler);
+			$this->db->update($this->table);
+			return $this->db->affected_rows();
+		}
+
+	}
+
+	/////////////fin alquier/////////////////
 	public function get_by_id($id)
 	{
 		$this->db->from($this->table);
@@ -95,6 +185,11 @@ class Presupuesto_arquiler_model extends CI_Model {
 	public function add_presupuesto_detalle($data)
 	{
 		$this->db->insert($this->da,$data);
+		return $this->db->insert_id();
+	}
+	public function add_credito($_data)
+	{
+		$this->db->insert('credito',$_data);
 		return $this->db->insert_id();
 	}
 
@@ -197,31 +292,6 @@ class Presupuesto_arquiler_model extends CI_Model {
 			//minimo php 5.2
 		echo json_encode($arr);
     }
-    public function actualizar_stock($idProducto_Servicio,$cantidad)
-    {
-    $this->db->select("Cantidad_stock -'$cantidad' as total");
-    $this->db->where('Producto_Servicio_idProducto_Servicio', $idProducto_Servicio);
-	$query = $this->db->get('stock');
-		foreach ($query->result() as $row) {
-			$data = array('Cantidad_stock' => $row->total, 'Producto_Servicio_idProducto_Servicio' => $idProducto_Servicio);
-			$this->db->where('Producto_Servicio_idProducto_Servicio', $idProducto_Servicio);
-			$this->db->update('stock', $data);
-			return $this->db->affected_rows();
-		};
-    }
-    public function update_stock($idProducto_Servicio,$cantidad)
-    {
-    $this->db->select("Cantidad_stock +'$cantidad' as total");
-    $this->db->where('Producto_Servicio_idProducto_Servicio', $idProducto_Servicio);
-	$query = $this->db->get('stock');
-		foreach ($query->result() as $row) {
-			$data = array('Cantidad_stock' => $row->total, 'Producto_Servicio_idProducto_Servicio' => $idProducto_Servicio);
-			$this->db->where('Producto_Servicio_idProducto_Servicio', $idProducto_Servicio);
-			$this->db->update('stock', $data);
-			return $this->db->affected_rows();
-			echo json_encode($data);
-		};
-    }
     public function octener_serie()
     {
 		$this->db->select_max('idArquiler');
@@ -238,10 +308,7 @@ class Presupuesto_arquiler_model extends CI_Model {
 			}
 		};
     }
-    public function recorrer_servicios($id)
-    {
-		$this->db->select('
-			');
+    public function recorrer_servicios($id)    {
 		$this->db->select('*');
 		$this->db->from('detalle_servicio,producto_servicio');
 		$this->db->where("producto_servicio.idProducto_Servicio = detalle_servicio.Producto_Servicio_idProducto_Servicio");
@@ -262,14 +329,55 @@ class Presupuesto_arquiler_model extends CI_Model {
     }
 	public function getarticulo_by_id($idArquiler)
 	{
-		$this->db->select('da.Presupuesto_Arquiler_idArquiler,da.Cantidad,da.Precio,da.Iva,ps.Nombre');
+		$this->db->distinct('
+			');
+		$this->db->select('
+			pr.idArquiler,
+			pr.Fecha_Pre_Arqui,
+			pr.Num_arquiler,
+			pr.Fecha_Devolucion,
+			pr.Nombre_servicio,S
+			pr.Monto_Alquiler_Presupuesto,
+			pr.Contado_Credito,
+			cl.ci_ruc,
+			cl.Nombres,
+			cl.Direccion,
+			cl.Telefono,
+			cl.Apellidos
+			');
+		$this->db->from('detalle_arquiler da,cliente cl');
+		$this->db->join('producto_servicio ps', 'da.Producto_Servicio_idProducto_Servicio = ps.idProducto_Servicio', 'INNER');
+		$this->db->join('presupuesto_arquiler pr', 'cl.idCliente = pr.Cliente_idCliente ', 'INNER');
+		$this->db->where('idArquiler',$idArquiler);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+		public function edit_presupuesto($idArquiler)
+	{
+		$this->db->select('*');
 		$this->db->from('detalle_arquiler da');
 		$this->db->join('producto_servicio ps', 'da.Producto_Servicio_idProducto_Servicio = ps.idProducto_Servicio', 'INNER');
 		$this->db->where('Presupuesto_Arquiler_idArquiler',$idArquiler);
 		$query = $this->db->get();
+			foreach ($query->result() as $row)
+			{
+						$data = array(
+									'id'      =>$row->idProducto_Servicio,
+									'qty'     =>$row->Cantidad,
+									'price'   =>$row->Precio,
+									'name'    =>$row->Nombre,
+									'options' => array('Importe' => $row->Iva)
+								);
+				$this->cart->insert($data);
+			}
+		$this->db->select('*');
+		$this->db->from('cliente cl');
+		$this->db->join('presupuesto_arquiler pr', 'cl.idCliente = pr.Cliente_idCliente ', 'INNER');
+		$this->db->where('idArquiler',$idArquiler);
+		$query = $this->db->get();
 		return $query->result_array();
-	}
 
+	}
 }
 
 /* End of file marca_Model.php */

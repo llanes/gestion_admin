@@ -53,11 +53,11 @@
                                   <?php endforeach; ?>
                                           <td width="130" colspan="6">
                                               <strong>Total IVA 5 %&nbsp;&nbsp;</strong>₲. <span class='total_iva_cinco'></span>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                               <strong>Total IVA 10 %&nbsp;&nbsp;</strong>₲. <span class='total_iva_diez'></span>
-                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                               <strong>Total IVA &nbsp;&nbsp;</strong>₲. <span class='totalesiva'></span>
-                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                               <strong>Monto Total &nbsp;</strong>₲. <?php echo $this->cart->format_number($this->cart->total()); ?>
                                           </td>
                                    </tr>
@@ -70,10 +70,10 @@
                                  <tr id="generar">
                                           <td colspan="4"> </td>
                                           <td class="right"  style="text-align:right">
-                                                       <button type="submit" id="Presupuesto" class="btn btn-sm btn-success">
+                                                       <button type="submit" id="Presupuesto" onclick="add_presupuesto(0)" class="btn btn-sm btn-success">
                                                                 <i class="fa fa-archive" ></i> Guarda Presupuesto
                                                         </button>
-                                                        <button type="submit" id="Alquiler" onclick="add_alquiler(0)" class="btn btn-sm btn-success">
+                                                        <button type="submit" id="Alquiler" onclick="modal_view(0)" class="btn btn-sm btn-success">
                                                                 <span class="glyphicon glyphicon-floppy-disk"></span> Generar Alquiler
                                                         </button>
                                           </td>
@@ -88,13 +88,69 @@
                           </table>
                            <!-- cierre de carrito -->
                     </div>
-                </form>
               </div>
           </div>
           <!-- ///////////////////////////////////////////// -->
       </section>
+      <div class="modal fade" id="modal_form_alquiler">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 style="text-align: center" class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <div <div class="row"> 
+               <div class="col-md-12 col-md-offset-0 table-responsive">
+                <table class="table" >
+                  <tbody>
+                     <tr id="transparente">
+                        <td >
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Tipo de Pago</label>
+                                <div class="col-lg-5">
+                                        <select name="credi_cont" id="credi_cont" class="form-control">
+                                          <option value="1">Contado</option>
+                                          <option value="2">Credito</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr> 
+                    <tr id="transparente">
+                        <td>
+                            <div class="form-group cuotas">
+                                <label class="col-lg-4 control-label">Cantidad Cuotas</label>
+                                <div class="col-lg-5">
+                                    <select name="cuota" id="cuota" class="form-control">
+                                          <option value="2">2</option>
+                                          <option value="4">4</option>
+                                          <option value="6">6</option>
+                                          <option value="8">8</option>
+                                          <option value="12">12</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+         <div class="modal-footer">
+            <button type="submit" id="btnSave" onclick="add_alquiler()" class="btn btn-sm btn-success">
+                     <span class="glyphicon glyphicon-floppy-disk"></span> Alquilar
+            </button>&nbsp;&nbsp;&nbsp;
+             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" >
+                     <span class="glyphicon glyphicon-floppy-remove"></span> Cancelar
+             </button>
+          </div>
+          </div>
+        </div>
+      </div>
 </div>
-
+      </form>
 
 <script type="text/javascript" charset="utf-8" async defer>
   $(function() {
@@ -118,7 +174,6 @@
                  total_cinco = num1.toFixed(3);
                  $(".total_iva_cinco").html(total_cinco);
                  $("#iva_cinco").val(total_cinco);
-                 
                }
                if (iva == 10) {
                  inpuesto_diez += parseFloat($(this).attr('data-subtotal').replace(',', ','));
@@ -136,4 +191,17 @@
          }
         });
 });
+    $(function() {
+            $("#credi_cont").change(function(){
+              var id      = $( "select[name=credi_cont]").val();
+            if (id == 1) {
+               $('.cuotas').hide();
+                // $('.Vencimiento').hide();
+            } if (id == 2) {
+                $('.cuotas').show();
+                // $('.Vencimiento').show();
+            }
+                          });
+    });
+
 </script>
