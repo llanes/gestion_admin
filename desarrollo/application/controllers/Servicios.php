@@ -42,7 +42,7 @@ class Servicios extends CI_Controller {
 			<i class ="fa fa-plus-square"></i></a>' ;
 			$row[]   = $servi->Servicio;
 			$row[]   = $servi->Descripcion;
-			$row[]   = $servi->Monto_total_servicio;
+			$row[]   = number_format($servi->Monto_total_servicio,0,'.',',');
 			//add html for action
 			$row[]   = '<div class="pull-right hidden-phone">
 			<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_servicios('."'".$servi->idServicio."'".')">
@@ -78,11 +78,11 @@ class Servicios extends CI_Controller {
 				'res'             => 'error');
 				echo json_encode($data);
 		}else{
+			$Monto_total_servicio =  str_replace($this->config->item('caracteres'),"",$this->cart->total());
 			$_data = array(
 				'Servicio'    => $this->security->xss_clean( $this->input->post('servicio')),
-				'Monto_total_servicio' => number_format($this->cart->total(),0,',','.'),
+				'Monto_total_servicio' => $Monto_total_servicio,
 				'Descripcion' => $this->security->xss_clean( $this->input->post('Descripcion')),
-				'Estado' => 0,
 
 			);
 			$this->Servicios_model->add_servicio($_data);
@@ -134,11 +134,12 @@ class Servicios extends CI_Controller {
 				echo json_encode($data);
 		}else{
 			$idServicio = $this->security->xss_clean( $this->input->post('idServicio'));
+			$Monto_total_servicio =  str_replace($this->config->item('caracteres'),"",$this->cart->total());
 			$_data = array(
 				'Servicio'    => $this->security->xss_clean( $this->input->post('servicio')),
-				'Monto_total_servicio' => number_format($this->cart->total(),0,',','.'),
+				'Monto_total_servicio' => $Monto_total_servicio,
 				'Descripcion' => $this->security->xss_clean( $this->input->post('Descripcion')),
-				'Estado' => 0,
+
 			);
 			$this->Servicios_model->actualizar_servicio($_data,$idServicio);
 			$i = 1;
@@ -224,7 +225,8 @@ class Servicios extends CI_Controller {
 	}
 	public function loader()
 	{
-	$this->load->view('Servicios/cart.php');	// carga todos las url de estilo i js home	
+	$this->load->view('Servicios/cart.php');	// carga todos las url de estilo i js home
+	// $this->load->view('Servicios/script.php');
 	}
 	public function reser($value='')
 	{

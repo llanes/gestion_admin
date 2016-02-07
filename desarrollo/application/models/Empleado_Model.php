@@ -1,8 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Empleado_model extends CI_Model {
-	var $table = 'empleado,usuario';
-	var $where = 'usuario.Empleado_idEmpleado = empleado.idEmpleado and usuario.Permiso_idPermiso = 1';
+	var $table = 'empleado';
+	var $where = 'usuario.Permiso_idPermiso = 1';
+
 	var $column = array('Nombres','Apellidos','Direccion','Telefono','Sueldo','Cargo');
 	var $order = array('idEmpleado' => 'desc');
 
@@ -15,7 +16,7 @@ class Empleado_model extends CI_Model {
 	private function _get_datatables_query()
 	{
 		$this->db->from($this->table);
-
+		$this->db->join('usuario', 'empleado.idEmpleado = usuario.Empleado_idEmpleado', 'INNER');
 		$i = 0;
 
 		foreach ($this->column as $item)
@@ -58,7 +59,8 @@ class Empleado_model extends CI_Model {
 	public function count_todas()
 	{
 		$this->db->from($this->table);
-		$this->db->where($this->where);
+		$this->db->join('usuario', 'empleado.idEmpleado = usuario.Empleado_idEmpleado', 'INNER');
+		$this->db->where($this->where);	
 		return $this->db->count_all_results();
 	}
 
@@ -79,7 +81,7 @@ class Empleado_model extends CI_Model {
 	}
 	public function save2($data)
 	{
-		$this->db->insert($this->table2, $data);
+		$this->db->insert($this->table, $data);
 		return $this->db->insert_id();
 	}
 
@@ -92,17 +94,17 @@ class Empleado_model extends CI_Model {
 	{
 		$this->db->where('Empleado_idEmpleado', $idEmpleado);
 		$this->db->where('Permiso_idPermiso = 1');
-		$this->db->update($this->table2, $data);
+		$this->db->update('usuario', $data);
 		return $this->db->affected_rows();
 	}
 
 	public function delete_by_id($idEmpleado)
 	{
 		$this->db->where('idEmpleado', $idEmpleado);
-		$this->db->delete($this->table);
+		$this->db->delete('empleado');
 		$this->db->where('usuario.Empleado_idEmpleado',$idEmpleado);
 		$this->db->where('Permiso_idPermiso = 1');
-		$this->db->delete($this->table2);
+		$this->db->delete('usuario');
 	}
 
 }

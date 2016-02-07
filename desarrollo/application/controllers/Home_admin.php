@@ -20,9 +20,9 @@ class Home_admin extends CI_Controller {
 			(
 					'titulo'      => 'Sietema | Administrativa',//mi titulo 
 					"usuario"     => $this->session->userdata('usuario'),
-					'num_cliente' => $this->db->get('cliente')->num_rows(),
-					'num_empleado' => $this->db->get('empleado')->num_rows(),
-					'num_productos' => $this->db->get('producto_servicio')->num_rows(),
+					'num_cliente' => '',
+					'num_empleado' => '',
+					'num_productos' => '',
 
 			);
 			//redirecionamos a la vista o llamamos a la vista index

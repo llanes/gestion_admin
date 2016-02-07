@@ -35,19 +35,19 @@ class Cliente extends CI_Controller {
 	}
 		public function ajax_list()
 	{
-		$list = $this->Cliente_model->get_cliente();
+		if ($this->input->is_ajax_request()) {
+				$list = $this->Cliente_model->get_cliente();
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $cliente) {
 			$no++;
-			$row = array();
-			$row[] = $cliente->Nombres;
-			$row[] = $cliente->Apellidos;
-			$row[] = $cliente->Direccion;
-			$row[] = $cliente->Telefono;
-			$row[] = $cliente->Email;
-			// $row[] = $cliente->Usuario;
-			// $row[] = $cliente->Password;
+				$row   = array();
+				$row[] = $cliente->Nombres;
+				$row[] = $cliente->Apellidos;
+				$row[] = $cliente->Direccion;
+				$row[] = $cliente->ci_ruc;
+				$row[] = $cliente->Telefono;
+				$row[] = $cliente->Email;
 
 			//add html for action
 			$row[] = '<div class="pull-right hidden-phone">
@@ -66,11 +66,20 @@ class Cliente extends CI_Controller {
 				);
 		//output to json format
 		echo json_encode($output);
+		} else {
+			show_404();
+		}
+		
 	}
 	public function ajax_edit($idCliente)
 	{
-		$data = $this->Cliente_model->get_by_id($idCliente);
-		echo json_encode($data);
+		if ($this->input->is_ajax_request()) {
+			$data = $this->Cliente_model->get_by_id($idCliente);
+			echo json_encode($data);
+		} else {
+			show_404();
+		}
+		
 	}
 
 	public function ajax_add()
@@ -83,6 +92,7 @@ class Cliente extends CI_Controller {
 							'Nombres'   => form_error('Nombres'),
 							'Apellidos'   => form_error('Apellidos'),
 							'Direccion'   => form_error('Direccion'),
+							'ci_ruc'   => form_error('ci_ruc'),
 							'Telefono'   => form_error('Telefono'),
 							'Email'   => form_error('Email'),
 							'usuario'   => form_error('usuario'),
@@ -96,6 +106,7 @@ class Cliente extends CI_Controller {
 					'Nombres'                     => $this->security->xss_clean( $this->input->post('Nombres',FALSE)),
 					'Apellidos'                   => $this->security->xss_clean( $this->input->post('Apellidos',FALSE)),
 					'Direccion'                   => $this->security->xss_clean( $this->input->post('Direccion',FALSE)),
+					'ci_ruc'                   => $this->security->xss_clean( $this->input->post('ci_ruc',FALSE)),
 					'Telefono'                    => $this->security->xss_clean( $this->input->post('Telefono',FALSE)),
 					'Email'                       => $this->security->xss_clean( $this->input->post('Email',FALSE)),
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)
@@ -127,6 +138,7 @@ class Cliente extends CI_Controller {
 							'Nombres'   => form_error('Nombres'),
 							'Apellidos'   => form_error('Apellidos'),
 							'Direccion'   => form_error('Direccion'),
+							'ci_ruc'   => form_error('ci_ruc'),
 							'Telefono'   => form_error('Telefono'),
 							'Email'   => form_error('Email'),
 							'usuario'   => form_error('usuario'),
@@ -140,6 +152,7 @@ class Cliente extends CI_Controller {
 					'Nombres'                     => $this->security->xss_clean( $this->input->post('Nombres',FALSE)),
 					'Apellidos'                   => $this->security->xss_clean( $this->input->post('Apellidos',FALSE)),
 					'Direccion'                   => $this->security->xss_clean( $this->input->post('Direccion',FALSE)),
+					'ci_ruc'                      => $this->security->xss_clean( $this->input->post('ci_ruc',FALSE)),
 					'Telefono'                    => $this->security->xss_clean( $this->input->post('Telefono',FALSE)),
 					'Email'                       => $this->security->xss_clean( $this->input->post('Email',FALSE)),
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)

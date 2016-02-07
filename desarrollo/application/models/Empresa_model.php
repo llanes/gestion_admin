@@ -1,11 +1,17 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cliente_model extends CI_Model {
-	var $table = 'cliente';
-	var $user = 'usuario';
-	var $where = 'usuario.Cliente_idCliente = cliente.idCliente and usuario.Permiso_idPermiso = 2';	
-	var $column = array('Nombres','Apellidos','Direccion','Telefono','Email');
-	var $order = array('idCliente' => 'desc');
+class Empresa_model extends CI_Model {
+	var $table = 'empresa';
+	var $column = array(
+		'Nombre',
+		'Direccion',
+		'Telefono',
+		'Email',
+		'R_U_C',
+		'Timbrado',
+		'Series');
+	var $order = array('idEmpresa' => 'desc');
 
 	public function __construct()
 	{
@@ -37,7 +43,7 @@ class Cliente_model extends CI_Model {
 		}
 	}
 
-	function get_cliente()
+	function get_empresa()
 	{
 		$this->_get_datatables_query();
 		if($_POST['length'] != -1)
@@ -62,9 +68,7 @@ class Cliente_model extends CI_Model {
 	public function get_by_id($id)
 	{
 		$this->db->from($this->table);
-		$this->db->from($this->user);
-		$this->db->where($this->where);
-		$this->db->where('idCliente',$id);
+		$this->db->where('idEmpresa',$id);
 		$query = $this->db->get();
 
 		return $query->row();
@@ -75,34 +79,20 @@ class Cliente_model extends CI_Model {
 		$this->db->insert($this->table, $data);
 		return $this->db->insert_id();
 	}
-	public function save2($data)
-	{
-		$this->db->insert($this->user, $data);
-		return $this->db->insert_id();
-	}
 
 	public function update($where, $data)
 	{
 		$this->db->update($this->table, $data, $where);
 		return $this->db->affected_rows();
 	}
-	public function update2($idCliente, $data)
-	{	
-		$this->db->where('Empleado_idEmpleado', $idCliente);
-		$this->db->where('Permiso_idPermiso = 2');
-		$this->db->update($this->user, $data);
-		return $this->db->affected_rows();
-	}
 
-	public function delete_by_id($idCliente)
+	public function delete_by_id($idEmpresa)
 	{
-		$this->db->where('idCliente', $idCliente);
+		$this->db->where('idEmpresa', $idEmpresa);
 		$this->db->delete($this->table);
-		$this->db->where('usuario.Empleado_idEmpleado',$idCliente);
-		$this->db->delete($this->user);
 	}
 
 }
 
-/* End of file marca_Model.php */
-/* Location: ./application/models/marca_Model.php */
+/* End of file Empresa_model.php */
+/* Location: ./application/models/Empresa_model.php */
