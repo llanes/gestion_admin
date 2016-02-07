@@ -1,0 +1,17 @@
+<% 	event.date_start = new Date(parseInt(event.start));
+	event.date_end = new Date(parseInt(event.end)); %>
+
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>
+    <span>Fecha Inicio &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="glyphicon glyphicon-calendar"></span> <%= event.date_start.getDate() %> <%= calendar.locale["m" + event.date_start.getMonth()] %> <%= event.date_start.getFullYear() %>&nbsp;&nbsp;&nbsp;&nbsp;Hasta las&nbsp;&nbsp; <%= event.date_start.getHours() %>:<%= event.date_start.getMinutes() %> <span class="glyphicon glyphicon-time"></span></span><br />
+    <span>Fecha Devolucion &nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="glyphicon glyphicon-calendar"></span> <%= event.date_end.getDate() %> <%= calendar.locale["m" + event.date_end.getMonth()] %> <%= event.date_end.getFullYear() %>&nbsp;&nbsp;&nbsp;&nbsp;Hasta las&nbsp;&nbsp; <%= event.date_end.getHours() %>:<%= event.date_end.getMinutes() %> <span class="glyphicon glyphicon-time"></span></span><br />
+			</th>
+		</tr>
+	</thead>
+
+</table>
