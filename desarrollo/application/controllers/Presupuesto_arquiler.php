@@ -14,7 +14,7 @@ class Presupuesto_arquiler extends CI_Controller {
 
 	public function index()
 	{
-		// $this->output->enable_profiler(true);
+			
 			$this->cart->destroy();
 			$data = array //arreglo para mandar datos a la vista
 			(
@@ -23,6 +23,7 @@ class Presupuesto_arquiler extends CI_Controller {
 					'titulo3'=> 'Home',//mi titulo 
 					'titulo4'=> 'Productos Arquiler',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
+					'formula' => $this->db->get('empresa')->result_array(),
 			);
 			//redirecionamos a la vista o llamamos a la vista index
 			$this->parser->parse('Presupuesto_arquiler/presupuesto_arquiler_vista.php',$data, FALSE);	// carga todos las url de estilo i js home	
@@ -116,6 +117,7 @@ class Presupuesto_arquiler extends CI_Controller {
 	public function add_presupuesto($id)
 	{
 		if ($this->input->is_ajax_request()) {
+			$aleatorio = $this->ultimo_cabecera();
 			$this->form_validation->set_error_delimiters('*','');
 			if ($this->form_validation->run('add_presupuesto') == FALSE) {
 					$data = array(
@@ -126,14 +128,14 @@ class Presupuesto_arquiler extends CI_Controller {
 						'Nombres_servicios' => form_error('Nombres_servicios'),
 						'res'               => 'error');
 			} else {
-				if ($id === 2) {
+				if ($id == 2) {
 					$data = array(
 						'fecha_expedicion'           => $this->security->xss_clean( $this->input->post('fecha_expedicion')),
 						'Fecha_Pre_Arqui'            => $this->security->xss_clean( $this->input->post('Fecha_Pre_Arqui')),
-						'Monto_Alquiler_Presupuesto' =>  number_format($this->cart->total(),0,'.',','),
-						'Arquiler_Presupuesto'       => $id,
+						'Monto_Alquiler_Presupuesto' => str_replace($this->config->item('caracteres'),"",$this->cart->total()),
+						'Arquiler_Presupuesto'       => 2,
 						'Contado_Credito'            => 0,
-						'Num_arquiler'               => 001,
+						'Num_arquiler'               => $aleatorio + 1,
 						'Fecha_Devolucion'           => $this->security->xss_clean( $this->input->post('Fecha_Devolucion')),
 						'Monto_total_iva'            => $this->security->xss_clean( $this->input->post('lesiva')),
 						'Nombre_servicio'            => $this->security->xss_clean( $this->input->post('Nombres_servicios')),
@@ -149,26 +151,33 @@ class Presupuesto_arquiler extends CI_Controller {
 									foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
 										$iva =	$option_value;
 									}
-							$data = array(
+							$_data = array(
 								'Cantidad'                              => $items['qty'],
 								'Descripcion'                           => '',
-								'Precio'                                => $items['price'],
+								'Precio'                                => str_replace($this->config->item('caracteres'),"",$items['price']),
 								'Iva'                                   => $iva,
 								'Presupuesto_Arquiler_idArquiler'       => $this->ultimo_cabecera(),
 								'Producto_Servicio_idProducto_Servicio' => $items['id'],
 							);
-					$this->Presupuesto_arquiler_model->add_presupuesto_detalle($data);
+					$this->Presupuesto_arquiler_model->add_presupuesto_detalle($_data);
 						$i++;
 						}
+					$this->cart->destroy();
+					echo json_encode($data);
 				} else {
 					$Contado_Credito = $this->input->post('credi_cont');
+					if ($Contado_Credito == 2) {
+						$Arquiler_Presupuesto = 0;
+					} else {
+						$Arquiler_Presupuesto =	1;
+					}
 					$data = array(
 						'fecha_expedicion'           => $this->security->xss_clean( $this->input->post('fecha_expedicion')),
 						'Fecha_Pre_Arqui'            => $this->security->xss_clean( $this->input->post('Fecha_Pre_Arqui')),
-						'Monto_Alquiler_Presupuesto' =>  number_format($this->cart->total(),0,'.',','),
-						'Arquiler_Presupuesto'       => $id,
+						'Monto_Alquiler_Presupuesto' => str_replace($this->config->item('caracteres'),"",$this->cart->total()),
+						'Arquiler_Presupuesto'       => $Arquiler_Presupuesto,
 						'Contado_Credito'            => $Contado_Credito,
-						'Num_arquiler'               => 001,
+						'Num_arquiler'               => $aleatorio + 1,
 						'Fecha_Devolucion'           => $this->security->xss_clean( $this->input->post('Fecha_Devolucion')),
 						'Monto_total_iva'            => $this->security->xss_clean( $this->input->post('lesiva')),
 						'Nombre_servicio'            => $this->security->xss_clean( $this->input->post('Nombres_servicios')),
@@ -178,20 +187,23 @@ class Presupuesto_arquiler extends CI_Controller {
 						'Devolucion'                 => '',
 						);
 						$this->Presupuesto_arquiler_model->add_presupuesto($data);
+						$id = $this->Presupuesto_arquiler_model->serie();
+						$serie = $id + 1;
+						$this->Presupuesto_arquiler_model->add_serie($serie);
 						$i = 1;
 						foreach ($this->cart->contents() as $items) {
 									foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
 										$iva =	$option_value;
 									}
-							$data = array(
+							$_data = array(
 								'Cantidad'                              => $items['qty'],
 								'Descripcion'                           => '',
-								'Precio'                                => number_format($items['price'],0,'.',','),
+								'Precio'                                => str_replace($this->config->item('caracteres'),"",$items['price']),
 								'Iva'                                   => $iva,
 								'Presupuesto_Arquiler_idArquiler'       => $this->ultimo_cabecera(),
 								'Producto_Servicio_idProducto_Servicio' => $items['id'],
 							);
-							$this->Presupuesto_arquiler_model->add_presupuesto_detalle($data);
+							$this->Presupuesto_arquiler_model->add_presupuesto_detalle($_data);
 						$i++;
 						}
 						if ($Contado_Credito == 2) {
@@ -201,8 +213,8 @@ class Presupuesto_arquiler extends CI_Controller {
 							for ($j = 1; $j <= $cantidad; $j++) {
 									$Fecha_Ven = date('Y-m-d',strtotime("+$j month")) ; // suma 1 mes
 									$_data                     = array(
-									'Num_Recibo'                      => 0001,
-									'Importe'                         => number_format($importe,0,'.',','),
+									'Num_Recibo'                      => $aleatorio + $j,
+									'Importe'                         => str_replace($this->config->item('caracteres'),"",$importe),
 									'Fecha_Ven'                       => $Fecha_Ven,
 									'Fecha_Pago'                      => '',
 									'Estado_Pago'                     => '2',
@@ -213,10 +225,11 @@ class Presupuesto_arquiler extends CI_Controller {
 							$this->Presupuesto_arquiler_model->add_credito($_data);
 							}
 						}
+					$this->cart->destroy();
+					echo json_encode($data);
 				}
 			}
-				$this->cart->destroy();
-				echo json_encode($data);
+
 		} else {
 			show_404();
 		}
@@ -288,6 +301,7 @@ class Presupuesto_arquiler extends CI_Controller {
 					'titulo4'=> 'Listados Presupuesto',//mi titulo 
 					'titulo5'=> 'Productos Arquiler',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
+
 			);
 			//redirecionamos a la vista o llamamos a la vista index
 			$this->parser->parse('Presupuesto_arquiler/listado_presupuesto.php',$data, FALSE);	// carga todos las url de estilo i js home	
@@ -322,6 +336,7 @@ class Presupuesto_arquiler extends CI_Controller {
 						"data" => $data,
 				);
 		//output to json format
+		
 		echo json_encode($output);
 	}
 	public function ajax_edit($idArquiler)
@@ -340,6 +355,7 @@ class Presupuesto_arquiler extends CI_Controller {
 					'titulo4'=> 'Productos Arquiler',//mi titulo 
 					'formulario'=> $this->Presupuesto_arquiler_model->edit_presupuesto($idArquiler),//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
+					'formula' => $this->db->get('empresa')->result_array(),
 			);
 			//redirecionamos a la vista o llamamos a la vista index
 			$this->parser->parse('Presupuesto_arquiler/presupuesto_arquiler_edit.php',$data, FALSE);	// carga todos las url de estilo i js home	
@@ -422,11 +438,29 @@ class Presupuesto_arquiler extends CI_Controller {
 			<a class="btn btn-info " href="javascript:void(0);" title="Edit" onclick="details_al('."'".$alquiler->idArquiler."'".')">
 	   	<i class="fa fa-plus-square"></i></a></div>' ;
 			//add html for action
-			$row[]   = '<div class="pull-right hidden-phone">
-			<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_presupuesto('."'".$alquiler->idArquiler."'".')">
-			<i class="fa fa-pencil"></i></a>
-			<a class="btn btn-danger btn-xs" href="javascript:void(0);" title="Hapus" onclick="delete_presupuesto('."'".$alquiler->idArquiler."'".')">
-			<i class="fa fa-trash-o "></i></a></div>';
+			if ($alquiler->Devolucion == 1 || $alquiler->Entrega == 1) {
+				$row[]   = '<div class="pull-right hidden-phone">
+				<form class="form-horizontal" method="post" name="formulario" id="formulario" target="myIframe"  action='.'factura_pdf/'."".$alquiler->idArquiler."".' >
+				<input type="hidden" name="Monto" value='."'".$alquiler->Monto_Alquiler_Presupuesto."'".'>
+				<button type="submit" formtarget="_blank" id="target" class="btn btn-success btn-xs "><i class="fa fa-download"></i> PDF</button>
+				<a class="btn btn-danger btn-xs" href="javascript:void(0);" title="Hapus" onclick="delete_presupuesto('."'".$alquiler->idArquiler."'".')">
+				<i class="fa fa-trash-o "></i></a>
+				</FORM>
+				</div>';
+			} else {
+				$row[]   = '<div class="pull-right hidden-phone">
+				<form class="form-horizontal" method="post" name="formulario" id="formulario" target="myIframe"  action='.'factura_pdf/'."".$alquiler->idArquiler."".' >
+				<input type="hidden" name="Monto" value='."'".$alquiler->Monto_Alquiler_Presupuesto."'".'>
+				<button type="submit" formtarget="_blank" id="target" class="btn btn-success btn-xs "><i class="fa fa-download"></i> PDF</button>
+				<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_presupuesto('."'".$alquiler->idArquiler."'".')">
+				<i class="fa fa-pencil"></i></a>
+				<a class="btn btn-danger btn-xs" href="javascript:void(0);" title="Hapus" onclick="delete_presupuesto('."'".$alquiler->idArquiler."'".')">
+				<i class="fa fa-trash-o "></i></a>
+				</FORM>
+				</div>';
+			}
+			
+
 			$data[] = $row;
 		}
 		$output = array(

@@ -6,7 +6,7 @@ class Presupuesto_arquiler_model extends CI_Model {
 	var $da = 'detalle_arquiler';
 	var $select = 'pa.Monto_Alquiler_Presupuesto,pa.Arquiler_Presupuesto ,pa.idArquiler ,pa.fecha_expedicion ,pa.Nombre_servicio ,pa.Entrega ,pa.Devolucion ,c.idCliente ,c.Nombres,c.Apellidos ,u.Usuario ,u.idUsuario ';
 	var $where = 'Arquiler_Presupuesto = 2';
-	var $where2 = 'Arquiler_Presupuesto = 1';
+	var $where2 = '(Arquiler_Presupuesto = 1) OR (Arquiler_Presupuesto = 0)';
 	var $column = array('Entrega','Devolucion','Monto_Alquiler_Presupuesto','idArquiler','fecha_expedicion','Nombre_servicio','idCliente','Nombres','Usuario','idUsuario');
 	var $order = array('Entrega  ,Devolucion' => 'desc');
 
@@ -187,6 +187,21 @@ class Presupuesto_arquiler_model extends CI_Model {
 		$this->db->insert($this->da,$data);
 		return $this->db->insert_id();
 	}
+	public function serie()
+	{
+		$this->db->select('Series', FALSE);
+		$query = $this->db->get('empresa');
+		foreach($query->result_array() as $d)
+		{
+			return( $d['Series']);
+		}
+	}
+
+	public function add_serie($serie)
+	{
+		$this->db->set('Series', $serie);
+		$this->db->update('empresa');
+	}
 	public function add_credito($_data)
 	{
 		$this->db->insert('credito',$_data);
@@ -327,31 +342,30 @@ class Presupuesto_arquiler_model extends CI_Model {
 		echo json_encode($data);
 	}
     }
-	public function getarticulo_by_id($idArquiler)
-	{
-		$this->db->distinct('
-			');
-		$this->db->select('
-			pr.idArquiler,
-			pr.Fecha_Pre_Arqui,
-			pr.Num_arquiler,
-			pr.Fecha_Devolucion,
-			pr.Nombre_servicio,S
-			pr.Monto_Alquiler_Presupuesto,
-			pr.Contado_Credito,
-			cl.ci_ruc,
-			cl.Nombres,
-			cl.Direccion,
-			cl.Telefono,
-			cl.Apellidos
-			');
-		$this->db->from('detalle_arquiler da,cliente cl');
-		$this->db->join('producto_servicio ps', 'da.Producto_Servicio_idProducto_Servicio = ps.idProducto_Servicio', 'INNER');
-		$this->db->join('presupuesto_arquiler pr', 'cl.idCliente = pr.Cliente_idCliente ', 'INNER');
-		$this->db->where('idArquiler',$idArquiler);
-		$query = $this->db->get();
-		return $query->result_array();
-	}
+	// public function getarticulo_by_id($idArquiler)
+	// {
+	// 	$this->db->distinct('');
+	// 	$this->db->select('
+	// 		pr.idArquiler,
+	// 		pr.Fecha_Pre_Arqui,
+	// 		pr.Num_arquiler,
+	// 		pr.Fecha_Devolucion,
+	// 		pr.Nombre_servicio,S
+	// 		pr.Monto_Alquiler_Presupuesto,
+	// 		pr.Contado_Credito,
+	// 		cl.ci_ruc,
+	// 		cl.Nombres,
+	// 		cl.Direccion,
+	// 		cl.Telefono,
+	// 		cl.Apellidos
+	// 		');
+	// 	$this->db->from('detalle_arquiler da,cliente cl');
+	// 	$this->db->join('producto_servicio ps', 'da.Producto_Servicio_idProducto_Servicio = ps.idProducto_Servicio', 'INNER');
+	// 	$this->db->join('presupuesto_arquiler pr', 'cl.idCliente = pr.Cliente_idCliente ', 'INNER');
+	// 	$this->db->where('idArquiler',$idArquiler);
+	// 	$query = $this->db->get();
+	// 	return $query->result_array();
+	// }
 		public function edit_presupuesto($idArquiler)
 	{
 		$this->db->select('*');
@@ -371,11 +385,11 @@ class Presupuesto_arquiler_model extends CI_Model {
 				$this->cart->insert($data);
 			}
 		$this->db->select('*');
-		$this->db->from('cliente cl');
+		$this->db->from('cliente cl,empresa');
 		$this->db->join('presupuesto_arquiler pr', 'cl.idCliente = pr.Cliente_idCliente ', 'INNER');
 		$this->db->where('idArquiler',$idArquiler);
 		$query = $this->db->get();
-		return $query->result_array();
+		return $query->result();
 
 	}
 }
