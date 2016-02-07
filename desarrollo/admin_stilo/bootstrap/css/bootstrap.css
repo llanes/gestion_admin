@@ -1,6 +1,6 @@
 /*!
  * Bootstrap v3.3.4 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2015 Twitter, Inc.modal-lg
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
@@ -42,7 +42,7 @@ audio:not([controls]) {
 [hidden],
 template {
   display: none;
-}modal
+}
 a {
   background-color: transparent;
 }
@@ -5838,7 +5838,7 @@ button.close {
 }
 @media (min-width: 992px) {
   .modal-lg {
-    width: 900px;
+    width: 1000px;
   }
 }
 .tooltip {
