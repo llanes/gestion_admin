@@ -39,6 +39,11 @@
                                             'label' => 'Direccion',
                                             'rules' => 'trim|required|min_length[2]|max_length[50]|strip_tags'
                                          ),
+                                            array(
+                                            'field' => 'ci_ruc',
+                                            'label' => 'CI RUC',
+                                            'rules' => 'trim|required|min_length[4]|max_length[45]|strip_tags'
+                                         ),
                                     array(
                                             'field' => 'Telefono',
                                             'label' => 'Telefono',
@@ -86,6 +91,11 @@
                                             'field' => 'Direccion',
                                             'label' => 'Direccion',
                                             'rules' => 'trim|required|min_length[2]|max_length[50]|strip_tags'
+                                         ),
+                                            array(
+                                            'field' => 'ci_ruc',
+                                            'label' => 'CI RUC',
+                                            'rules' => 'trim|required|min_length[4]|max_length[45]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'Telefono',
@@ -361,7 +371,7 @@
                                     array(
                                             'field' => 'cantidad',
                                             'label' => 'cantidad',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'rules' => 'trim|required|min_length[1]|max_length[5]|strip_tags'
                                          ),
 
                      ),
@@ -370,12 +380,12 @@
                                     array(
                                             'field' => 'servicio',
                                             'label' => 'Servicio',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'rules' => 'trim|required|min_length[1]|max_length[45]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'Descripcion',
                                             'label' => 'Descripcion',
-                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                            'rules' => 'trim|min_length[1]|max_length[50]|strip_tags'
                                          ),
 
                      ),
@@ -384,12 +394,12 @@
                                     array(
                                             'field' => 'servicio',
                                             'label' => 'Servicio',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'rules' => 'trim|required|min_length[1]|max_length[45]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'Descripcion',
                                             'label' => 'Descripcion',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'rules' => 'trim|max_length[45]|strip_tags'
                                          ),
 
                      ),
@@ -404,7 +414,7 @@
                                     array(
                                             'field' => 'Cantidad',
                                             'label' => 'cantidad',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'rules' => 'trim|required|min_length[1]|max_length[5]|strip_tags'
                                          ),
 
                      ),
@@ -436,26 +446,147 @@
                                             'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
                                          ),
                      ),
-                'actualizar_servicio' => array(
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    'registro_pagos' => array(
 
                                     array(
-                                            'field' => 'servicio',
-                                            'label' => 'Servicio',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'field' => 'Descripcion',
+                                            'label' => 'Descripcion',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Monto',
+                                            'label' => 'Monto',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                                        array(
+                                            'field' => 'Tipos_Pagos',
+                                            'label' => 'Tipo Pagos',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+
+                     ),
+                'registro_pagos_1' => array(
+
+                                    array(
+                                            'field' => 'idEmpleado',
+                                            'label' => 'Cliente',
+                                            'rules' => 'trim|required|numeric|min_length[1]|max_length[11]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Monto',
+                                            'label' => 'Monto',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                                        array(
+                                            'field' => 'Tipos_Pagos',
+                                            'label' => 'Tipo Pagos',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'Descripcion',
                                             'label' => 'Descripcion',
-                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+                     ),
+            ////////////////////////////////////////////////////////////////////////////
+            'cobrar_credito' => array(
+                                    array(
+                                            'field' => 'Descripcion',
+                                            'label' => 'Descripcion',
+                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                         ),
+            ),
+
+
+
+/////////////////////////////////////////////Validacion registro_empresa///////////////////////////////////////////////////////////////////////
+                'registro_empresa' => array(
+
+                                    array(
+                                            'field' => 'Nombre',
+                                            'label' => 'Nombre Empresa',
+                                            'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Direccion',
+                                            'label' => 'Direccion',
+                                            'rules' => 'trim|required|min_length[2]|max_length[50]|strip_tags'
+                                         ),
+                                            array(
+                                            'field' => 'R_U_C',
+                                            'label' => 'CI RUC',
+                                            'rules' => 'trim|required|min_length[4]|max_length[45]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Telefono',
+                                            'label' => 'Telefono',
+                                            'rules' => 'trim|required|min_length[2]|max_length[15]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Email',
+                                            'label' => 'Correo',
+                                            'rules' => 'trim|required|valid_email|min_length[1]|max_length[30]|callback_check_email|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Timbrado',
+                                            'label' => 'Timbrado',
+                                            'rules' => 'trim|required|min_length[2]|max_length[20]|strip_tags'
+                                         ),
+                                     array(
+                                            'field' => 'Series',
+                                            'label' => 'Series',
+                                            'rules' => 'trim|required|min_length[2]|max_length[20]|strip_tags'
                                          ),
 
-                     ),
+                    ),
+
+                                       // final
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////Validacion ajax_update_empresa///////////////////////////////////////////////////////////////////////
+                'ajax_update_empresa' => array(
 
 
+                                    array(
+                                            'field' => 'Nombre',
+                                            'label' => 'Nombre Empresa',
+                                            'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Direccion',
+                                            'label' => 'Direccion',
+                                            'rules' => 'trim|required|min_length[2]|max_length[50]|strip_tags'
+                                         ),
+                                            array(
+                                            'field' => 'R_U_C',
+                                            'label' => 'CI RUC',
+                                            'rules' => 'trim|required|min_length[4]|max_length[45]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Telefono',
+                                            'label' => 'Telefono',
+                                            'rules' => 'trim|required|min_length[2]|max_length[15]|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Email',
+                                            'label' => 'Correo',
+                                            'rules' => 'trim|required|valid_email|min_length[1]|max_length[30]|callback_check_email|strip_tags'
+                                         ),
+                                    array(
+                                            'field' => 'Timbrado',
+                                            'label' => 'Timbrado',
+                                            'rules' => 'trim|required|min_length[2]|max_length[20]|strip_tags'
+                                         ),
+                                     array(
+                                            'field' => 'Series',
+                                            'label' => 'Series',
+                                            'rules' => 'trim|required|min_length[2]|max_length[20]|strip_tags'
+                                         ),
 
+                    ),
 
-
-
+                                       // final
 
 
 
