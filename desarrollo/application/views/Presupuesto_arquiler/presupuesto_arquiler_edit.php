@@ -1,7 +1,7 @@
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
                 <section class="panel panel-success">
-                          <header class="panel-heading">
+       <header class="panel-heading">
                               <ul class="nav nav-tabs">
                                   <li class="active" id="presupuesto1">
                                       <a data-toggle="tab" href="#presupuesto_alquiler">
@@ -10,34 +10,33 @@
                                   </li>
                                   <li class="" id="lista_presus">
                                       <a data-toggle="tab" href="#listados_presupuesto">
-                                      <i class="fa fa-list"></i>
-                                      Listados Presupuesto </a>
+                                 <i class="fa fa-list"></i>
+                                      Administrar Presupuesto </a>
                                   </li>
-                                  <li class="" id="lista_alquiler">
+                                  <li class="" id="lista_alqui">
                                       <a data-toggle="tab" href="#listados_alquiler">
                                       <i class="fa fa-list"></i>
-                                      Listados Alquiler</a>
+                                      Administrar Alquiler</a>
                                   </li>
                                   <li>
 
                                   </li>
-                                   <li class="">
+                                   <li class="disabled">
                                       <a>{titulo1}</a>
                                   </li>
-                                  <li ><a>
+                                  <li class="disabled"><a>
                                       <i class="fa fa-dashboard"></i> {titulo3}  {titulo4}
                                   </a></li>
                               </ul>
                           </header>
                           <div class="panel-body">
-                              <div id="" class="tab-content">
- <div id="presupuesto_alquiler" class="tab-pane active">  
+                              <div id="" class="tab-content"> <div id="presupuesto_alquiler" class="tab-pane active">  
                           <!-- comienzo de presupuesto -->
         <section class=''>
           <div class="row">
              <div class=""> 
                 <!-- /////////////////////// -->
-               <form class="form-horizontal" method="post" name="formulario" id="formulario" role="form" action="#" >
+               <form class="form-horizontal" method="post" name="formulario" id="formulario" target="myIframe"  action="<?= site_url('index.php/Reportes/reporte_presipuesro'); ?>" >
                <input type="hidden" name="fecha_expedicion" id="fecha_expedicion" value="<?php echo date("Y-m-d");?>">
                     <div class="container" >
                                <!-- cabecera cliente -->
@@ -121,7 +120,7 @@
                             <div class="responsive col-md-4">
                                                                      <div class="panel panel-primary">
                                                                           <div class="text-center panel-heading">
-                                                                          R.U.C  Nº 599944467-5
+                                                                          R.U.C  Nº {R_U_C}
                                                                         </div>
                                                                           <div id="boleta" class="text-danger text-center">
                                                                           Boleta de Venta
@@ -132,11 +131,11 @@
                                                                                   <div class="form-group">
                                                                                       <div class="col-md-6 col-md-offset-0 text-danger text-center">
                                                                                       Serie
-                                                                                            <input type="text" class="form-control input-sm" value="001" disabled>
+                                                                                            <input type="text" name="series" class="form-control input-sm" value="{Series}-{Series}" disabled>
                                                                                       </div>
                                                                                       <div class="col-md-6 col-md-offset-0 text-danger text-center">
                                                                                         Nº Timbrado
-                                                                                             <input type="text" class="form-control input-sm" value="5000-666-899" disabled>
+                                                                                             <input type="text" name="timbrado" class="form-control input-sm" value="{Timbrado}" disabled>
                                                                                       </div>
                                                                                   </div>
                                                                        </div>

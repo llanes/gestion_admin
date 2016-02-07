@@ -25,7 +25,11 @@
     <!-- datatables -->
     <link href="<?php echo base_url('admin_stilo/datatables/css/dataTables.bootstrap.css')?>" rel="stylesheet">
 
+    <!-- caledar -->
+    <link href="<?php echo base_url('bower_components/bootstrap-calendar/css/calendar.css')?>" rel="stylesheet">
+   <script src="<?php echo base_url();?>bower_components/jquery/jquery-1.11.2.min.js"></script>
+   <script src="<?php echo base_url('bower_components/bootstrap-calendar/js/language/es-ES.js')?>"></script>
 
 
   </head>
-  <body class="skin-blue sidebar-mini">
+  <body class="skin-blue sidebar-mini layout-boxed">

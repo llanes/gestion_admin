@@ -14,6 +14,8 @@
         </section>
               <section class="content">
                     <table id="table_producto" class="table table-striped table-bordered" cellspacing="30" width="100%">
+                         <style type="text/css" media="screen">
+                          </style>
                       <thead>
                         <tr>
                         <th class ="text-danger"><i class="fa fa-list"></i> </th>
@@ -41,7 +43,7 @@
         <strong class="title" ></strong>
       </div>
         <div class="modal-body form">
-          <form action="#" name="formulario" id="form_productos" class="form-signin" enctype="multipart/form-data">
+          <form action="#" name="form_productos" id="form_productos" class="form-signin" enctype="multipart/form-data">
             <input type="hidden" value="" name="idProducto_Servicio"/>
             <input type="hidden" value="" name="Codigo_Barra"/>  
                 <div class="table-responsive">
@@ -76,7 +78,7 @@
                           <td>
                             <span class ="cate text-danger"></span>
                             <div class="form-group has-feedback">
-                                        <input required type='text' id='autocomplete cliente_bus' name="Categoria" class="form-control autocomplete cliente_bus" value="<?php echo set_value('Categoriaa');?>" placeholder="escribe una letra"  title="Seleciona Categoriaa"/>
+                                        <input required type='text' id='autocomplete' name="Categoria" class="form-control autocomplete input-sm" value="" placeholder="escribe una letra"  title="Seleciona Categoriaa"/>
                                         <input required id="idCategoria" name="idCategoria" class="form-control" placeholder="idCategoria" value="<?php echo set_value('idCategoria');?>" type="hidden"  />
                                         <?php echo form_error('idCategoria'); ?>
                             </div>

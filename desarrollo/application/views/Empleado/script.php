@@ -187,5 +187,5 @@
           swal("Cancelled", "Sin accion:)", "error");
         }
       });
-    }/aSome/.test(aSome)
+    }
 

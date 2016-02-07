@@ -71,7 +71,7 @@
 
     function reload_table()
     {
-      table.ajax.reload(null,false); //reload datatable ajax 
+      table_stock.ajax.reload(null,false); //reload datatable ajax 
     }
     $(function() {
     $('#form_stock').submit(function(e) {

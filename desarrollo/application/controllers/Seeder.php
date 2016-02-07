@@ -20,13 +20,14 @@ class Seeder extends CI_Controller {
 	{
 		echo "Seeding cliente table".PHP_EOL;
 		$this->db->truncate('cliente');
-		// $this->db->truncate('usuario');
-		for ($i=0; $i < 50; $i++) { 
+		$this->db->truncate('usuario');
+		for ($i=0; $i < 100; $i++) { 
 			$object = array(
 				'Nombres' => $this->faker->firstName,
 				'Apellidos' =>  $this->faker->lastName,
 				'Direccion' =>  $this->faker->streetAddress,
-				'Telefono' =>  $this->faker->phoneNumber,
+				'ci_ruc' =>  $this->faker->numberBetween($min = 1000, $max = 20000),
+				'Telefono' => $this->faker->numberBetween($min = 100000, $max = 20000000),
 				'Email' =>  $this->faker->email,
 				'Geo_posicion_idGeo_posicion' =>  $this->faker->randomDigit(5),
 				);
@@ -45,13 +46,20 @@ class Seeder extends CI_Controller {
 
 			echo 'User'.$id2. PHP_EOL;
 		}
-		echo "finist table";
-	}
-	public function empleado()
-	{
-		echo "Seeding empleado table".PHP_EOL;
-		$this->db->truncate('empleado');
-		// $this->db->truncate('usuario');
+		// echo "finist table";
+	// }
+	// public function empleado()
+	// {
+				echo "Seeding empleado table".PHP_EOL;
+				$this->db->truncate('empleado');
+				echo "Seeding categoria table".PHP_EOL;
+				$this->db->truncate('servicio');
+				$this->db->truncate('detalle_servicio');
+				echo "tavicho table";
+				echo "Seeding categoria table".PHP_EOL;
+				$this->db->truncate('categoria');
+				$this->db->truncate('producto_servicio');
+				$this->db->truncate('stock');
 		for ($i=0; $i < 50; $i++) { 
 			$object = array(
 				'Nombres' => $this->faker->firstName,
@@ -59,56 +67,70 @@ class Seeder extends CI_Controller {
 				'Direccion' =>  $this->faker->streetAddress,
 				'Telefono' =>  $this->faker->phoneNumber,
 				'Sueldo' =>  $this->faker->latitude,
-				'Cargo' =>  $this->faker->company,
+				'Cargo' =>  $this->faker->firstName,
 				'Geo_posicion_idGeo_posicion' =>  $this->faker->randomDigit(5),
 				);
 			$this->db->insert('empleado', $object);
-			$id = $this->db->insert_id();
+			$empleado = $this->db->insert_id();
 			$permiso = 1;
 			$user = array(
 				'Usuario' => $this->faker->userName,
 				'Password' =>  $this->faker->password,
-				'Empleado_idEmpleado' =>  $id,
-				'Permiso_idPermiso' => $permiso,
+				'Empleado_idEmpleado' =>  $empleado,
+				'Permiso_idPermiso' => 1,
 				);
 			$this->db->insert('usuario', $user);
-			$id2 = $this->db->insert_id();
-
-			echo 'User'.$id2. PHP_EOL;
-		}
-		echo "finist table";
-	}
-	public function productos()
-	{
-		echo "Seeding categoria table".PHP_EOL;
-		$this->db->truncate('categoria');
-			$this->db->truncate('producto_servicio');
-		// $this->db->truncate('usuario');
-		for ($i=0; $i < 50; $i++) { 
+			$empleado = $this->db->insert_id();
 			$cate = array(
 				'Categoria' => $this->faker->colorName,
 				'Descrip' =>  $this->faker->catchPhrase,
 				);
 			$this->db->insert('categoria', $cate);
-			$id2 = $this->db->insert_id();
+			$categoria = $this->db->insert_id();
 			$object = array(
 				'Codigo' => $this->faker->postcode,
-				'Nombre' => $this->faker->firstName,
+				'Nombre' => $this->faker->city,
 				'Codigo_Barra' => $this->faker->creditCardNumber,
 				'Descripcion' =>  $this->faker->catchPhrase,
-				'Precio_Unitario' =>  $this->faker->randomDigit(5),
-				'Cantidad' =>  $id2,
+				'Precio_Unitario' =>  $this->faker->numberBetween($min = 1000, $max = 20000),
+				'Cantidad' =>  $categoria,
 				'Descuento' =>  $this->faker->ean8,
-				'Iva' =>  $id2,
+				'Iva' =>  10,
 				'Img' =>  $this->faker->imageUrl($width = 640, $height = 480),
-				'Categoria_idCategoria' =>  $id2,
+				'Categoria_idCategoria' =>  $categoria,
 				);
 			$this->db->insert('producto_servicio', $object);
+			$producto_servicio = $this->db->insert_id();
+			$stock = array(
+				'Cantidad_stock' => $this->faker->numberBetween($min = 10, $max = 1000),
+				'Producto_Servicio_idProducto_Servicio' => $producto_servicio,
+				);
+			$this->db->insert('stock', $stock);
+			$id_stock = $this->db->insert_id();
+			$Servicio = array(
+				'Servicio' => $this->faker->colorName,
+				'Monto_total_servicio' => $this->faker->numberBetween($min = 1000, $max = 20000),				
+				'Descripcion' =>  $this->faker->catchPhrase,
+				);
+			$this->db->insert('servicio', $Servicio);
+			$Servicio_idServicio = $this->db->insert_id();
+			for ($i=0; $i < 10 ; $i++) { 
+				$detalle_servicio = array(
+				'Costo' =>  $this->faker->numberBetween($min = 1000, $max = 200000),
+				'Cantidad_detalle' =>  $this->faker->numberBetween($min = 10, $max = 15),
+				'Producto_Servicio_idProducto_Servicio' => $this->faker->numberBetween($min = 1, $max = 200),
+				'Servicio_idServicio' =>  $Servicio_idServicio,
+				);
+			$this->db->insert('detalle_servicio', $detalle_servicio);
 			$id = $this->db->insert_id();
-			echo 'producto_servicio' .$id. PHP_EOL;
+			echo 'servicio' .$id. PHP_EOL;
+
+			}
 		}
 		echo "tavicho table";
+
 	}
+
 
 }
 

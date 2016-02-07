@@ -22,7 +22,7 @@
         $("#listados_alquiler").load('<?php echo base_url("index.php/Presupuesto_arquiler/listados_alquiler"); ?>');
         });
 });
-    var save_method_presupuesto
+    var save_method_presupuesto;
     /**
      * [modal_view funcion para mostrar modal de agregar alquiler]
      * @return {[type]} [html]
@@ -234,7 +234,7 @@
 
     $(function(){
       var site1 = "<?php echo base_url();?>";
-  $('.busqueda_cliente').devbridgeAutocomplete({
+  $('.busqueda_cliente').autocomplete({
     serviceUrl:  site1+'index.php/Presupuesto_arquiler/busqueda_cliente',
     onSelect: function (suggestions) {
       // document.formulario.idCliente.value = suggestions.data;
@@ -244,7 +244,7 @@
       // document.formulario.ci_ruc.value = suggestions.ci_ruc;
       }
   });
-    $('.busqueda_cliente2').devbridgeAutocomplete({
+    $('.busqueda_cliente2').autocomplete({
     serviceUrl:  "<?php echo site_url('index.php/Presupuesto_arquiler/busqueda_cliente2'); ?>",
 
     onSelect: function (suggestions) {
@@ -253,7 +253,7 @@
       $('[name ="idCliente"]').val(suggestions.data);
       }
   });
-  $('.busqueda_producto').devbridgeAutocomplete({
+  $('.busqueda_producto').autocomplete({
 
     serviceUrl:  "<?php echo site_url('index.php/Presupuesto_arquiler/busqueda_producto'); ?>",
     onSelect: function (suggestions) {
@@ -272,7 +272,7 @@
           // $('#max').append('<input type ="text" class="form-control input-sm" id="Cantidad" name="Cantidad" maxlength="" pattern="{10,15}" placeholder="">');
       }
   });
-    $('.busqueda_servicio').devbridgeAutocomplete({
+    $('.busqueda_servicio').autocomplete({
     serviceUrl:  "<?php echo site_url('index.php/Presupuesto_arquiler/busqueda_servicio')?>",
     onSelect: function (suggestions) {
 
@@ -346,13 +346,13 @@
      $(function () {
             $('#datetimepicker6').datetimepicker({
               minDate: new Date(),
-                format: 'YYYY-MM-DD - LT',
+                format: 'DD/MM/YYYY  LT',
               disabledHours: [0, 1, 2, 3, 4,] ,
               enabledHours: [ 5, 6, 7, 12,18, 19, 20, 21, 22, 23, 24,8,9, 10, 11, 13, 14, 15, 16] ,
             });
             $('#datetimepicker7').datetimepicker({
                minDate: new Date(),
-                 format: 'YYYY-MM-DD - LT',
+               format: 'DD/MM/YYYY  LT',
               disabledHours: [0, 1, 2, 3, 4,] ,
               enabledHours: [ 5, 6, 7, 12,18, 19, 20, 21, 22, 23, 24,8,9, 10, 11, 13, 14, 15, 16] ,
             });

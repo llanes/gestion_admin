@@ -219,12 +219,13 @@
     });
     }
 
-    $(function(){
-  $('.cliente_bus').autocomplete({
-    serviceUrl:  "<?php echo site_url('index.php/Productos/busqueda_Categoria')?>",
+var site = "<?php echo site_url();?>";
+$(function(){
+  $('.autocomplete').autocomplete({
+    serviceUrl:  site+"index.php/Productos/busqueda_Categoria",
 
     onSelect: function (suggestions) {
-     $('[name="idCategoria"]').val(data.idProducto_Servicio);
+      document.form_productos.idCategoria.value = suggestions.data;
 
       }
   });

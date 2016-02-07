@@ -14,7 +14,12 @@
         </section>
               <section class="content">
                     <table id="table_servicios" class="table table-striped table-bordered" cellspacing="30" width="100%">
-                      <thead>
+                         <style type="text/css" media="screen">
+                         .row{
+                            display: block;
+                          }
+                          </style>
+                    <thead>
                         <tr>
                         <th class ="text-danger"><i class="fa fa-list"></i> </th>
                         <th class ="text-danger"><i class="fa fa-server"></i>  Nombre</th>
@@ -39,7 +44,7 @@
         <strong class="title" ></strong>
       </div>
         <div class="modal-body form_servicios">
-          <form action="#" name="form_servicios" id="form_servicios" class="form-signin" enctype="multipart/form-data">
+          <form  name="form_servicios" id="form_servicios" class="form-signin" enctype="multipart/form-data">
             <input type="hidden" value="" name="idProducto_Servicio"/>
             <input type="hidden" value="" name="Codigo_Barra"/>  
                 <div class="table-responsive">
@@ -76,7 +81,7 @@
                                              <label for="" class="control-label text-danger">Cantidad</label>
                                          </td>
                                             <td style="width: 70px;" >
-                                                <input  type='text' id='cantidad' name="cantidad" class="form-control " value="" title="catidad"/>
+                                                <input  type='number' id='cantidad' name="cantidad" class="form-control " value="" title="catidad"/>
                                             </td>
 
                                             <td style="width: 100px;">

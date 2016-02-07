@@ -67,7 +67,7 @@
                      </table >
               <?php if ($this->cart->format_number($this->cart->total()) != '0') { ?>
                       <div class="modal-footer">
-                        <button type="submit" id="btnSave"  class="btn btn-sm btn-success">
+                        <button type="submit" id="btnSave_servi"  class="btn btn-sm btn-success">
                                  <span class="glyphicon glyphicon-floppy-disk"></span> Guardar
                         </button>&nbsp;&nbsp;&nbsp;     
                         <button type="reset"  class="btn btn-sm btn-info" onclick="reser(0);">

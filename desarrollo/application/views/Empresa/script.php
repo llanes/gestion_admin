@@ -1,15 +1,15 @@
   <script type="text/javascript">
     var save_method; //for save method string
-    var table_cliente;
+    var table_empresa;
     $(document).ready(function() {
-      table_cliente = $('#table_cliente').DataTable({ 
+      table_empresa = $('#table_empresa').DataTable({ 
         
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('index.php/Cliente/ajax_list'); ?>",
+            "url": "<?php echo site_url('index.php/Empresa/ajax_list'); ?>",
             "type": "POST"
         },
 
@@ -26,43 +26,42 @@
 
     function add_cliente()
     {
-     $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
-      $("#cliente_aler").hide();
+     $(".N,.DI,.D,.T,.CO,.SE,.RU,.TI,.MP").html("").css({"display":"none"});
+      $("#empresa_aler").hide();
       $(".modal-body,.modal-header").show();
       save_method = 'add';
-      $('#form')[0].reset(); // reset form on modals
-      $('#modal_form').modal('show'); // show bootstrap modal
-      $('.modal-title').text('Agregar Cliente'); // Set Title to Bootstrap modal title
+      $('#from_empresa')[0].reset(); // reset form on modals
+      $('#modal_form_empresa').modal('show'); // show bootstrap modal
+      $('.modal-title').text('Agregar Empresa'); // Set Title to Bootstrap modal title
     }
 
     function edit_person(idCliente)
     {
-      $(".N,.A,.D,.C_R,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
-       $("#cliente_aler").hide();
+     $(".N,.DI,.D,.T,.CO,.SE,.RU,.TI,.MP").html("").css({"display":"none"});
+       $("#empresa_aler").hide();
        $(".modal-body,.modal-header").show();
       save_method = 'update';
       // $('#PF').hide();
-      $('#form')[0].reset(); // reset form on modals
+      $('#from_empresa')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/Cliente/ajax_edit/'); ?>/" + idCliente,
+        url : "<?php echo site_url('index.php/Empresa/ajax_edit/'); ?>/" + idCliente,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
-            $('[name="idCliente"]').val(data.idCliente);
-            $('[name="Nombres"]').val(data.Nombres);
-            $('[name="Apellidos"]').val(data.Apellidos);
+            $('[name="idEmpresa"]').val(data.idEmpresa);
+            $('[name="Nombre"]').val(data.Nombre);
+            $('[name="Descripcion"]').val(data.Descripcion);
             $('[name="Direccion"]').val(data.Direccion);
-             $('[name="ci_ruc"]').val(data.ci_ruc);
+             $('[name="R_U_C"]').val(data.R_U_C);
             $('[name="Telefono"]').val(data.Telefono);
             $('[name="Email"]').val(data.Email);
-            $('[name="usuario"]').val(data.Usuario);
-            $('[name="password"]').val(data.Password);
-            $('[name="passconf"]').val(data.Password);
-            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Editar Cliente'); // Set title to Bootstrap modal title
+            $('[name="Timbrado"]').val(data.Timbrado);
+            $('[name="Series"]').val(data.Series);
+            $('#modal_form_empresa').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Editar Empresa'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -73,18 +72,18 @@
 
     function reload_table()
     {
-      table_cliente.ajax.reload(null,false); //reload datatable ajax 
+      table_empresa.ajax.reload(null,false); //reload datatable ajax 
     }
     $(function() {
-    $('#form').submit(function(e) {
+    $('#from_empresa').submit(function(e) {
       var url;
       if(save_method == 'add') 
       {
-        url = "<?php echo site_url('index.php/Cliente/ajax_add'); ?>";
+        url = "<?php echo site_url('index.php/Empresa/ajax_add'); ?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/Cliente/ajax_update'); ?>";
+        url = "<?php echo site_url('index.php/Empresa/ajax_update'); ?>";
       }
            $.ajax({
                       type : 'POST',
@@ -94,46 +93,46 @@
                          var json = JSON.parse(data);// parseo la dada devuelta por json
                           $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
                           if (json.res == "error") {
-                            if (json.Nombres) {
-                               $(".N").append(json.Nombres).css({"display":"block"}); // mostrar validation de iten usuario
+                            if (json.Nombre) {
+                               $(".N").append(json.Nombre).css({"display":"block"}); // mostrar validation de iten usuario
                             }
-                            if (json.Apellidos) {
-                               $(".A").append(json.Apellidos).css({"display":"block"}); // mostrar validation de iten usuario
+                            if (json.Descripcion) {
+                               $(".DI").append(json.Descripcion).css({"display":"block"}); // mostrar validation de iten usuario
                             }
                             if (json.Direccion) {
                                $(".D").append(json.Direccion).css({"display":"block"}); // mostrar validation de iten usuario
                             }
-                             if (json.ci_ruc) {
-                               $(".C_R").append(json.ci_ruc).css({"display":"block"}); // mostrar validation de iten usuario
+                             if (json.R_U_C) {
+                               $(".RU").append(json.R_U_C).css({"display":"block"}); // mostrar validation de iten usuario
                             }
                             if (json.Telefono) {
                                $(".T").append(json.Telefono).css({"display":"block"}); // mostrar validation de iten usuario
                             }
                             if (json.Email) {
-                               $(".E").append(json.Email).css({"display":"block"}); // mostrar validation de iten usuario
+                               $(".CO").append(json.Email).css({"display":"block"}); // mostrar validation de iten usuario
                             }
-                            if (json.usuario) {
-                               $(".U").append(json.usuario).css({"display":"block"}); // mostrar validation de iten usuario
+                            if (json.Timbrado) {
+                               $(".TI").append(json.Timbrado).css({"display":"block"}); // mostrar validation de iten usuario
                             }
-                            if (json.password) {
-                               $(".P").append(json.password).css({"display":"block"}); /// mostar validation  de iten pass
+                            if (json.Series) {
+                               $(".SE").append(json.Series).css({"display":"block"}); /// mostar validation  de iten pass
                             }
-                           if (json.passconf) {
-                               $(".PF").append(json.passconf).css({"display":"block"}); /// mostar validation  de iten pass
-                            }
+                           // if (json.passconf) {
+                           //     $(".PF").append(json.passconf).css({"display":"block"}); /// mostar validation  de iten pass
+                           //  }
                           }else{ 
                                         $(".modal-body,.modal-header").hide();
-                                         $('#cliente_aler').show()
+                                         $('#empresa_aler').show()
                                           if (save_method == 'add') {
                                             $('.title').text('Registrado Correctamente');
                                           } else {
                                             $('.title').text('Datos Actualizado correctamente');
                                           }
                                           setTimeout(function() {
-                                                $("#cliente_aler").fadeOut(1500);
-                                                $('#modal_form').modal('hide');
+                                                $("#empresa_aler").fadeOut(1500);
+                                                $('#modal_form_empresa').modal('hide');
                                             },2000);
-                                        // $('#modal_form').modal('hide');
+                                        // $('#modal_form_empresa').modal('hide');
                                         reload_table();
                            }
                      },
@@ -152,7 +151,7 @@
      {
      swal({
         title: "Estas seguro?",
-        text: "Usted no será capaz de recuperar este Presupuesto!",
+        text: "Usted no será capaz de recuperar!",
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -165,7 +164,7 @@
         if (isConfirm) {
       // ajax delete data to database
           $.ajax({
-            url : "<?php echo site_url('index.php/Cliente/ajax_delete'); ?>/"+id,
+            url : "<?php echo site_url('index.php/Empresa/ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
              cache: false,

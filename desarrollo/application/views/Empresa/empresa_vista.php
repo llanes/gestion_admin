@@ -13,16 +13,16 @@
         </section>
         <div id="my-tab-content" class="tab-content">
               <section class="content" >
-                    <table id="table_cliente" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="table_empresa" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th class ="text-danger"><i class="fa fa-user"></i>  Nombre</th>
-                          <th class ="text-danger"><i class="fa fa-user-plus"></i>  Apellidos</th>
-                          <th class ="text-danger"><i class="fa fa-road"></i>  Direccion</th>
-                          <th class ="text-danger"><i class="fa fa-newspaper-o"></i>  Cedula/R-U-C</th>
-                          <th class ="text-danger"><i class="fa fa-mobile"></i> Telefono</th>
-                          <th class ="text-danger"><i class="fa fa-envelope"></i> Correo</th>
-                          <th class ="text-danger" style="width:125px;"><i class="fa fa-cogs"></i> Acciones</th>
+                           <th class ="text-danger"><i class="fa fa-user"></i>  Nombre</th>
+                           <!--                    <th class ="text-danger"><i class="fa fa-user-plus"></i>  Apellidos</th> -->
+                           <th class ="text-danger"><i class="fa fa-road"></i>  Direccion</th>
+                           <th class ="text-danger"><i class="fa fa-mobile"></i> Telefono</th>
+                           <th class ="text-danger"><i class="fa fa-envelope"></i> Correo</th>
+                           <th class ="text-danger"><i class="fa fa-newspaper-o"></i>  Lugar Mapa</th>
+                           <th class ="text-danger" style="width:125px;"><i class="fa fa-cogs"></i> Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -30,42 +30,42 @@
                     </table>
               </section><!-- /.content -->
         </div>
-  <div class="modal fade" id="modal_form" >
+  <div class="modal fade" id="modal_form_empresa" >
     <div class="modal-dialog">
       <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">Formulario Cliente</h3>
+        <h3 class="modal-title">Formulario Empresa</h3>
       </div>
-       <div class="alert alert-info" id="cliente_aler" >
+       <div class="alert alert-info" id="empresa_aler" >
         <strong class="title" ></strong>
       </div>
       <div class="modal-body form">
 
-        <form action="#" id="form" class="form-signin">
-          <input type="hidden" value="" name="idCliente"/> 
+        <form action="#" id="from_empresa" name="from_empresa" class="form-signin">
+          <input type="hidden" value="" name="idEmpresa"/> 
                        <div class="table-responsive">
                 <table class="table table-striped" i>
                   <tbody>
                      <tr id="transparente">
                         <td >
-                          <a> Nombres </a>
+                          <a> Nombre </a>
                         </td>
                         <td>
                           <span class ="N text-danger"></span>
                           <div class="form-group has-feedback">
-                            <input required  type ="text" id="Nombres" name="Nombres" class="form-control " placeholder="Nombres" size='45' title="ingrese Nombre"pattern="[A-Za-z ]{4,50}" maxlength="50" maxlength="30"  autofocus   >
+                            <input required  type ="text" id="Nombre" name="Nombre" class="form-control input-sm" placeholder="" size='45' title="ingrese Nombre"pattern="[A-Za-z ]{4,50}" maxlength="50" maxlength="30"  autofocus   >
                             <span class=""></span>
                           </div>
                         </td>
                         <td >
-                          <a> Apellidos </a>
+                          <a> Descripcion </a>
                         </td>
                         <td>
-                          <span class ="A text-danger"></span>
+                          <span class ="DI text-danger"></span>
                           <div class="form-group has-feedback">
-                            <input   type ="text" id="Apellidos" name="Apellidos" class="form-control " placeholder="Apellidos" size='45' title="ingrese Nombre"pattern="[A-Za-z ]{4,50}" maxlength="50" maxlength="30"  autofocus   >
-                            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            <input   type ="text" id="Descripcion" name="Descripcion" class="form-control input-sm" placeholder="" size='45' title="ingrese Nombre"pattern="[A-Za-z ]{4,50}" maxlength="50" maxlength="30"  autofocus   >
+                            <!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
                           </div>
                         </td>
                       </tr> 
@@ -76,74 +76,72 @@
                         <td>
                           <span class ="D text-danger"></span>
                           <div class="form-group has-feedback">
-                              <input required  type ="text" id="Direccion" name="Direccion" class="form-control" placeholder="Direccion" size='45' title="ingrese Direccion" pattern="[A-Za-z ]{5,50}" maxlength="50"  autofocus  >
+                              <input required  type ="text" id="Direccion" name="Direccion" class="form-control input-sm" placeholder="" size='45' title="ingrese Direccion" pattern="[A-Za-z ]{5,50}" maxlength="50"  autofocus  >
                             <span class=""></span>
                           </div>
                         </td>
                              <td >
-                          <a> DNI R-U-C</a>
+                          <a> Telefono</a>
                         </td>
                         <td>
-                          <span class ="C_R text-danger"></span>
+                          <span class ="T text-danger"></span>
                           <div class="form-group has-feedback">
-                              <input required  type ="text" id="ci_ruc" name="ci_ruc" class="form-control" placeholder="cedua o ruc" title="ingrese Cedula o R-U-C" pattern="[0-9]{5,15}" maxlength="15"  autofocus  >
+                              <input required  type ="text" id="Telefono" name="Telefono" class="form-control input-sm" placeholder="" title="ingrese Telefono" pattern="[0-9]{5,15}" maxlength="15"  autofocus  >
                              <span class=""></span>
                           </div>
                         </td>
                       </tr> 
                       <tr id="transparente"> 
                         <td >
-                          <a> Telefono </a>
-                        </td>
-                        <td>
-                            <span class ="T text-danger"></span>
-                            <div class="form-group has-feedback">
-                                <input required   type ="text" id="Telefono" name="Telefono" class="form-control" placeholder="Telefono" size='45'   title="ingrese telefono" pattern="[0-9]{10,15}" min="10" maxlength="15"  autofocus  >
-                              <span class=""></span>
-                            </div>
-                        </td>
-
-                        <td >
                           <a> Correo </a>
                         </td>
                         <td>
-                              <span class ="E text-danger"></span>
+                              <span class ="CO text-danger"></span>
                             <div class="form-group has-feedback">
-                              <input required   type ="Email" id="Email" name="Email" class="form-control" placeholder="Correo" title="ejemplo@correo.com" onfocus="autofocus" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" autofocus  >
+                              <input required   type ="Email" id="Email" name="Email" class="form-control input-sm" placeholder="" title="ejemplo@correo.com" onfocus="autofocus" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" autofocus  >
+                              <span class=""></span>
+                            </div>
+                        </td>
+                                                <td >
+                          <a> R.U.D </a>
+                        </td>
+                        <td>
+                            <span class ="RU text-danger"></span>
+                            <div class="form-group has-feedback">
+                                <input required   type ="text" id="R_U_C" name="R_U_C" class="form-control input-sm" placeholder="" size='45'   title="ingrese CEDULA RUC"  min="10" maxlength="15"  autofocus  >
                               <span class=""></span>
                             </div>
                         </td>
                       </tr> 
                       <tr id="transparente"> 
                         <td >
-                          <a> Usuario </a>
+                          <a> Timbrado </a>
                         </td>
                         <td>
-                        <span class ="U text-danger"></span>
+                        <span class ="TI text-danger"></span>
                         <div class="form-group has-feedback">
-                          <input required  type ="text" id="usuario" name="usuario" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Usuario" pattern="[A-Za-z ]{3,100}"   >
+                          <input required  type ="text" id="Timbrado" name="Timbrado" class="form-control input-sm" onfocus="autofocus"   placeholder=""    >
                           <span class=""></span>
                         </div>
                         </td>                        
                         <td >
-                          <a> Contraseña </a>
+                          <a> Series </a>
                         </td>
                         <td>
-                        <span class ="P text-danger"></span>
+                        <span class ="SE text-danger"></span>
                         <div class="form-group has-feedback">
-                               <input required   type ="password" id="password" name="password" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Contraseña"   pattern="(?=.*[a-z]).{6,}"  >
-                          <span class=""></span>
+                          <input required  type ="text" id="Series" name="Series" class="form-control input-sm" onfocus="autofocus"   placeholder=""   >
                         </div>
                         </td>
                       </tr> 
                       <tr id="transparente"> 
                         <td >
-                          <a> Confirmar </a>
+                          <a> Mapa </a>
                         </td>
                         <td>
-                         <span class ="PF text-danger"></span>
+                         <span class ="MP text-danger"></span>
                         <div class="form-group has-feedback" id="PF">
-                            <input required   type ="password" id="passconf" name="passconf" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Repetir Contraseña"  pattern="(?=.*[a-z]).{6,}">
+                            <button type="button" id="mapa" class="btn btn-success btn-sm">Mostrar</button>
                           <span class=""></span>
                         </div>
                         </td>

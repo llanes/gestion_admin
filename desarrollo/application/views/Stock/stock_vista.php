@@ -14,6 +14,11 @@
         <div id="my-tab-content" class="tab-content">
               <section class="content">
                     <table id="table_stock" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                         <style type="text/css" media="screen">
+                         .row{
+                            display: block;
+                          }
+                          </style>
                       <thead>
                         <tr>
                           <th class ="text-danger"><i class="fa fa-archive"></i>  Nombre</th>

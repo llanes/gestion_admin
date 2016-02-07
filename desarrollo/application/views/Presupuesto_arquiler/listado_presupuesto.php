@@ -1,6 +1,11 @@
 
               <section class="content">
                     <table id="listado_presupuesto_ajax" class="table table-striped table-advance table-hover" >
+                         <style type="text/css" media="screen">
+                         .row{
+                            display: block;
+                          }
+                          </style>
                       <thead>
                         <tr>
                           <th class ="text-danger" style="width:120px;"><i class="fa fa-list"></i>   Servicio</th>
@@ -24,26 +29,8 @@
 
       </div>
       <div class="modal-body form" id="reset">
-      <fieldset title="Step 3" class="step" id="default-step-2" style="display: block;">
-       <table class="table table-hover">
-          <thead>
-            <tr>
-              <th ><label class="col-lg-3 control-label">Descripcion</label></th>
-              <th ><label class="col-lg-3 control-label">Inpuesto</label></th>
-              <th ><label class="col-lg-3 control-label">Precio</label></th>
-              <th ><label class="col-lg-3 control-label">Subtotal</label></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td ><p class="form-control-static descripcion" id="descripcion"></p></td>
-              <td><p class="form-control-static costo" id="Inpuesto"></p></td>
-              <td><p class="form-control-static costo" id="Precio"></p></td>
-              <td><p class="form-control-static costo" id="Subtotal"></p></td>
-            </tr>
-          </tbody>
-        </table>
-        
+      <fieldset title="Step 3" class="step3" id="default-step-2" style="display: block;">
+
      </fieldset>
       </div>
       <div class="modal-footer">
@@ -93,14 +80,16 @@
            var result = JSON.parse(data);
            $.each(result, function(i, val){
             var Subtotal = val.Cantidad*val.Precio;
-                           // $("#cantidad").append('<i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;' + val.cantidad + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
-                           $("#descripcion").append('&nbsp;&nbsp;'+ val.Cantidad  +'&nbsp;&nbsp;'+ val.Nombre + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
-                           $("#Inpuesto").append('₲.&nbsp;&nbsp;' + val.Iva + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
-                           $("#Precio").append('₲.&nbsp;&nbsp;' + val.Precio + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
-                           $("#Subtotal").append('₲.&nbsp;&nbsp;' + Subtotal + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
+                          $( ".step3" ).load( "<?php echo site_url('index.php/Presupuesto_arquiler/load');?>" );
                            $('#ver_detalles').modal('show'); // show bootstrap modal when complete loaded
                            $(".modal-body,.modal-header").show();
                            $('.modal-title_ver_detalles').text('Listados'); // Set title to Bootstrap modal title
+                           // $("#cantidad").append('<i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;' + val.cantidad + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
+                           // $("#descripcion").append('&nbsp;&nbsp;'+ val.Cantidad  +'&nbsp;&nbsp;'+ val.Nombre + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
+                           // $("#Inpuesto").append('₲.&nbsp;&nbsp;' + val.Iva + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
+                           // $("#Precio").append('₲.&nbsp;&nbsp;' + val.Precio + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
+                           // $("#Subtotal").append('₲.&nbsp;&nbsp;' + Subtotal + '&nbsp;&nbsp;<br><br>').css({"display":"block"});
+
       });
 
       }

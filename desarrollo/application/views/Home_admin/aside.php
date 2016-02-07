@@ -15,75 +15,97 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">Navegacion</li>
-             <li id="Caaja" class="" data-tabs="tabs">
+             <li id="caja" class="treeview">
               <a href="#" data-toggle="tab" >
                 <i class="fa fa-dropbox"></i> <span>Caja</span>  
                 <small class="label pull-right bg-red"></small>
               </a>
             </li>
-
-            <li id="presupuesto" class="" data-tabs="tabs">
+             <li class="treeview" id="sub">
+               <a href="#" data-toggle="tab" >
+                 <i class="fa fa-credit-card"></i>
+                <span>Pagos   Cobros</span>
+                <span class="fa fa-angle-left pull-right"></span>
+              </a>
+              <ul class="treeview-menu acor_pa" >
+                 <li id="Pagos" class="" data-tabs="tabs">
+                    <a href="#" data-toggle="tab" >
+                    <i class="fa fa-circle-o"></i> Pagos</a>
+                </li>
+               <li id="Cobros" class="" data-tabs="tabs">
+                    <a href="#" data-toggle="tab" >
+                    <i class="fa fa-circle-o"></i> Cobros Cuotas</a>
+                </li>
+              </ul>
+            </li>
+            <li id="presupuesto" class="treeview" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
                 <i class="fa fa-calculator"></i> <span>Presupuesto Alquiler</span>  
                 <small class="label pull-right bg-red"></small>
               </a>
             </li>
 
-             <li id="agenda" class="" data-tabs="tabs">
+             <li id="agenda" class="treeview" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
                 <i class="fa fa-calendar"></i><span>Mi Agenda Evento</span>  
                 <small class="label pull-right bg-red"></small>
               </a>
             </li>
-            <li id="servicios" class="" data-tabs="tabs">
+            <li id="servicios" class="treeview" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
                 <i class="fa fa-wrench"></i> <span>Servicios</span>  
                 <small class="label pull-right bg-red"></small>
               </a>
             </li>
 
-            <li id="cliente" class="" data-tabs="tabs">
+            <li id="cliente" class="treeview" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
                 <i class="fa fa-users"></i> <span>Clientes</span>  
                 <small class="label pull-right bg-red">{num_cliente}</small>
               </a>
             </li>
-            <li id="empleado" class="" data-tabs="tabs">
+            <li id="empleado" class="treeview" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
                <i class="fa fa-user-secret"></i> <span>Empleados</span>  
                 <small class="label pull-right bg-red">{num_empleado}</small>
               </a>
             </li>
-            <li id="productos" class="" data-tabs="tabs">
+            <li id="productos" class="treeview" data-tabs="tabs">
               <a href="#" data-toggle="tab" >
                <i class="fa fa-cart-arrow-down"></i> <span>Articulos</span>  
                 <small class="label pull-right bg-red">{num_productos}</small>
               </a>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-cogs"></i>
-                <span>Administrar</span>
-                <span class="fa fa-angle-left pull-right"></span>
-              </a>
-              <ul class="treeview-menu">
-                <li id="Stock"><a href="#" ><i class="fa fa-circle-o"></i> Stock</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Empleado</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
-              </ul>
-            </li>
-             <li class="treeview">
+
+             <li id="refrescar" class="">
               <a href="#">
                <i class="fa fa-indent"></i>
                 <span>Reportes</span>
                 <span class="fa fa-angle-left pull-right"></span>
               </a>
-              <ul class="treeview-menu">
-                <li id=""><a href="#" ><i class="fa fa-circle-o"></i> Stock</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Empleado</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> </a></li>
+              <ul class="treeview-menu acor">
+                <li id="r8"><a href="#" ><i class="fa fa-circle-o"></i> Caja</a></li>
+                <li id="Alquiler_Presupuesto"><a href="#"><i class="fa fa-circle-o"></i>Alquiler / Presupuesto</a></li>
+                <li id="r2"><a href="#"><i class="fa fa-circle-o"></i>Pagos y Cobros</a></li>
+                <li id="r3"><a href="#"><i class="fa fa-circle-o"></i>Servicios</a></li>
+                <li id="r4"><a href="#"><i class="fa fa-circle-o"></i>Clientes</a></li>
+                <li id="r5"><a href="#"><i class="fa fa-circle-o"></i>Empleados</a></li>
+                <li id="r6"><a href="#"><i class="fa fa-circle-o"></i>Articulos</a></li>
+                <li id="r7"><a href="#"><i class="fa fa-circle-o"></i>Stock</a></li>
+              </ul>
+            </li>
+
+             <li id="administsdad" class="">
+              <a href="#" >
+                <i class="fa fa-cogs"></i>
+                <span>Administrar</span>
+                <span class="fa fa-angle-left pull-right"></span>
+              </a>
+              <ul class="treeview-menu admi">
+                <li id="Stock"><a href="#" ><i class="fa fa-circle-o"></i> Stock</a></li>
+                <li id="empresa"><a href="#"><i class="fa fa-circle-o"></i> Empresa</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> </a></li>
               </ul>
             </li>
 

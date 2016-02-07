@@ -37,7 +37,7 @@
       $( "#loader" ).load( "<?php echo site_url('index.php/Servicios/reser');?>" );
     }
 
-        function edit_servicios(idServicio)
+    function edit_servicios(idServicio)
     {
       $(".N,.A,.D,.T,.E,.U,.P,.PF").html("").css({"display":"none"});
       $("#servicios_aler").hide();
@@ -60,6 +60,8 @@
                  $('[name="Descripcion"]').val(data.Descripcion);
                 $('#modal_form_servicios').modal('show'); // show bootstrap modal when complete loaded
                 $('.modal-title_servicios').text('Editar Servicio'); // Set title to Bootstrap modal title
+                $('#btnSave_servi').text('Actualizar'); // Set title to Bootstrap modal title
+
                  $( "#loader" ).load( "<?php echo site_url('index.php/Servicios/loader');?>" );
             
         },
@@ -91,8 +93,6 @@
            $.ajax({
                       type : 'POST',
                       url : url, // octengo la url del formulario
-                      data: form,
-                      cache: false,
                       data: $(this).serialize(), // serilizo el formulario
                       success : function(data) {
                          var json = JSON.parse(data);// parseo la dada devuelta por json

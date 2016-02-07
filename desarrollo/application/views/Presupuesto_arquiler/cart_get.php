@@ -1,5 +1,5 @@
 
-                            <table id="table" class="idRecorrer table" cellspacing="0" width="100%">
+                            <table id="table" class="idRecorrer table" cellspacing="0" width="100%" >
                                         <thead>
                                           <tr>
                                                       <th class  ="text-danger">Cantidad</th>
@@ -70,6 +70,7 @@
                                  <tr id="generar">
                                           <td colspan="4"> </td>
                                           <td class="right"  style="text-align:right">
+                                                       <button type="submit" formtarget="_blank" id="target" class="btn btn-sm btn-primary btn-fla " style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
                                                        <button type="submit" id="Presupuesto" onclick="add_presupuesto(0)" class="btn btn-sm btn-success">
                                                                 <i class="fa fa-archive" ></i> Guarda Presupuesto
                                                         </button>
@@ -100,7 +101,7 @@
               <h4 style="text-align: center" class="modal-title">Modal title</h4>
             </div>
             <div class="modal-body">
-              <div <div class="row"> 
+              <div <div class="roww"> 
                <div class="col-md-12 col-md-offset-0 table-responsive">
                 <table class="table" >
                   <tbody>
@@ -139,6 +140,7 @@
               </div>
             </div>
          <div class="modal-footer">
+
             <button type="submit" id="btnSave" onclick="add_alquiler()" class="btn btn-sm btn-success">
                      <span class="glyphicon glyphicon-floppy-disk"></span> Alquilar
             </button>&nbsp;&nbsp;&nbsp;

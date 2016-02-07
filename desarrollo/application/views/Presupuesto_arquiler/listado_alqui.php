@@ -1,6 +1,12 @@
+
 							<section class="content">
 
 										<table id="listado_alq_ajax" class="table table-striped table-advance table-hover" >
+						<style type="text/css" media="screen">
+                         .row{
+                            display: block;
+                          }
+                          </style>
 											<thead>
 												<tr>
 													<th class  ="text-danger" style="width:120px;"><i class="fa fa-list"></i> Servicio</th>
@@ -9,12 +15,22 @@
 													<th class  ="text-danger" style="width:120px;"><i class="fa fa-"></i> Entegado</th>
 													<th class  ="text-danger" style="width:120px;"><i class="fa fa-"></i> Devolucion</th>
 													<th class  ="text-danger" style="width:50px; text-align:center"> Detalles</th>
-													<th  class ="text-danger"style="width:60px; text-align:center"> Acciones</th>
+													<th  class ="text-danger"style="width:100px; text-align:center"> Acciones</th>
 												</tr>
 											</thead>
-											<tbody>
-
-											</tbody>
+ <tbody>
+                                       <tr id="transparente" class="active">    
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                                Prueva
+                                            </td>
+                                        </tr>
+                                      </tbody>
 										</table>
 
 							</section><!-- /.content <-->	</-->
