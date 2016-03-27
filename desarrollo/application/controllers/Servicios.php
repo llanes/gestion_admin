@@ -19,7 +19,7 @@ class Servicios extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Servicios',//mi titulo 
 					'titulo2'=> 'Administrar Servicios',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Servicios',//mi titulo 
 					'titulo5'=> 'Servicios',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),

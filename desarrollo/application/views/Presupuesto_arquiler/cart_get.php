@@ -1,4 +1,4 @@
-
+                            <div style="height : 170px; overflow : auto; ">
                             <table id="table" class="idRecorrer table" cellspacing="0" width="100%" >
                                         <thead>
                                           <tr>
@@ -16,7 +16,10 @@
 
                                           <?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
                                           <tr>
-                                                  <td><?php echo form_input(array('style'=> 'border: none;','class' => 'row_id', 'name' => $i.'[qty]', 'value' => $items['qty'], 'data-id'=> $items['rowid'], 'maxlength' => '3', 'size' => '5')); ?></td>
+                                                                 <?php echo form_hidden(array('style'=> 'border: none;','class' => 'row_id', 'name' => $i.'[qty]', 'value' => $items['qty'], 'data-id'=> $items['rowid'], 'maxlength' => '5', 'size' => '5')); ?>
+                                                  <td colspan="1">
+                                                  <?php echo  $items['qty']; ?>
+                                                  </td>
                                                   <td>
                                                           <?php echo $items['name']; ?>
                                                   </td>
@@ -51,31 +54,48 @@
                                           </tr>
                                   <?php $i++; ?>
                                   <?php endforeach; ?>
-                                          <td width="130" colspan="6">
-                                              <strong>Total IVA 5 %&nbsp;&nbsp;</strong>₲. <span class='total_iva_cinco'></span>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                              <strong>Total IVA 10 %&nbsp;&nbsp;</strong>₲. <span class='total_iva_diez'></span>
-                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                              <strong>Total IVA &nbsp;&nbsp;</strong>₲. <span class='totalesiva'></span>
-                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                              <strong>Monto Total &nbsp;</strong>₲. <?php echo $this->cart->format_number($this->cart->total()); ?>
+                             </tbody>
+                            </table >
+                            </div>
+                             <table id="table" class="table" cellspacing="0" width="100%" >
+                              <tbody>
+                                  <tr class="success" role="row">
+                                          <td colspan="6" >
+                                            <label for="" class="col-xs-3 " style="text-align:left">
+                                                  <strong>Total IVA 5 %&nbsp;&nbsp;</strong>₲. <span class='total_iva_cinco'></span>
+                                            </label>
+                                            <label for="" class="col-xs-3 " style="text-align:center">
+                                                  <strong>Total IVA 10 %&nbsp;&nbsp;</strong>₲. <span class='total_iva_diez'></span>
+                                            </label>
+                                            <label for="" class="col-xs-3 " style="text-align:center">
+                                                  <strong>Total IVA &nbsp;&nbsp;</strong>₲. <span class='totalesiva'></span>
+                                            </label>
+                                            <label for="" class="col-xs-3 " style="text-align:right">
+                                                  <strong>Monto Total &nbsp;</strong>₲. <?php echo $this->cart->format_number($this->cart->total()); ?>
+                                            </label>
                                           </td>
                                    </tr>
                                         </tbody>
 
                             </table >
+
                           <table class="" cellspacing="30" width="100%">
                             <thead>
                             <?php if ($this->cart->format_number($this->cart->total()) != '0') { ?>
                                  <tr id="generar">
                                           <td colspan="4"> </td>
                                           <td class="right"  style="text-align:right">
-                                                       <button type="submit" formtarget="_blank" id="target" class="btn btn-sm btn-primary btn-fla " style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+                                                       <button type="submit" formtarget="_blank" id="target" class="btn btn-sm btn-primary btn-fla " style="margin-right: 5px;">
+                                                          <i class="fa fa-download"></i> 
+                                                          <span class="text_PDF">Generate PDF</span>
+                                                        </button>
                                                        <button type="submit" id="Presupuesto" onclick="add_presupuesto(0)" class="btn btn-sm btn-success">
-                                                                <i class="fa fa-archive" ></i> Guarda Presupuesto
+                                                                <i class="fa fa-archive" > </i>
+                                                                <span class="text_Presupuesto">Guarda Presupuesto</span>
                                                         </button>
                                                         <button type="submit" id="Alquiler" onclick="modal_view(0)" class="btn btn-sm btn-success">
-                                                                <span class="glyphicon glyphicon-floppy-disk"></span> Generar Alquiler
+                                                        <i class="fa " id='reo'></i>
+                                                            <span class="text_Alquiler">Generar Alquiler</span>
                                                         </button>
                                           </td>
                                   </tr>
@@ -92,70 +112,23 @@
               </div>
           </div>
           <!-- ///////////////////////////////////////////// -->
-      </section>
-      <div class="modal fade" id="modal_form_alquiler">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 style="text-align: center" class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-              <div <div class="roww"> 
-               <div class="col-md-12 col-md-offset-0 table-responsive">
-                <table class="table" >
-                  <tbody>
-                     <tr id="transparente">
-                        <td >
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Tipo de Pago</label>
-                                <div class="col-lg-5">
-                                        <select name="credi_cont" id="credi_cont" class="form-control">
-                                          <option value="1">Contado</option>
-                                          <option value="2">Credito</option>
-                                        </select>
-                                </div>
-                            </div>
-                        </td>
-                    </tr> 
-                    <tr id="transparente">
-                        <td>
-                            <div class="form-group cuotas">
-                                <label class="col-lg-4 control-label">Cantidad Cuotas</label>
-                                <div class="col-lg-5">
-                                    <select name="cuota" id="cuota" class="form-control">
-                                          <option value="2">2</option>
-                                          <option value="4">4</option>
-                                          <option value="6">6</option>
-                                          <option value="8">8</option>
-                                          <option value="12">12</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </td>
-                      </tr>
-                  </tbody>
-                </table>
-              </div>
-              </div>
-            </div>
-         <div class="modal-footer">
 
-            <button type="submit" id="btnSave" onclick="add_alquiler()" class="btn btn-sm btn-success">
-                     <span class="glyphicon glyphicon-floppy-disk"></span> Alquilar
-            </button>&nbsp;&nbsp;&nbsp;
-             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" >
-                     <span class="glyphicon glyphicon-floppy-remove"></span> Cancelar
-             </button>
-          </div>
-          </div>
-        </div>
-      </div>
+
 </div>
       </form>
 
 <script type="text/javascript" charset="utf-8" async defer>
   $(function() {
+        var controlbutton      = $( "[name=controlbutton]").val();
+        if (controlbutton != 0) {
+              $('#reo').removeClass('fa-save');
+              $('#reo').addClass('fa-refresh');
+              $(".text_Alquiler").text("Actualizar Alquiler");
+        } else{
+          $('#reo').removeClass('fa-refresh');
+          $('#reo').addClass('fa-save');
+          $(".text_Alquiler").text("Generar Alquiler");
+        }
         var inpuesto_cinco = 0;
         var iva = 0;
         var inpuesto_diez = 0;

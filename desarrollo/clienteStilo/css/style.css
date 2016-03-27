@@ -5,7 +5,7 @@ Author: Mosaddek Hossain
 Website: http://thevectorlab.net/
 */
 
-/* Import fonts */
+/* Import fonts breadcrumbs*/
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 @import url(//fonts.googleapis.com/css?family=Fjalla+One);
 
@@ -15,6 +15,48 @@ body {
     padding: 0px !important;
     margin: 0px !important;
     font-size:13px;
+}
+
+/*AUTOSELEC ESTILOS*/
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; width:400px;}
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+/*rival autocomplete */
+.autocomplete {
+  /*display: block;*/
+  width: 100%;
+         height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+}
+
+.autocomplete:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.autocomplete::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.autocomplete:-ms-input-placeholder {
+  color: #999;
+}
+.autocomplete::-webkit-input-placeholder {
+  color: #999;
 }
 
 
@@ -914,8 +956,8 @@ ul.about-flex-slides {
 .breadcrumbs {
     background: #475268;
     color: #fff;
-    padding: 45px 0;
-    margin-bottom: 40px;
+    padding: 10px 0;
+    margin-bottom: 10px;
 }
 
 .breadcrumb {
@@ -1935,22 +1977,105 @@ border: 1px solid green;
 }
 textarea:invalid {
  
-border: 2px solid red;
+border: 1px solid red;
  
 }
 textarea:valid {
  
-border: 2px solid green;
+border: 1px solid green;
  
 }
 select:invalid {
  
-border: 2px solid red;
+border: 1px solid red;
  
 }
 select:valid {
  
-border: 2px solid green;
+border: 1px solid green;
  
 }
 
+
+.navbar-nav > .user-menu > .dropdown-menu {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  padding: 1px 0 0 0;
+  border-top-width: 0;
+  width: 230px;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+  height: 175px;
+  padding: 10px;
+  text-align: center;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header > img {
+  z-index: 5;
+  height: 90px;
+  width: 90px;
+  border: 3px solid;
+  border-color: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header > p {
+  z-index: 5;
+  color: #fff;
+  color: rgb(0,173,239);
+  font-size: 17px;
+  margin-top: 10px;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header > p > small {
+  display: block;
+  font-size: 12px;
+}
+.navbar-nav > .user-menu > .dropdown-menu > .user-body {
+  padding: 15px;
+  border-bottom: 1px solid #f4f4f4;
+  border-top: 1px solid #F77B6F;
+}
+.navbar-nav > .user-menu > .dropdown-menu > .user-body:after {
+  clear: both;
+}
+.navbar-nav > .user-menu > .dropdown-menu > .user-footer {
+  background-color: #F77B6F;
+  padding: 1px;
+}
+
+.navbar-nav > .user-menu .user-image {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: -2px;
+}
+@media (max-width: 767px) {
+  .navbar-nav > .user-menu .user-image {
+    float: none;
+    margin-right: 0;
+    margin-top: -8px;
+    line-height: 10px;
+  }
+}
+.user-header{background-color:#475268}
+.navbar-nav > .user-menu > .dropdown-menu > .user-footer {
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+.btn.btn-flat {
+    border-radius: 2;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-width: 1px;
+}
+.btn-default {
+    color: #F77B6F;
+    background-color: #F77B6F;
+    border-color: #F77B6F;
+
+}
+.content-wrapper {
+  background: url('../img/boxed-bg.jpg') repeat fixed;
+
+}

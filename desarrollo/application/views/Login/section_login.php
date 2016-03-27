@@ -8,23 +8,32 @@
       <form class="form-signin" id="for_login" action="<?= site_url('index.php/Login/logeo')?> ">
         <h2 class="form-signin-heading">Inicio de Sesion</h2>
         <div class="login-wrap">
-              <input type="text" required  class="form-control" placeholder="Usuario"  id="usuario" name="usuario" onfocus="autofocus" autocomplete="off" pattern="[A-Za-z ]{3,100}"  >
-                <span class="User text-danger">
-                <!-- error usuario -->
-                </span>
-              <input type="password" required  class="form-control" placeholder="Contraseña " id="password" name="password"   onfocus="autofocus" autocomplete="off" pattern="(?=.*[a-z]).{6,}"   >
-                <span class="Pass text-danger">
-                    <!-- error password -->
-                </span>
+              <div class="form-group has-feedback">
+                <label for="inputTwitter" class="control-label"></label>
+                <div class="">
+                    <input type="text" required  class="form-control" maxlength="35" placeholder="Usuario"  id="usuario" name="usuario" onfocus="autofocus" autocomplete="off" pattern="[A-Za-z ]{3,100}"  >
+                </div>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors" id="User"></div>
+              </div>
+
+              <div class="form-group has-feedback">
+                <label for="inputTwitter" class="control-label"></label>
+                <div class="">
+                  <input type="password" required  class="form-control" maxlength="35" placeholder="Contraseña " id="password" name="password"   onfocus="autofocus" autocomplete="off" pattern="(?=.*[a-z]).{6,}"   >
+                </div>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors" id="Pass"></div>
+              </div>
             <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Recordarme
+<!--                 <input type="checkbox" value="remember-me"> Recordarme
                 <span class="pull-right">
                     <a data-toggle="modal" rel="tooltip" title="Recuperar" href="#myModal"> ¿Se te olvidó tu contraseña?</a>
 
                 </span>
-            </label>
+ -->            </label>
             <button class="btn btn-lg btn-login btn-block" type="submit">Iniciar </button>
-            <p>Inicioar con redes Sociales</p>
+           <!--  <p>Inicioar con redes Sociales</p>
             <div class="login-social-link">
                 <a href="index.html" class="facebook">
                     <i class="fa fa-facebook"></i>
@@ -34,7 +43,7 @@
                     <i class="fa fa-twitter"></i>
                     Twitter
                 </a>
-            </div>
+            </div> -->
             <div class="registration">
                 ¿No tienes una cuenta?  
                 <a class="" href="<?= base_url();?>index.php/Login/registro">
@@ -67,11 +76,10 @@
           <!-- modal -->
 
     </div>
-    <script src="<?= base_url();?>clienteStilo/js/jquery.js"></script>
     <script src="<?= base_url();?>clienteStilo/js/bootstrap.min.js"></script>
     <script src="<?= base_url();?>clienteStilo/js/jquery.backstretch.min.js"></script>
     <script>
-        $.backstretch("<?= base_url();?>clienteStilo/img/login.jpg", {speed: 0});
+        $.backstretch("<?= base_url();?>clienteStilo/img/boxed-bg.jpg", {speed: 0});
     </script>
     <script type="text/javascript" charset="utf-8" async defer>
     $(function () {
@@ -83,13 +91,13 @@
               data: $(this).serialize(), // serilizo el formulario
               success : function(data) {
                  var json = JSON.parse(data);// parseo la dada devuelta por json
-                  $(".User,.Pass").html("").css({"display":"none"});
+                  $("#User,#Pass").html("").css({"display":"none"});
                   if (json.res == "error") {
                     if (json.usuario) {
-                       $(".User").append(json.usuario).css({"display":"block"}); // mostrar validation de iten usuario
+                       $("#User").append(json.usuario).css({"display":"block"}); // mostrar validation de iten usuario
                     }
                     if (json.password) {
-                       $(".Pass").append(json.password).css({"display":"block"}); /// mostar validation  de iten pass
+                       $("#Pass").append(json.password).css({"display":"block"}); /// mostar validation  de iten pass
                     }
                   }else{ // si pasa la validation redireccionar al ligin del control de acceso
                       var url = "<?= site_url('index.php/Login')?>";
@@ -109,4 +117,5 @@
         });
         /////////////////////////////////////////////////////////
         });
+$('#myForm,#for_login').validator()
     </script>

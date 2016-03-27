@@ -84,7 +84,7 @@ public function logeo($Usuario ,$Password)
 	// agregra usuario
 	public function add_user($_data)
 	{
-		$this->db->insert('usuario', $data);
+		$this->db->insert('usuario', $_data);
 	}
 }
 

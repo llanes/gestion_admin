@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$config['caracteres'] = Array(".",",");
+$config['caracteres'] = Array(",",",");
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

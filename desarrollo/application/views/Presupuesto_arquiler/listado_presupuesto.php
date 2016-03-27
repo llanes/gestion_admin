@@ -1,11 +1,12 @@
-
+    <div class="modal fade bs-example-modal-lg" id="snnipppp">
+          <div style="text-align: center">
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+             <h1 class="text-danger">Procesando....</h1>
+            <p class="text-danger"><i class="fa fa-spinner fa-spin fa-5x"></i></p>
+          </div>
+    </div>
               <section class="content">
                     <table id="listado_presupuesto_ajax" class="table table-striped table-advance table-hover" >
-                         <style type="text/css" media="screen">
-                         .row{
-                            display: block;
-                          }
-                          </style>
                       <thead>
                         <tr>
                           <th class ="text-danger" style="width:120px;"><i class="fa fa-list"></i>   Servicio</th>

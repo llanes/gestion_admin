@@ -6,6 +6,7 @@ class Login extends CI_Controller {
 	{
 		parent::__construct();
 		// Cargamos las librerias, model, helper;
+		$this->load->dbforge();
 		$this->load->model("Logeo_model");
 	}
 		public function index()
@@ -14,9 +15,9 @@ class Login extends CI_Controller {
 			$this->inicio();
 		}else{
 			if ($this->session->userdata('Permiso_idPermiso')==='1'){
-			redirect('index.php/Home_admin');
+			redirect('index.php/Gestion');
 			} else{
-			redirect('Home_cliente');
+			redirect('index.php/1');
 			}
 
 
@@ -30,19 +31,16 @@ class Login extends CI_Controller {
 					'titulo'=> 'Login',//mi titulo
 					"usuario" => $this->session->userdata('usuario')
 			);
-			//redirecionamos a la vista o llamamos a la vista index
 			$this->parser->parse('Home_cliente/head.php',$data, FALSE);	// carga todos las url de estilo i js home
-			// $this->parser->parse('Home_cliente/header.php',$data, FALSE); // esta seria la barra de navegacion horizontal
 			$this->parser->parse('Login/section_login.php',$data, FALSE); // este seria todo el contenido central
-			// $this->parser->parse('Home_cliente/footer.php',$data, FALSE); // este seria todo el contenido central
-			// $this->load->view('Home_cliente/pie_js.php'); // pie con los js
+
 	}
 	// Funcion de logeo
 	public function logeo()
 	{
 		if($this->input->is_ajax_request()){
 				// la validacion esta en el la carpeta config
-				$this->form_validation->set_error_delimiters('<i class="fa fa-exclamation-triangle"></i>   ','');
+				$this->form_validation->set_error_delimiters('<ul class="list-unstyled text-danger"><li>','</li></ul>');
 				if ($this->form_validation->run('Login_validation') == FALSE)
 				{
 						$data = array(
@@ -59,10 +57,11 @@ class Login extends CI_Controller {
 										'idUsuario' => $fila->idUsuario,
 										'Usuario' => $fila->Usuario,
 										'Empleado_idEmpleado' => $fila->Empleado_idEmpleado,
+										'Cliente_idCliente' => $fila->Cliente_idCliente,
 										'Permiso_idPermiso' => $fila->Permiso_idPermiso
 										);
 									$this->session->set_userdata($data);
-									// redirect('index.php/Login/login','refresh');
+
 						}else{
 							// redirect('index.php/Login/login','refresh');
 						}
@@ -75,11 +74,13 @@ class Login extends CI_Controller {
 	// cerrar seccion
 	public function logout()
 	{
+		$this->dbforge->drop_table('temp',TRUE);
 		$this->session->sess_destroy();
-		redirect('index.php/Home','refresh');
+		redirect('index.php/Login');
 	}
 	public function registro()
 	{
+		if(!$this->session->userdata('idUsuario')) {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo'=> 'Registro de Cliente',//mi titulo 
@@ -90,7 +91,11 @@ class Login extends CI_Controller {
 			// $this->parser->parse('Home_cliente/header.php',$data, FALSE); // esta seria la barra de navegacion horizontal
 			$this->parser->parse('Login/registro.php',$data, FALSE); // este seria todo el contenido central
 			// $this->parser->parse('Home_cliente/footer.php',$data, FALSE); // este seria todo el contenido central
-			// $this->load->view('Home_cliente/pie_js.php'); // pie con los js
+			$this->load->view('Home_cliente/pie_js.php'); // pie con los js
+
+		} else {
+		redirect('index.php/Login');
+		}
 	}
 	public function registro_add()
 	{
@@ -102,6 +107,7 @@ class Login extends CI_Controller {
 							'Nombres'   => form_error('Nombres'),
 							'Direccion'   => form_error('Direccion'),
 							'Telefono'   => form_error('Telefono'),
+							'ci_ruc'   => form_error('ci_ruc'),
 							'Email'   => form_error('Email'),
 							'usuario'   => form_error('usuario'),
 							'password'  => form_error('password'),
@@ -114,20 +120,22 @@ class Login extends CI_Controller {
 					'Nombres'                     => $this->security->xss_clean( $this->input->post('Nombres',FALSE)),
 					'Apellidos'                   => $this->security->xss_clean( $this->input->post('Apellidos',FALSE)),
 					'Direccion'                   => $this->security->xss_clean( $this->input->post('Direccion',FALSE)),
+					'ci_ruc'                   => $this->security->xss_clean( $this->input->post('ci_ruc',FALSE)),
 					'Telefono'                    => $this->security->xss_clean( $this->input->post('Telefono',FALSE)),
 					'Email'                       => $this->security->xss_clean( $this->input->post('Email',FALSE)),
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)
 					);
 						$this->Logeo_model->add_cliente($data);
-						$Empleado_idEmpleado = $this->	ultimoCliente();
+						$Cliente_idCliente = $this->	ultimoCliente();
 						$Permiso_idPermiso   = 2;
-					$data                = array(
+					$_data                = array(
 					'usuario'             => $this->security->xss_clean($this->input->post('usuario',FALSE)),
 					'password'            => $this->security->xss_clean($this->input->post('password',FALSE)),
-					'Empleado_idEmpleado' => $this->security->xss_clean($Empleado_idEmpleado),
+					'Empleado_idEmpleado' => '',
 					'Permiso_idPermiso'   =>$this->security->xss_clean($Permiso_idPermiso),
+					'Cliente_idCliente'  => $this->security->xss_clean($Cliente_idCliente)
 					);
-						$this->Logeo_model->add_user($data);
+						$this->Logeo_model->add_user($_data);
 				}
            echo json_encode($data);
         }else{

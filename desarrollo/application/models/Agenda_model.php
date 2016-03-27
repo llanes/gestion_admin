@@ -2,7 +2,7 @@
 
 class Agenda_model extends CI_Model
 {
-	var $where = '(Arquiler_Presupuesto = 1) OR (Arquiler_Presupuesto = 0)';
+	var $where = 'Arquiler_Presupuesto = 1';
 	const TABLA = 'presupuesto_arquiler pre';
 
 	public function __construct()

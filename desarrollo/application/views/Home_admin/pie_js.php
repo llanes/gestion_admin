@@ -8,7 +8,8 @@
     <script src="<?php echo base_url();?>admin_stilo/js/jquery.autocomplete.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
     <script src="<?php echo base_url();?>admin_stilo/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-    <!-- Morris.js charts -->
+
+        
    <!-- AdminLTE App -->
     <script src="<?php echo base_url();?>admin_stilo/dist/js/app.min.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
@@ -21,6 +22,8 @@
     <script src="<?php echo base_url('bower_components/bootstrap-checkbox/dist/js/bootstrap-checkbox.js')?>"></script>
     <script src="<?php echo base_url('bower_components/underscore/underscore-min.js')?>"></script>
     <script src="<?php echo base_url('bower_components/bootstrap-calendar/js/calendar.js')?>"></script>
+        <!-- Morris.js charts -->
+            <script src="<?php echo base_url('clienteStilo/validator.min.js')?>"></script>
 <script>
 $(function() {
     $('#cliente_vista').hide();
@@ -38,89 +41,233 @@ $(function() {
 
 
     $("#refrescar,#administsdad").click(function(){
-        $('#cliente_vista').hide();
-        $("#empleado_vista").hide();
-        $("#productos_vista").hide();
-        //$("#stock_vista").hide();
-        $("#presupuesto_vista").hide();
-        $("#servicios_vista").hide();
-        $("#caja_vista").hide();
-        $("#pagos_vista").hide();
-        $("#cobros_vista").hide();
-        $("#agenda_vista").hide();
-        $("#conte_repo").show();
+        $.ajax({
+                url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                data: {param1: 'value1'},
+         })
+         .done(function(data) {
+                $('#cliente_vista').hide();
+                $("#empleado_vista").hide();
+                $("#productos_vista").hide();
+                //$("#stock_vista").hide();
+                $("#presupuesto_vista").hide();
+                $("#servicios_vista").hide();
+                $("#caja_vista").hide();
+                $("#pagos_vista").hide();
+                $("#cobros_vista").hide();
+                $("#agenda_vista").hide();
+                $("#conte_repo").show();
+         })
+         .fail(function(data) {
+              location.reload();
+         });
+
     });
 });
 $(function () {
         $("#agenda").click(function(){
-        $('#agenda_vista').show();
-        $("#conte_repo,#cliente_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
-        $("#agenda_vista").load('<?php echo base_url("index.php/Agenda")?>');
-        $('.acor,.acor_pa,.admi').hide();
+        $.ajax({
+                url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                data: {param1: 'value1'},
+         })
+         .done(function(data) {
+            // $('#skin').removeClass('sidebar-collapse');
+            $('#agenda_vista').show();
+            $("#conte_repo,#cliente_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
+            $("#agenda_vista").load('<?php echo base_url("index.php/Agenda")?>');
+            $('.acor,.acor_pa,.admi').hide();
+         })
+         .fail(function(data) {
+              location.reload();
+         });
         });
 
         $("#cliente").click(function(){
-        $('#cliente_vista').show();
-        $("#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
-        $("#cliente_vista").load('<?php echo base_url("index.php/Cliente")?>');
-        $('.acor,.acor_pa,.admi').hide();
+        $.ajax({
+                url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                data: {param1: 'value1'},
+         })
+         .done(function(data) {
+                 // $('#skin').removeClass('sidebar-collapse');
+            $('#cliente_vista').show();
+            $("#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
+            $("#cliente_vista").load('<?php echo base_url("index.php/Cliente")?>');
+            $('.acor,.acor_pa,.admi').hide();
+         })
+         .fail(function(data) {
+              location.reload();
+         });
         });
-
         $("#empleado").click(function(){
-        $('#empleado_vista').show();
-        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#productos_vista,#caja_vista').hide();
-        $("#empleado_vista").load('<?php echo base_url("index.php/Empleado")?>');
-        $('.acor,.acor_pa,.admi').hide();
+        $.ajax({
+                url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                data: {param1: 'value1'},
+         })
+         .done(function(data) {
+                 // $('#skin').removeClass('sidebar-collapse');
+            $('#empleado_vista').show();
+            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#productos_vista,#caja_vista').hide();
+            $("#empleado_vista").load('<?php echo base_url("index.php/Empleado")?>');
+            $('.acor,.acor_pa,.admi').hide();
+         })
+         .fail(function(data) {
+              location.reload();
+         });
+
         });
 
          $("#productos").click(function(){
-        $('#productos_vista').show();
-        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
-        $("#productos_vista").load('<?php echo base_url("index.php/Productos")?>');
-        $('.acor,.acor_pa,.admi').hide();
+        $.ajax({
+                url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                data: {param1: 'value1'},
+         })
+         .done(function(data) {
+             // $('#skin').removeClass('sidebar-collapse');
+            $('#productos_vista').show();
+            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+            $("#productos_vista").load('<?php echo base_url("index.php/Productos")?>');
+            $('.acor,.acor_pa,.admi').hide();
+         })
+         .fail(function(data) {
+              location.reload();
+         });
+
         });
 
          $("#Stock").click(function(){
-        $('#stock_vista').show();
-        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
-        $("#stock_vista").load('<?php echo base_url("index.php/Stock")?>');
-        $('.acor,.acor_pa').hide();
+        $.ajax({
+                url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                data: {param1: 'value1'},
+         })
+         .done(function(data) {
+             // $('#skin').removeClass('sidebar-collapse');
+            $('#stock_vista').show();
+            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+            $("#stock_vista").load('<?php echo base_url("index.php/Stock")?>');
+            $('.acor,.acor_pa').hide();
+         })
+         .fail(function(data) {
+              location.reload();
+         });
+
         });
 
          $("#servicios").click(function(){
-        $('#servicios_vista').show();
-        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
-        $("#servicios_vista").load('<?php echo base_url("index.php/Servicios")?>');
-        $('.acor,.acor_pa,.admi').hide();
+        $.ajax({
+                url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                data: {param1: 'value1'},
+         })
+         .done(function(data) {
+             // $('#skin').removeClass('sidebar-collapse');
+            $('#servicios_vista').show();
+            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+            $("#servicios_vista").load('<?php echo base_url("index.php/Servicios")?>');
+            $('.acor,.acor_pa,.admi').hide();
+         })
+         .fail(function(data) {
+              location.reload();
+         });
         });
 
          $("#presupuesto").click(function(){
-        $('#presupuesto_vista').show();
-        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
-        $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler")?>');
-        $('.acor,.acor_pa,.admi').hide();
+          $.ajax({
+                url : "<?php echo site_url('index.php/Caja/verificar_caja'); ?>",
+                type: "POST",
+                dataType: "JSON",
+                 cache: false,
+                success: function(data)
+                {
+                    if (data == 'cerrada') {
+                        swal('Caja Cerrada','')
+                    }else{
+                        $('#skin').addClass('sidebar-collapse');
+                        $('#presupuesto_vista').show();
+                        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+                        $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler")?>');
+                        $('.acor,.acor_pa,.admi').hide();
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                     location.reload();
+                }
+            });
         });
 
          $("#caja").click(function(){
+        $('#skin').addClass('sidebar-collapse');
         $('#caja_vista').show();
         $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#presupuesto_vista').hide();
         $("#caja_vista").load('<?php echo base_url("index.php/Caja")?>');
         $('.acor,.acor_pa,.admi').hide();
         });
+                     $("#Pagos").click(function(){
+                         $.ajax({
+                            url : "<?php echo site_url('index.php/Caja/verificar_caja'); ?>",
+                            type: "POST",
+                            dataType: "JSON",
+                             cache: false,
+                            success: function(data)
+                            {
+                                if (data == 'cerrada') {
+                                    swal('Caja Cerrada','')
+                                }else{
+                                 $('#skin').removeClass('sidebar-collapse');
+                                 $('#pagos_vista').show();
+                                 $('#conte_repo,#agenda_vista,#cobros_vista,#caja_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#presupuesto_vista').hide();
+                                 $("#pagos_vista").load('<?php echo base_url("index.php/Pagos")?>');
+                                 $('.acor').hide();
+                             }
 
-         $("#Pagos").click(function(){
-        $('#pagos_vista').show();
-        $('#conte_repo,#agenda_vista,#cobros_vista,#caja_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#presupuesto_vista').hide();
-        $("#pagos_vista").load('<?php echo base_url("index.php/Pagos")?>');
-        $('.acor').hide();
-        });
+                            },
+                            error: function (jqXHR, textStatus, errorThrown)
+                            {
+                                location.reload();
+                            }
+                        });
+                     });
+                     $("#Cobros").click(function(){
+                         $.ajax({
+                            url : "<?php echo site_url('index.php/Caja/verificar_caja'); ?>",
+                            type: "POST",
+                            dataType: "JSON",
+                             cache: false,
+                            success: function(data)
+                            {
+                                if (data == 'cerrada') {
+                                    swal('Caja Cerrada','')
+                                }else{
+                                 $('#skin').removeClass('sidebar-collapse');
+                                 $('#cobros_vista').show();
+                                 $('#conte_repo,#agenda_vista,#pagos_vista,#caja_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#presupuesto_vista').hide();
+                                 $("#cobros_vista").load('<?php echo base_url("index.php/Cobros")?>');
+                                 $('.acor').hide();
+                                }
 
-         $("#Cobros").click(function(){
-        $('#cobros_vista').show();
-        $('#conte_repo,#agenda_vista,#pagos_vista,#caja_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#presupuesto_vista').hide();
-        $("#cobros_vista").load('<?php echo base_url("index.php/Cobros")?>');
-        $('.acor').hide();
-        });
+                            },
+                            error: function (jqXHR, textStatus, errorThrown)
+                            {
+                                location.reload();
+                            }
+                        });
+                     });
+
+
 });
         $(function() {
             $("#Alquiler_Presupuesto").click(function(){

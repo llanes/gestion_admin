@@ -19,7 +19,7 @@ class Productos extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Productos',//mi titulo 
 					'titulo2'=> 'Administrar Productos',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Productos',//mi titulo 
 					'titulo5'=> 'Productos',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),

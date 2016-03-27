@@ -51,6 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Home';
 $route['factura_pdf/(:num)'] = 'Reportes/factura_pdf/$i';
-
+$route['boleta/(:num)'] = 'Reportes/boleta/$i';
+$route['1'] = 'Home_cliente';
+$route['Gestion'] = 'Home_admin';
+$route['pag/(:num)'] = 'Home_cliente/servicios/$i';
+$route['2'] = 'Home_cliente/servicios';
+$route['3'] = 'Home_cliente/presupuesto';
+$route['4'] = 'Home_cliente/Precios';
+$route['5'] = 'Home_cliente/servicios';
+$route['login'] = 'Login/logout';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -14,7 +14,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Alquler/Presupuesto',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Alquler/Presupuesto',//mi titulo 
 					'titulo5'=> 'Alquler/Presupuesto',//mi titulo 
 			);
@@ -186,7 +186,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Pagos y Cobros',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Pagos y Cobros',//mi titulo 
 					'titulo5'=> 'Pagos y Cobros',//mi titulo 
 			);
@@ -569,7 +569,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Servicios',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Servicios',//mi titulo 
 					'titulo5'=> 'Servicios',//mi titulo 
 			);
@@ -652,7 +652,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Cliente',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Cliente',//mi titulo 
 					'titulo5'=> 'Cliente',//mi titulo 
 			);
@@ -738,7 +738,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Empleado',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Empleado',//mi titulo 
 					'titulo5'=> 'Empleado',//mi titulo 
 			);
@@ -824,7 +824,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Articulos',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Articulos',//mi titulo 
 					'titulo5'=> 'Articulos',//mi titulo 
 			);
@@ -919,7 +919,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Stock',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Stock',//mi titulo 
 					'titulo5'=> 'Stock',//mi titulo 
 			);
@@ -1006,7 +1006,7 @@ class Reportes extends CI_Controller {
 		$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Reportes | Caja',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Caja',//mi titulo 
 					'titulo5'=> 'Caja',//mi titulo 
 			);
@@ -1477,8 +1477,9 @@ class Reportes extends CI_Controller {
 
 	}
 
-	public function factura_pdf()
+	public function factura_pdf($id = '')
 	{
+
 			$idArquiler= $this->uri->segment(2);
 			$Monto_Alquiler_Presupuesto  = $this->security->xss_clean( $this->input->post('Monto'));
 			$this->cart->destroy();
@@ -1561,7 +1562,166 @@ class Reportes extends CI_Controller {
 							$this->pdf->Output('pdf.pdf','F');  //save pdf
 							$this->pdf->Output('pdf.pdf', 'I'); // show pdf
 	}
+	public function boleta()
+	{
+		$id= $this->uri->segment(2);
+		if ($id == 2) {
+			$nombre = 'Boleta de venta';
+		} else {
+			$nombre = 'Facrura';
+		}
+			$id_ = $this->_ultimo_cabecera();
+			$this->cart->destroy();
+			$this->load->model('Presupuesto_arquiler_model');
+			$objeto = $this->Presupuesto_arquiler_model->edit_presupuesto($id_);
+			$empleado = $this->Reportes_model->ge_empleado();
+			// echo var_dump($objeto);
+			// Creacion del PDF
+			/*
+			* Se crea un objeto de la clase Pdf, recuerda que la clase Pdf
+			* heredó todos las variables y métodos de fpdf
+			*/
+			$this->load->library('factura');
+			$this->pdf = new Factura();
 
+			// Agregamos una página
+			$this->pdf->AddPage();
+			// Define el alias para el número de página que se imprimirá en el pie
+			$this->pdf->AliasNbPages();
+			$this->pdf->SetTitle('Alquiler');
+						foreach ($empleado as $key ) {
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(40,7,$key->Nombre,'',0,'L');
+						$this->pdf->SetFont('Arial','B',9);
+						$this->pdf->Cell(12);
+						$this->pdf->Cell(70,7,'Direccion : '.$key->Direccion ,'',0,'L');
+
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(70,7,'R.U.D : '.$key->R_U_D ,'TL R',0,'C');
+						$this->pdf->Ln(7);
+
+						$this->pdf->Cell(52);	
+						$this->pdf->SetFont('Arial','B',9);
+						$this->pdf->Cell(70,7,'Telefono : '.$key->Telefono ,'',0,'L');
+
+						$this->pdf->SetTextColor(250, 0, 0);
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(70,7,$nombre,'L R',0,'C');
+
+						$this->pdf->SetTextColor(0, 0, 0);
+						$this->pdf->Ln(7);
+						$this->pdf->Cell(52);	
+						$this->pdf->SetFont('Arial','B',9);
+						$this->pdf->Cell(70,7,'Correo  : '.$key->Email ,'',0,'L');
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(70,7,'N. '.$key->Series.'    -     '.'N. '.$key->Timbrado ,'L BR',0,'C');
+						}
+			$this->pdf->Ln(10);
+
+			$this->pdf->SetLeftMargin(10);
+			$this->pdf->SetRightMargin(10);
+			$this->pdf->SetFillColor(250,250,250);
+			$this->pdf->SetFont('Arial', 'B', 9);
+			foreach ($objeto as $alias) {
+			$this->pdf->Cell(80,6,'Cliente             : '.$alias->Nombres.' '.$alias->Apellidos,'TL',0,'L');
+			if ($alias->Contado_Credito == 2) 
+			{
+				$this->pdf->Cell(43,6,'Condi. Pago :  Coutas','T',0,'L');
+			} ;
+			if($alias->Contado_Credito == 1) 
+			{
+				$this->pdf->Cell(43,6,'Condi. Pago : Contado','T',0,'L');
+			};
+			
+
+			$this->pdf->Cell(69,6,'C.I/R.U.C:  : '.$alias->ci_ruc,'T R',0,'C');
+			$this->pdf->Ln(6);
+			$this->pdf->Cell(192,6,'Servicio           : '.$alias->Nombre_servicio,'L R',0,'L');
+			$this->pdf->Ln(6);
+			$this->pdf->Cell(192,6,'Direccion         : '.$alias->Nombre_servicio,'L R',0,'L');
+			$this->pdf->Ln(6);
+			$this->pdf->Cell(43,6,'Fecha Emision : '.date('Y-d-m'),'BL ','',0,'L');
+			$this->pdf->Cell(80,6,'Entrega  :'.$alias->Fecha_Pre_Arqui,'B',0,'C');
+			$this->pdf->Cell(69,6,'Devolucion  :'.$alias->Fecha_Devolucion,'B R',0,'L');
+			$this->pdf->Ln(10);
+
+
+
+			/* Se define el titulo, márgenes izquierdo, derecho y
+			* el color de relleno predeterminado*/
+			$this->pdf->SetFillColor(150,250,150);
+
+			// Se define el formato de fuente: Arial, negritas, tamaño 9
+			/*
+			* TITULOS DE COLUMNAS
+			*
+			* $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
+			*/
+			$this->pdf->Cell(12,7,'#','TBL',0,'C','1');
+			$this->pdf->Cell(30,7,'Cantidad','TBL',0,'C','1');
+			$this->pdf->Cell(60,7,'Nombre','TBL',0,'L','1');
+			$this->pdf->Cell(30,7,'Inpuesto','TBL',0,'L','1');
+			$this->pdf->Cell(30,7,'Precio','TBL',0,'L','1');
+			$this->pdf->Cell(30,7,'Subtotal','TBL BR',0,'L','1');
+			$this->pdf->Ln(7);
+			$i = 0;
+			foreach ($this->cart->contents() as $items) {
+				foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
+				$iva =	$option_value;
+				}
+				// se imprime el numero actual y despues se incrementa el valor de $x en uno
+				$this->pdf->Cell(12,6,$i,' ',0,'C',0);
+				// Se imprimen los datos de cada cliente
+				$this->pdf->Cell(30,6,$items['qty'],'',0,'C',0);
+				$this->pdf->Cell(60,6,$items['name'],'',0,'L',0);
+				$this->pdf->Cell(30,6,$iva.' %','',0,'C',0);
+				$this->pdf->Cell(30,6,number_format($items['price'],0,',','.'),'',0,'C',0);
+				$this->pdf->Cell(30,6,number_format($items['subtotal'],0,',','.'),'  ',0,'L',0);
+				//Se agrega un salto de linea
+				$this->pdf->Ln(6);
+				$i++;
+			}
+		$this->pdf->Ln(6);
+		$this->pdf->SetFillColor(0, 27, 0, 1);
+		$this->pdf->SetDrawColor(0, 27, 0, 1);
+		$this->pdf->SetTextColor(0, 27, 0, 1);
+		$this->pdf->SetFont('Arial', 'B',10);
+		$this->pdf->Cell(48,5,' Monto Total Iva:     '.number_format($alias->Monto_total_iva,0,',','.').'  Gs.',' ',0,'L',0);
+		$this->pdf->Cell(48,5,'',' ',0,'L',0);
+		$this->pdf->Cell(48,5,'',' ',0,'L',0);
+		$this->pdf->Cell(48,5,' Monto Total :     '.number_format($alias->Monto_Alquiler_Presupuesto,0,',','.').'  Gs.',' ',0,'L',0);
+		}
+							$this->pdf->Output('pdf.pdf','F');  //save pdf
+							$this->pdf->Output('pdf.pdf', 'I'); // show pdf
+
+		
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private function _ultimo_cabecera()
+	{
+		$query = $this->db->query('SELECT MAX(idArquiler) as idArquiler from presupuesto_arquiler');
+			foreach($query->result_array() as $d)
+			{
+				return( $d['idArquiler']);
+			}
+	}
 
 }
 

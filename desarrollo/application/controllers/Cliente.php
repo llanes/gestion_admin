@@ -22,7 +22,7 @@ class Cliente extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Clientes',//mi titulo 
 					'titulo2'=> 'Administrar clientes',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Clientes',//mi titulo 
 					'titulo5'=> 'Clientes',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),

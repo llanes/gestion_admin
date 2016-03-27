@@ -6,9 +6,9 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		if(!$this->session->userdata('idUsuario')) { // si la seccion no existe me quedo en el homo
-			$this->index();
+
 		} else{
-			redirect('index.php/Login','refresh');
+			redirect('index.php/Login/inicio');
 		}
 	}
 

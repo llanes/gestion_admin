@@ -19,7 +19,7 @@ class Empleado extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Empleados',//mi titulo 
 					'titulo2'=> 'Administrar Empleado',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Empleados',//mi titulo 
 					'titulo5'=> 'Empleados',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),

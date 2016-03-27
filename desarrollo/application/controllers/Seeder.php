@@ -1,4 +1,4 @@
-<?php
+// <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Seeder extends CI_Controller {
@@ -21,7 +21,7 @@ class Seeder extends CI_Controller {
 		echo "Seeding cliente table".PHP_EOL;
 		$this->db->truncate('cliente');
 		$this->db->truncate('usuario');
-		for ($i=0; $i < 100; $i++) { 
+		for ($i=0; $i < 20; $i++) { 
 			$object = array(
 				'Nombres' => $this->faker->firstName,
 				'Apellidos' =>  $this->faker->lastName,
@@ -60,7 +60,7 @@ class Seeder extends CI_Controller {
 				$this->db->truncate('categoria');
 				$this->db->truncate('producto_servicio');
 				$this->db->truncate('stock');
-		for ($i=0; $i < 50; $i++) { 
+		for ($i=0; $i < 20; $i++) { 
 			$object = array(
 				'Nombres' => $this->faker->firstName,
 				'Apellidos' =>  $this->faker->lastName,
@@ -92,7 +92,7 @@ class Seeder extends CI_Controller {
 				'Nombre' => $this->faker->city,
 				'Codigo_Barra' => $this->faker->creditCardNumber,
 				'Descripcion' =>  $this->faker->catchPhrase,
-				'Precio_Unitario' =>  $this->faker->numberBetween($min = 1000, $max = 20000),
+				'Precio_Unitario' =>  $this->faker->numberBetween($min = 1000, $max = 2000),
 				'Cantidad' =>  $categoria,
 				'Descuento' =>  $this->faker->ean8,
 				'Iva' =>  10,
@@ -116,8 +116,8 @@ class Seeder extends CI_Controller {
 			$Servicio_idServicio = $this->db->insert_id();
 			for ($i=0; $i < 10 ; $i++) { 
 				$detalle_servicio = array(
-				'Costo' =>  $this->faker->numberBetween($min = 1000, $max = 200000),
-				'Cantidad_detalle' =>  $this->faker->numberBetween($min = 10, $max = 15),
+				'Costo' =>  $this->faker->numberBetween($min = 1000, $max = 2000),
+				'Cantidad_detalle' =>  $this->faker->numberBetween($min = 10, $max = 100),
 				'Producto_Servicio_idProducto_Servicio' => $this->faker->numberBetween($min = 1, $max = 200),
 				'Servicio_idServicio' =>  $Servicio_idServicio,
 				);

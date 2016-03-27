@@ -85,7 +85,7 @@ class Pagos_model extends CI_Model {
      */
     public function busqueda_empleao($datos)
     {
-        $data = $this->db->query("select idEmpleado, Nombres from empleado where Nombres like '%$datos%' ");
+        $data = $this->db->query("select idEmpleado, Nombres,Sueldo from empleado where Nombres like '%$datos%' ");
         //formateo los datos en una matriz
         foreach ($data->result() as $row)
         {
@@ -93,7 +93,8 @@ class Pagos_model extends CI_Model {
             $arr['query'] = $datos;
             $arr['suggestions'][] = array(
                 'value' =>$row->Nombres,
-                'data' =>$row->idEmpleado
+                'data' =>$row->idEmpleado,
+                'Sueldo' =>$row->Sueldo
         );
         }
         //minimo php 5.2

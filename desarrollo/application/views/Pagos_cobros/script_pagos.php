@@ -1,5 +1,6 @@
   <script type="text/javascript">
-    var save_method; //for save method string
+  $('#form_pagos').validator();
+   var save_method; //for save method string
     var table_pagos;
     $(document).ready(function() {
       table_pagos = $('#table_pagos').DataTable({
@@ -23,25 +24,29 @@
 
     function add_pagos()
     {
-     $(".1,.2,.3,.4,.5,.6,.7,.8").html("").css({"display":"none"});
+      $("#form_pagos")[0].reset();
+      $( "#resetear1,#resetear2,#resetear3,#resetear4" ).removeClass("has-success");
+      $( "#re1,#re2,#re3,#re4" ).removeClass("glyphicon-ok");
+      $("#11,#2,#3,#4,#5,#6,#7,#8").html("").css({"display":"none"});
       $('[name="0"]').val('');
       $('[name="0"]').text('');
-     $(".btnSave").text('');
+      $(".btnSave").text('');
       $("#empleaddo,#pagos_aler").hide();
       $(".modal-body,.modal-header").show();
-       $('[name="0"]').append('');
+      $('[name="0"]').append('');
       $(".btnSave").text(' Pagar');
       save_method = 'add';
-      $('#form_pagos')[0].reset(); // reset form on modals
       $('#modal_form_pagos').modal('show'); // show bootstrap modal
       $('.modal-title').text('Agregar Pagos'); // Set Title to Bootstrap modal title
+      $("#11,#2,#3,#4,#5,#6,#7,#8").show();
+      
     }
 
     function edit_pagos(id)
     {
          $('#empleaddo').hide();
          $(".btnSave").text('');
-         $("[name='0'],.1,.2,.3,.4,.5,.6,.7,.8").html("").css({"display":"none"});
+         $("[name='0'],#11,#2,#3,#4,#5,#6,#7,#8").html("").css({"display":"none"});
          $("#pagos_aler").hide();
          $(".modal-body,.modal-header").show();
          $(".btnSave").text(' Actualizar');
@@ -104,6 +109,11 @@
     }
     $(function() {
     $('#form_pagos').submit(function(e) {
+
+      e.preventDefault();
+    })
+    });
+$('#form_pagos').validator().on('submit', function (e) {
       var url;
       if(save_method == 'add') 
       {
@@ -119,19 +129,27 @@
                       data: $(this).serialize(), // serilizo el formulario
                       success : function(data) {
                          var json = JSON.parse(data);// parseo la dada devuelta por json
-                          $(".1,.2,.3,.4,.5,.6,.7,.8").html("").css({"display":"none"});
+                          $("#11,#2,#3,#4,#5,#6,#7,#8").html("").css({"display":"none"});
                           if (json.res == "error") {
                             if (json.Tipos_Pagos) {
-                               $(".1").append(json.Tipos_Pagos).css({"display":"block"}); // mostrar validation de iten usuario
+                               $( "#resetear1" ).addClass("has-error has-danger");
+                               $( "#re1" ).addClass("glyphicon-remove");
+                               $("#11").append(json.Tipos_Pagos).css({"display":"block"}); // mostrar validation de iten usuario
                             }
-                            if (json.Nombres) {
-                               $(".2").append(json.Nombres).css({"display":"block"}); // mostrar validation de iten usuario
+                            if (json.idEmpleado) {
+                              $( "#resetear2" ).addClass("has-error has-danger");
+                              $( "#re2" ).addClass("glyphicon-remove");
+                               $("#2").append(json.idEmpleado).css({"display":"block"}); // mostrar validation de iten usuario
                             }
                             if (json.Descripcion) {
-                               $(".3").append(json.Descripcion).css({"display":"block"}); // mostrar validation de iten usuario
+                              $( "#resetear3" ).addClass("has-error has-danger");
+                              $( "#re3" ).addClass("glyphicon-remove");
+                               $("#3").append(json.Descripcion).css({"display":"block"}); // mostrar validation de iten usuario
                             }
                             if (json.Monto) {
-                               $(".4").append(json.Monto).css({"display":"block"}); // mostrar validation de iten usuario
+                              $( "#resetear4" ).addClass("has-error has-danger");
+                              $( "#re4" ).addClass("glyphicon-remove");
+                               $("#4").append(json.Monto).css({"display":"block"}); // mostrar validation de iten usuario
                             }
                           }else{ 
                                         $(".modal-body,.modal-header").hide();
@@ -147,6 +165,12 @@
                                             },2000);
                                         // $('#modal_form').modal('hide');
                                         reload_table();
+                                        $("#form_pagos")[0].reset();
+                                        $( "#resetear1,#resetear2,#resetear3,#resetear4" ).removeClass("has-success");
+                                        $( "#re1,#re2,#re3,#re4" ).removeClass("glyphicon-ok");
+
+
+
                            }
                      },
                       // código a ejecutar si la petición falla;
@@ -155,10 +179,17 @@
                           console.log('error(jqXHR, textStatus, errorThrown)');
                       },
                   });
-      e.preventDefault();
-    })
-    });
+e.preventDefault();
+})
+$(function() {
+      $("input").on('keyup', function(){
+        $("#11,#2,#3,#4,#5,#6,#7,#8").html("").css({"display":"none"});
+      })
+     $("select[name=Tipos_Pagos]").change(function(){
+         $("#11,#2,#3,#4,#5,#6,#7,#8").html("").css({"display":"none"});
+      });
 
+});
 
     function delete_pagos(id)
      {
@@ -200,14 +231,16 @@
     // Tipos de pagos
     $(function() {
              $('#empleaddo').hide();
+              $("#ver").val('');
             $("#Tipos_Pagos").change(function(){
               var id      = $( "select[name=Tipos_Pagos]").val();
               if (id == 1) {
                  $('#empleaddo').show();
-                  $(".Empl").attr("required", true);
+                  $("#ver").val('0');
 
               }else{
                  $('#empleaddo').hide();
+                  $("#ver").val('');
               }
             });
     });
@@ -216,9 +249,9 @@
   $('#Empl').autocomplete({
     serviceUrl: "<?php echo site_url('index.php/Pagos/busqueda_empleao'); ?>/",
 
-    onSelect: function (suggestions) {
-      document.form_pagos.idEmpleado.value = suggestions.data;
-
+        onSelect: function (suggestions) {
+      $('[name ="idEmpleado"]').val(suggestions.data);
+      $('[name ="Monto"]').val(suggestions.Sueldo);
       }
   });
 });

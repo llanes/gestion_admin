@@ -30,11 +30,6 @@
                                             'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
                                          ),
                                     array(
-                                            'field' => 'Apellidos',
-                                            'label' => 'Apellidos',
-                                            'rules' => 'trim|min_length[2]|max_length[50]|strip_tags'
-                                         ),
-                                    array(
                                             'field' => 'Direccion',
                                             'label' => 'Direccion',
                                             'rules' => 'trim|required|min_length[2]|max_length[50]|strip_tags'
@@ -82,11 +77,7 @@
                                             'label' => 'Nombre',
                                             'rules' => 'trim|required|min_length[2]|max_length[30]|strip_tags'
                                          ),
-                                    array(
-                                            'field' => 'Apellidos',
-                                            'label' => 'Apellidos',
-                                            'rules' => 'trim|min_length[2]|max_length[50]|strip_tags'
-                                         ),
+
                                     array(
                                             'field' => 'Direccion',
                                             'label' => 'Direccion',
@@ -414,7 +405,7 @@
                                     array(
                                             'field' => 'Cantidad',
                                             'label' => 'cantidad',
-                                            'rules' => 'trim|required|min_length[1]|max_length[5]|strip_tags'
+                                            'rules' => 'trim|required|numeric|min_length[1]|max_length[5]|strip_tags'
                                          ),
 
                      ),
@@ -424,11 +415,6 @@
                                             'field' => 'idCliente',
                                             'label' => 'Cliente',
                                             'rules' => 'trim|required|numeric|min_length[1]|max_length[11]|strip_tags'
-                                         ),
-                                    array(
-                                            'field' => 'ci_ruc',
-                                            'label' => 'Ci R.U.C',
-                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'Fecha_Pre_Arqui',
@@ -453,12 +439,12 @@
                                     array(
                                             'field' => 'Descripcion',
                                             'label' => 'Descripcion',
-                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                            'rules' => 'trim|required|alpha|min_length[1]|max_length[45]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'Monto',
                                             'label' => 'Monto',
-                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                            'rules' => 'trim|numeric|required|min_length[1]|max_length[11]|strip_tags'
                                          ),
                                         array(
                                             'field' => 'Tipos_Pagos',
@@ -471,13 +457,13 @@
 
                                     array(
                                             'field' => 'idEmpleado',
-                                            'label' => 'Cliente',
-                                            'rules' => 'trim|required|numeric|min_length[1]|max_length[11]|strip_tags'
+                                            'label' => 'Empleado',
+                                            'rules' => 'trim|required|min_length[1]|max_length[11]|strip_tags'
                                          ),
                                     array(
                                             'field' => 'Monto',
                                             'label' => 'Monto',
-                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                            'rules' => 'trim|required|numeric|min_length[1]|max_length[11]|strip_tags'
                                          ),
                                         array(
                                             'field' => 'Tipos_Pagos',
@@ -487,7 +473,7 @@
                                     array(
                                             'field' => 'Descripcion',
                                             'label' => 'Descripcion',
-                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                            'rules' => 'trim|required|min_length[5]|max_length[50]|strip_tags'
                                          ),
                      ),
             ////////////////////////////////////////////////////////////////////////////
@@ -495,7 +481,7 @@
                                     array(
                                             'field' => 'Descripcion',
                                             'label' => 'Descripcion',
-                                            'rules' => 'trim|required|min_length[1]|max_length[50]|strip_tags'
+                                            'rules' => 'trim|required|min_length[5]|max_length[50]|strip_tags'
                                          ),
             ),
 

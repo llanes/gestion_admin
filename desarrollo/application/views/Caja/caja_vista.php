@@ -44,7 +44,7 @@
                              <div class="col-xs-3">
                                 <td>
                                     <h5>
-                                        <input required type="number" name="" id="input" class="form-control input-lg" value="{monto_inicio}" placeholder="Introducir" pattern="[0-9]{0,11}" min="0" maxlength="11"  title="insertar" >
+                                        <input required type="text" name="" id="input" class="form-control input-lg" value="{monto_inicio}" placeholder="Introducir" pattern="[0-9]{0,11}" min="0" maxlength="11"  title="insertar" >
                                     </h5>
                                 </td>
                              </div>
@@ -52,11 +52,25 @@
                         </tbody>
                     </table>
                     </div>
-                        <div class="col-md-12 col-md-offset-1">
+                    <div class="col-md-12 col-md-offset-0" >
+                        <div class="" style="height: 417px;  overflow : auto;  ">
                             <h4>
-                                <p class="text-info text-center" id="info">Informacion de efectivo de Apertura de caja.</p>
+                                <p class="text-info text-center" id="info">Listado registro de caja.</p>
                             </h4>
+                                    <table id="registro_caja_ajax" class="table table-striped" >
+
+                                      <thead>
+                                        <tr class="success">
+                                           <th class ="text-danger" style="text-align:center;">Apertura</th>
+                                           <th class ="text-danger" style="text-align:center;">Cierre</th>
+                                             <th class ="text-danger" style="text-align:center;">Monto final</th>
+                                                   <th class ="text-danger" style="width:70px; text-align:center">Usuario</th>
+                                            <th  class ="text-danger"style="width:30px; text-align:center"> Acciones</th>
+                                         </tr>
+                                      </thead>
+                                    </table>
                         </div>
+                    </div>
                 </div>
                 <!-- ////////////////////////////////// -->
                <div class="col-md-4 col-md-offset-0" >

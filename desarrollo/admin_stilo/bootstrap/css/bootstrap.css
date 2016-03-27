@@ -188,7 +188,7 @@ td,
 th {
   padding: 0;
 }
-/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css modal */
 @media print {
   *,
   *:before,
@@ -5787,11 +5787,11 @@ button.close {
 .modal-header {
   min-height: 16.42857143px;
   padding: 15px;
-  border-bottom: 2px solid #DD4B39;
-  background-color: #00A65A;
+  border-bottom: 1px solid #DD4B39;
+  background-color: #3C8D9D;
 }
 .modal-header .close {
-  margin-top: -2px;
+  margin-top: -1px;
 }
 .modal-title {
   margin: 0;
@@ -5836,11 +5836,11 @@ button.close {
     width: 300px;
   }
 }
-@media (min-width: 992px) {
   .modal-lg {
-    width: 1000px;
+    width: 1200px;
+     margin: 10px auto;
   }
-}
+
 .tooltip {
   position: absolute;
   z-index: 1070;

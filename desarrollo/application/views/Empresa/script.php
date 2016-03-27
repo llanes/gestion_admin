@@ -55,7 +55,7 @@
             $('[name="Nombre"]').val(data.Nombre);
             $('[name="Descripcion"]').val(data.Descripcion);
             $('[name="Direccion"]').val(data.Direccion);
-             $('[name="R_U_C"]').val(data.R_U_C);
+             $('[name="R_U_C"]').val(data.R_U_D);
             $('[name="Telefono"]').val(data.Telefono);
             $('[name="Email"]').val(data.Email);
             $('[name="Timbrado"]').val(data.Timbrado);

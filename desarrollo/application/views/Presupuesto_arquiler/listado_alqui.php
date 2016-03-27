@@ -1,11 +1,16 @@
+    <div class="modal fade bs-example-modal-lg" id="snnippp">
+          <div style="text-align: center">
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+             <h1 class="text-danger">Procesando....</h1>
+            <p class="text-danger"><i class="fa fa-spinner fa-spin fa-5x"></i></p>
+          </div>
+    </div>
 
 							<section class="content">
 
 										<table id="listado_alq_ajax" class="table table-striped table-advance table-hover" >
 						<style type="text/css" media="screen">
-                         .row{
-                            display: block;
-                          }
+
                           </style>
 											<thead>
 												<tr>
@@ -18,19 +23,6 @@
 													<th  class ="text-danger"style="width:100px; text-align:center"> Acciones</th>
 												</tr>
 											</thead>
- <tbody>
-                                       <tr id="transparente" class="active">    
-                                            <td>
-                                            </td>
-                                            <td>
-                                            </td>
-                                            <td>
-                                            </td>
-                                            <td>
-                                                Prueva
-                                            </td>
-                                        </tr>
-                                      </tbody>
 										</table>
 
 							</section><!-- /.content <-->	</-->
@@ -46,13 +38,13 @@
 					<thead>
 						<tr style="background-color:#DFF0D8">
 							<td  style="text-align:left ">
-								<div id="1"></div>
+								<div id="1111"></div>
 							</td>
 							<td  style="text-align:left ">
-								<div id="2"></div>
+								<div id="22222"></div>
 							</td>
 							<td  style="text-align:left  ">
-								<div id="3"></div>
+								<div id="333333"></div>
 							</td>
 						</tr>
 						<tr style="background-color:#DFF0D8">
@@ -112,12 +104,13 @@ function reload_table()
  function details_al(idArquiler)
  {
 		$("#des,#Inp,#Precio,#Sub").html("").css({"display":"none"});
-		$("#1,#2,#3,#4,#5,#6,#Total").html("").css({"display":"none"})
+		$("#1111,#22222,#333333,#4,#5,#6,#Total").html("").css({"display":"none"})
 		$.ajax({
 			type: "POST",
 			url : "<?php echo site_url('index.php/Presupuesto_arquiler/ajax_edit/'); ?>/"+idArquiler,
 			data: $("#form").serialize(),
-			success: function(data) {
+			})
+			.done(function(data) {
 						var result = JSON.parse(data);
 						$.each(result, function(i, val){
 						var Subtotal = val.Cantidad*val.Precio;
@@ -125,9 +118,9 @@ function reload_table()
 							$('#details_al').modal('show'); // show bootstrap modal when complete loaded
 							$(".modal-body,.modal-header").show();
 							$("#Total").append('<strong class="text-danger"> Monto Total &nbsp;₲. </strong> &nbsp;&nbsp;'+ val.Monto_Alquiler_Presupuesto + '&nbsp;&nbsp;').css({"display":"block"});
-							$("#1").append('<strong class="text-danger">Cliente :</strong> &nbsp;&nbsp;'+ val.Nombres + '&nbsp;&nbsp;'+ val.Apellidos + '').css({"display":"block"});
-							$("#2").append('<strong class="text-danger">Direccion :</strong> &nbsp;&nbsp;'+ val.Direccion + '&nbsp;&nbsp;').css({"display":"block"});
-							$("#3").append('<strong class="text-danger">Telefono :</strong> &nbsp;&nbsp;'+ val.Telefono + '&nbsp;&nbsp;').css({"display":"block"});
+							$("#1111").append('<strong class="text-danger">Cliente :</strong> &nbsp;&nbsp;'+ val.Nombres + '&nbsp;&nbsp;'+ val.Apellidos + '').css({"display":"block"});
+							$("#22222").append('<strong class="text-danger">Direccion :</strong> &nbsp;&nbsp;'+ val.Direccion + '&nbsp;&nbsp;').css({"display":"block"});
+							$("#333333").append('<strong class="text-danger">Telefono :</strong> &nbsp;&nbsp;'+ val.Telefono + '&nbsp;&nbsp;').css({"display":"block"});
 							if (val.Contado_Credito == 1) {
 								$("#6").append('&nbsp;<strong class="text-danger">Pago&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong>&nbsp;&nbsp;Contado ').css({"display":"block"});
 							}
@@ -135,9 +128,8 @@ function reload_table()
 								$("#6").append('&nbsp;<strong class="text-danger">Pago&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong>&nbsp;&nbsp;Cuotas ').css({"display":"block"});
 							}
 					});
-					}
-			});
-	}
+			})
+ }
 
 		function delete_presupuesto(id)
 		{

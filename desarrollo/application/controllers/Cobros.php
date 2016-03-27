@@ -24,7 +24,7 @@ class Cobros extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Cobros',//mi titulo 
 					'titulo2'=> 'Administrar Cobros',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Cobros',//mi tit-ulo 
 			);
 			$this->parser->parse('Pagos_cobros/cobros_vista.php',$data, FALSE);	
@@ -151,7 +151,7 @@ class Cobros extends CI_Controller {
 		if ($this->input->is_ajax_request()) {
 				$hora = date("H:i:s");
 				$fecha = date("Y-m-d");
-				$this->form_validation->set_error_delimiters('*','');
+				$this->form_validation->set_error_delimiters('<ul class="list-unstyled"><li>','</li></ul>');
 				if ($this->form_validation->run('cobrar_credito') == FALSE)
 				{
 					$data         = array(

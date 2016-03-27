@@ -19,7 +19,7 @@ class Stock extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Stock',//mi titulo 
 					'titulo2'=> 'Administrar Stock',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Stock',//mi titulo 
 					'titulo5'=> 'Stock',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),

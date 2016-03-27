@@ -93,7 +93,7 @@ $autoload['helper'] = array('url','form','date');
 |
 |	$autoload['config'] = array('config1', 'config2');
 |
-| NOTE: This item is intended for use ONLY if you have created custom
+|  This item is intended for use ONLY if you have created custom
 | config files.  Otherwise, leave it blank.
 |
 */
@@ -107,7 +107,7 @@ $autoload['config'] = array();
 |
 |	$autoload['language'] = array('lang1', 'lang2');
 |
-| NOTE: Do not include the "_lang" part of your file.  For example
+|  Do not include the "_lang" part of your file.  For example
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */

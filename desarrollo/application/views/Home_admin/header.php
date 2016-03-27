@@ -1,9 +1,9 @@
     <!--header start-->
       <header class="main-header">
         <!-- Logo -->
-        <a href="<?php echo base_url('index.php/Home_admin') ?>" class="logo">
+        <a href="<?php echo base_url('index.php/Gestion') ?>" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>A</b>LT</span>
+          <span class="logo-mini"><b>G.</b>E.</span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>Gestion</b> Eventos </span>
         </a>
@@ -11,13 +11,13 @@
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="">Barra </span>
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                 <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
                   <img src="<?= base_url();?>admin_stilo/dist/img/avatar.png" class="user-image" alt="User Image"/>
                   <span class="hidden-xs"><?php echo $this->session->userdata('Usuario')?></span>
                 </a>
@@ -36,7 +36,7 @@
                       <a href="#" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?= site_url('index.php/Login/logout')?>" class="btn btn-default btn-flat">Cerrar Seccion</a>
+                      <a href="<?= site_url('index.php/login')?>" class="btn btn-default btn-flat">Cerrar Seccion</a>
                     </div>
                   </li>
                 </ul>

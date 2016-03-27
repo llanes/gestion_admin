@@ -21,13 +21,13 @@
                 <small class="label pull-right bg-red"></small>
               </a>
             </li>
-             <li class="treeview" id="sub">
-               <a href="#" data-toggle="tab" >
+             <li class="" id="verificar_caja">
+               <a href="#" >
                  <i class="fa fa-credit-card"></i>
                 <span>Pagos   Cobros</span>
                 <span class="fa fa-angle-left pull-right"></span>
               </a>
-              <ul class="treeview-menu acor_pa" >
+              <ul class="treeview-menu acor_pa" id="">
                  <li id="Pagos" class="" data-tabs="tabs">
                     <a href="#" data-toggle="tab" >
                     <i class="fa fa-circle-o"></i> Pagos</a>

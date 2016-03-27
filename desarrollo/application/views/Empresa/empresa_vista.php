@@ -4,7 +4,7 @@
           <h1>
             {titulo1}
             <small>{titulo2}</small>     
-            <button class="btn btn-sm btn-success" onclick="add_cliente()"><i class="glyphicon glyphicon-plus"></i> Cliente</button>
+            <!-- <button class="btn btn-sm btn-success" onclick="add_cliente()"><i class="glyphicon glyphicon-plus"></i> Cliente</button> -->
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> {titulo3}</a></li>
@@ -141,7 +141,7 @@
                         <td>
                          <span class ="MP text-danger"></span>
                         <div class="form-group has-feedback" id="PF">
-                            <button type="button" id="mapa" class="btn btn-success btn-sm">Mostrar</button>
+                            <!-- <button type="button" id="mapa" class="btn btn-success btn-sm">Mostrar</button> -->
                           <span class=""></span>
                         </div>
                         </td>

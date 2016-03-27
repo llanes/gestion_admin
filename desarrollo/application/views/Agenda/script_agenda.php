@@ -24,9 +24,9 @@
       // y dia actual
       day: yyyy+"-"+mm+"-"+dd,
       // Hora de inicio
-      time_start: '6:00',
+      time_start: '5:00',
       // y Hora final de cada dia
-      time_end: '23:00',
+      time_end: '24:00',
        // intervalo de tiempo entre las hora, en este caso son 30 minutos
       time_split: '30',
       // Definimos un ancho del 100% a nuestro calendario

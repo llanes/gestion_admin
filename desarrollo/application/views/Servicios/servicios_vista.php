@@ -38,7 +38,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h3 class="modal-title_servicios">Formulario Servicios</h3>
+          <h4 class="modal-title_servicios">Formulario Servicios</h4>
         </div>
        <div class="alert alert-info" id="servicios_aler" >
         <strong class="title" ></strong>
@@ -53,38 +53,32 @@
 
                                    <tbody>
                                       <tr id="transparente">
-                                      <TD style="width: 50px;">
+                                         <td  >
                                        <label for="" class="control-label text-danger">Nombre</label>
-                                      </TD>
-                                      <td style="width: 210px;">
+                                           </td>
+                                        <td colspan="">
+
                                       <span class ="N text-danger"></span>
                                      <input   required type='text' name='servicio' id='servicio' class="form-control " value="<?php echo set_value('servicio') ?>" placeholder="Nombre" title="Nombre servicio"/>
                                       </td>
-                                      <td style="width: 50px;">
-                                       <label for="" class="control-label text-danger">Descripcion</label>
-                                      </td>
-                                      <td style="width: 210px;" colspan="2">
-                                      <span class ="D text-danger"></span>
-                                      <textarea name='Descripcion' id='Descripcion' class="form-control " rows="1" placeholder="" title="Descripcion "></textarea>
-                                      </td>
-                                    </tr>
+                                           </tr>
                                          <tr id="transparente">
-                                         <td style="width: 50px;">
+                                         <td >
                                              <label for="" class="control-label text-danger">Articulos</label>
                                          </td>
                                             <td colspan="" >
-                                                <input  type='text' id='autocomplete s' name="nombre_articulo" class="autocomplete form-control  articulo_servicio" value="" placeholder="Nombre del Producto "  title="Buscar"/>
+                                                <input  type='text' id='autocomplete s' name="nombre_articulo" class="autocomplete form-control input-sm articulo_servicio" value="" placeholder="Nombre del Producto "  title="Buscar"/>
                                                 <input  id="id_articulo" name="id_articulo" class="form-control" placeholder="" value="" type="hidden"  />
                                                 <input  id="precio_articulo" name="precio_articulo" class="form-control" placeholder="" value="" type="hidden"  />
                                             </td>
-                                        <td style="width: 50px;">
+                                        <td >
                                              <label for="" class="control-label text-danger">Cantidad</label>
                                          </td>
-                                            <td style="width: 70px;" >
-                                                <input  type='number' id='cantidad' name="cantidad" class="form-control " value="" title="catidad"/>
+                                               <td style="width: 90px; text-align:right">
+                                                <input  type='number' id='cantidad' name="cantidad" class="form-control input-sm" value="" title="catidad"/>
                                             </td>
 
-                                            <td style="width: 100px;">
+                                            <td >
                                                   <button type="button" id="botonenviar"  class="btn btn-info">
                                                                 <i class="fa fa-cart-plus"></i> Agregar
                                                   </button>

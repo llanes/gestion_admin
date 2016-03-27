@@ -7,9 +7,7 @@ class Presupuesto_arquiler extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model("Presupuesto_arquiler_model");
-		if($this->session->userdata('Permiso_idPermiso')!='1') { // si la seccion no existe me quedo en el homo
-			redirect('index.php/Home','refresh');
-		}
+
 	}
 
 	public function index()
@@ -20,7 +18,7 @@ class Presupuesto_arquiler extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Productos Arquiler',//mi titulo 
 					'titulo2'=> 'Administrar Productos Arquiler',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Productos Arquiler',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
 					'formula' => $this->db->get('empresa')->result_array(),
@@ -34,7 +32,7 @@ class Presupuesto_arquiler extends CI_Controller {
 	}
 	public function loader()
 	{
-	$this->load->view('Presupuesto_arquiler/cart_get.php');	// carga todos las url de estilo i js home	
+		$this->load->view('Presupuesto_arquiler/cart_get.php');	// carga todos las url de estilo i js home	
 	}
 	/**
 	* [agregar_carrito description]
@@ -53,15 +51,8 @@ class Presupuesto_arquiler extends CI_Controller {
 					echo json_encode($data);
 				}else{
 					$cantidad = $this->security->xss_clean( $this->input->post('Cantidad'));
-					$Cantidad_stock = $this->input->post('stock');
-					if ($cantidad >= $Cantidad_stock) {
-						$data = array(
-							'cantidad'     => $cantidad,
-							'Cantidad_stock'     => $Cantidad_stock,
-							'res'		=> 'crrito');
-						echo json_encode($data);
-					}else {
-						$idProducto_Servicio = $this->security->xss_clean( $this->input->post('idProducto_Servicio'));
+
+						$idStock = $this->security->xss_clean( $this->input->post('idProducto_Servicio'));
 						$checkbox            = $this->security->xss_clean( $this->input->post('checkbox'));
 						$Precio_Unitario     = $this->security->xss_clean( $this->input->post('Precio_Unitario'));
 						$precio              =  $Precio_Unitario - $checkbox;
@@ -70,8 +61,8 @@ class Presupuesto_arquiler extends CI_Controller {
 									$opciones = $this->input->post('opciones');
 								}
 						$data = array(
-							'id'      => $idProducto_Servicio,
-							'qty'     => $cantidad,
+							'id'      => $this->security->xss_clean( $this->input->post('idProducto_Servicio')),
+							'qty'     => $this->security->xss_clean( $this->input->post('Cantidad')),
 							'price'   => $precio,
 							'name'    => $this->security->xss_clean( $this->input->post('Nombre')),
 							'options' => $opciones 
@@ -80,7 +71,6 @@ class Presupuesto_arquiler extends CI_Controller {
 						$this->cart->insert($data);
 						// $this->Presupuesto_arquiler_model->actualizar_stock($idProducto_Servicio,$cantidad);
 						echo json_encode($data);
-					}
 
 				}
         }else{
@@ -117,7 +107,9 @@ class Presupuesto_arquiler extends CI_Controller {
 	public function add_presupuesto($id)
 	{
 		if ($this->input->is_ajax_request()) {
-			$aleatorio = $this->ultimo_cabecera();
+			$Latitud = $this->security->xss_clean( $this->input->post('Latitud'));
+			$Longitud = $this->security->xss_clean( $this->input->post('Longitud'));
+			$aleatorio = $this->cantida_factura();
 			$this->form_validation->set_error_delimiters('*','');
 			if ($this->form_validation->run('add_presupuesto') == FALSE) {
 					$data = array(
@@ -128,6 +120,23 @@ class Presupuesto_arquiler extends CI_Controller {
 						'Nombres_servicios' => form_error('Nombres_servicios'),
 						'res'               => 'error');
 			} else {
+					if ($Latitud == '-27.22121' &&  $Longitud == '-55.80523'  ) {
+						$Geo_posicion = '';
+					} else {
+								if ($Latitud == '' &&  $Longitud == ''  ) {
+									$Geo_posicion = '';
+								} else {
+									$geodata = array('Latitud' => $Latitud , 'Longitud' => $Longitud  );
+									$this->Presupuesto_arquiler_model->add_Geo_posicion($where='',$geodata);
+									$Geo_posicion = $this->Geo_posicion();
+					}
+
+					}
+
+
+
+
+
 				if ($id == 2) {
 					$data = array(
 						'fecha_expedicion'           => $this->security->xss_clean( $this->input->post('fecha_expedicion')),
@@ -135,14 +144,17 @@ class Presupuesto_arquiler extends CI_Controller {
 						'Monto_Alquiler_Presupuesto' => str_replace($this->config->item('caracteres'),"",$this->cart->total()),
 						'Arquiler_Presupuesto'       => 2,
 						'Contado_Credito'            => 0,
-						'Num_arquiler'               => $aleatorio + 1,
+						'Num_arquiler'               => 0,
 						'Fecha_Devolucion'           => $this->security->xss_clean( $this->input->post('Fecha_Devolucion')),
 						'Monto_total_iva'            => $this->security->xss_clean( $this->input->post('lesiva')),
 						'Nombre_servicio'            => $this->security->xss_clean( $this->input->post('Nombres_servicios')),
+						'Direccion_evento'            => $this->security->xss_clean( $this->input->post('Direccion_evento')),
 						'Usuario_idUsuario'          => $this->session->userdata('idUsuario'),
 						'Cliente_idCliente'          => $this->security->xss_clean( $this->input->post('idCliente')),
 						'Entrega'                    => '',
 						'Devolucion'                 => '',
+						'Caja_idCaja'                 => '',
+						'Geo_posicion_idGeo_posicion' => $Geo_posicion,
 
 						);
 					$this->Presupuesto_arquiler_model->add_presupuesto($data);
@@ -165,73 +177,146 @@ class Presupuesto_arquiler extends CI_Controller {
 					$this->cart->destroy();
 					echo json_encode($data);
 				} else {
+					$controlbutton = $this->security->xss_clean( $this->input->post('controlbutton'));
+					$this->load->model("Caja_model");
+					$Caja_idCaja  = $this->Caja_model->ultimoCaja();
 					$Contado_Credito = $this->input->post('credi_cont');
-					if ($Contado_Credito == 2) {
-						$Arquiler_Presupuesto = 0;
+					$Arquiler_Presupuesto =	1;
+					// ''''''''''''''''''''''''''''''''
+					$Pre  = $this->security->xss_clean( $this->input->post('Fecha_Pre_Arqui'));
+					$Devo = $this->security->xss_clean( $this->input->post('Fecha_Devolucion'));
+					$time = date_create($Pre);
+					$time1 = date_create($Devo);
+					$Pre_Arqui_date = date_format($time, "d-m-Y");
+					$Devolucio_date = date_format($time1, "d-m-Y");
+					$Pre_Arqui_hr   = date_format($time, "H:i:s");
+					$Devolucio_hr   = date_format($time1, "H:i:s");
+					$Devolucio = date('H:i:s', strtotime($Pre_Arqui_hr) + 18000); // sumar 5 horas
+					if ($Pre_Arqui_date === $Devolucio_date && $Devolucio > $Devolucio_hr) {
+						$Fecha_Devolucion = $Pre_Arqui_date.' '.$Devolucio ;
 					} else {
-						$Arquiler_Presupuesto =	1;
+						$Fecha_Devolucion = $this->security->xss_clean( $this->input->post('Fecha_Devolucion'));
 					}
+
 					$data = array(
 						'fecha_expedicion'           => $this->security->xss_clean( $this->input->post('fecha_expedicion')),
-						'Fecha_Pre_Arqui'            => $this->security->xss_clean( $this->input->post('Fecha_Pre_Arqui')),
+						'Fecha_Pre_Arqui'            => $Pre,
 						'Monto_Alquiler_Presupuesto' => str_replace($this->config->item('caracteres'),"",$this->cart->total()),
 						'Arquiler_Presupuesto'       => $Arquiler_Presupuesto,
 						'Contado_Credito'            => $Contado_Credito,
 						'Num_arquiler'               => $aleatorio + 1,
-						'Fecha_Devolucion'           => $this->security->xss_clean( $this->input->post('Fecha_Devolucion')),
+						'Fecha_Devolucion'           => $Fecha_Devolucion,
 						'Monto_total_iva'            => $this->security->xss_clean( $this->input->post('lesiva')),
 						'Nombre_servicio'            => $this->security->xss_clean( $this->input->post('Nombres_servicios')),
+						'Direccion_evento'            => $this->security->xss_clean( $this->input->post('Direccion_evento')),
 						'Usuario_idUsuario'          => $this->session->userdata('idUsuario'),
 						'Cliente_idCliente'          => $this->security->xss_clean( $this->input->post('idCliente')),
 						'Entrega'                    => '',
 						'Devolucion'                 => '',
+						'Caja_idCaja'                => $Caja_idCaja,
+						'Geo_posicion_idGeo_posicion' => $Geo_posicion,
 						);
-						$this->Presupuesto_arquiler_model->add_presupuesto($data);
-						$id = $this->Presupuesto_arquiler_model->serie();
-						$serie = $id + 1;
-						$this->Presupuesto_arquiler_model->add_serie($serie);
-						$i = 1;
-						foreach ($this->cart->contents() as $items) {
-									foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
-										$iva =	$option_value;
-									}
-							$_data = array(
-								'Cantidad'                              => $items['qty'],
-								'Descripcion'                           => '',
-								'Precio'                                => str_replace($this->config->item('caracteres'),"",$items['price']),
-								'Iva'                                   => $iva,
-								'Presupuesto_Arquiler_idArquiler'       => $this->ultimo_cabecera(),
-								'Producto_Servicio_idProducto_Servicio' => $items['id'],
-							);
-							$this->Presupuesto_arquiler_model->add_presupuesto_detalle($_data);
-						$i++;
-						}
-						if ($Contado_Credito == 2) {
-							$cantidad_cuota = $this->input->post('cuota');
-							$cantidad = $this->input->post('cuota');
-							$importe = $this->cart->total() / $cantidad_cuota;
-							for ($j = 1; $j <= $cantidad; $j++) {
-									$Fecha_Ven = date('Y-m-d',strtotime("+$j month")) ; // suma 1 mes
-									$_data                     = array(
-									'Num_Recibo'                      => $aleatorio + $j,
-									'Importe'                         => str_replace($this->config->item('caracteres'),"",$importe),
-									'Fecha_Ven'                       => $Fecha_Ven,
-									'Fecha_Pago'                      => '',
-									'Estado_Pago'                     => '2',
-									'Num_cuota'                       => $j,
-									'Presupuesto_Arquiler_idArquiler' => $this->ultimo_cabecera(),
-									'Cliente_idCliente'               => $this->security->xss_clean( $this->input->post('idCliente')),
-									);
-							$this->Presupuesto_arquiler_model->add_credito($_data);
-							}
-						}
-					$this->cart->destroy();
-					echo json_encode($data);
+								if ($controlbutton == 0) {
+												$this->Presupuesto_arquiler_model->add_presupuesto($data);
+												$id = $this->Presupuesto_arquiler_model->serie();
+												$serie = $id + 1;
+												$this->Presupuesto_arquiler_model->add_serie($serie);
+												$i = 1;
+												foreach ($this->cart->contents() as $items) {
+															foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
+																$iva =	$option_value;
+															}
+													$_data = array(
+														'Cantidad'                              => $items['qty'],
+														'Descripcion'                           => '',
+														'Precio'                                => str_replace($this->config->item('caracteres'),"",$items['price']),
+														'Iva'                                   => $iva,
+														'Presupuesto_Arquiler_idArquiler'       => $this->ultimo_cabecera(),
+														'Producto_Servicio_idProducto_Servicio' => $items['id'],
+													);
+													$this->Presupuesto_arquiler_model->add_presupuesto_detalle($_data);
+												$i++;
+												}
+												if ($Contado_Credito == 2) {
+													$cantidad_cuota = $this->input->post('cuota');
+													$cantidad = $this->input->post('cuota');
+													$importe = $this->cart->total() / $cantidad_cuota;
+													for ($j = 1; $j <= $cantidad; $j++) {
+															$Fecha_Ven = date('d-m-Y',strtotime("+$j month")) ; // suma 1 mes
+															$_data                     = array(
+															'Num_Recibo'                      => $aleatorio + $j,
+															'Importe'                         => str_replace($this->config->item('caracteres'),"",$importe),
+															'Fecha_Ven'                       => $Fecha_Ven,
+															'Fecha_Pago'                      => '',
+															'Estado_Pago'                     => '2',
+															'Num_cuota'                       => $j,
+															'Presupuesto_Arquiler_idArquiler' => $this->ultimo_cabecera(),
+															'Cliente_idCliente'               => $this->security->xss_clean( $this->input->post('idCliente')),
+															);
+													$this->Presupuesto_arquiler_model->add_credito($_data);
+													}
+												}
+											$this->cart->destroy();
+											echo json_encode($data);
+								} else {
+									$this->Presupuesto_arquiler_model->set_presupuesto($data,$controlbutton );
+												$id = $this->Presupuesto_arquiler_model->serie();
+												$serie = $id + 1;
+												$this->Presupuesto_arquiler_model->add_serie($serie);
+												$i = 1;
+												foreach ($this->cart->contents() as $items) {
+															foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
+																$iva =	$option_value;
+															}
+													$_data = array(
+														'Cantidad'                              => $items['qty'],
+														'Descripcion'                           => '',
+														'Precio'                                => str_replace($this->config->item('caracteres'),"",$items['price']),
+														'Iva'                                   => $iva,
+														'Presupuesto_Arquiler_idArquiler'       => $controlbutton,
+														'Producto_Servicio_idProducto_Servicio' => $items['id'],
+													);
+													$this->Presupuesto_arquiler_model->add_presupuesto_detalle($_data);
+												$i++;
+												}
+												if ($Contado_Credito == 2) {
+													$this->Presupuesto_arquiler_model->delete_credito($controlbutton);
+													$cantidad_cuota = $this->input->post('cuota');
+													$cantidad = $this->input->post('cuota');
+													$importe = $this->cart->total() / $cantidad_cuota;
+													for ($j = 1; $j <= $cantidad; $j++) {
+															$Fecha_Ven = date('d-m-Y',strtotime("+$j month")) ; // suma 1 mes
+															$_data                     = array(
+															'Num_Recibo'                      => $aleatorio + $j,
+															'Importe'                         => str_replace($this->config->item('caracteres'),"",$importe),
+															'Fecha_Ven'                       => $Fecha_Ven,
+															'Fecha_Pago'                      => '',
+															'Estado_Pago'                     => '2',
+															'Num_cuota'                       => $j,
+															'Presupuesto_Arquiler_idArquiler' => $controlbutton,
+															'Cliente_idCliente'               => $this->security->xss_clean( $this->input->post('idCliente')),
+															);
+													$this->Presupuesto_arquiler_model->add_credito($_data);
+													}
+												}
+											$this->cart->destroy();
+											echo json_encode($data);
+								}
+			
 				}
 			}
 
 		} else {
 			show_404();
+		}
+	}
+	public function Geo_posicion($value='')
+	{
+		$this->db->select_max('idGeo_posicion', 'idGeo_posicion');
+		$query = $this->db->get('geo_posicion');
+		foreach($query->result_array() as $d)
+		{
+			return( $d['idGeo_posicion']);
 		}
 	}
 	// Ultima cabecera
@@ -242,6 +327,12 @@ class Presupuesto_arquiler extends CI_Controller {
 			{
 				return( $d['idArquiler']);
 			}
+	}
+
+	public function cantida_factura()
+	{
+		$this->db->where('Arquiler_Presupuesto', 1 );
+		return $this->db->count_all_results('presupuesto_arquiler');
 	}
 	// ultimo servicio
 	public function ultimo_servicio_dos()
@@ -297,7 +388,7 @@ class Presupuesto_arquiler extends CI_Controller {
 			(
 					'titulo1'=> 'Listados Presupuesto',//mi titulo 
 					'titulo2'=> 'Presupuesto ',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Listados Presupuesto',//mi titulo 
 					'titulo5'=> 'Productos Arquiler',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
@@ -307,8 +398,9 @@ class Presupuesto_arquiler extends CI_Controller {
 			$this->parser->parse('Presupuesto_arquiler/listado_presupuesto.php',$data, FALSE);	// carga todos las url de estilo i js home	
 	}
 	public function ajax_list_presupuesto()
-	{
-		$list = $this->Presupuesto_arquiler_model->get_presupuesto();
+	{	
+		$list = $this->Presupuesto_arquiler_model->get_presupuesto($id = '');
+		 // $this->output->enable_profiler(TRUE);
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $lista) {
@@ -331,12 +423,11 @@ class Presupuesto_arquiler extends CI_Controller {
 		}
 		$output = array(
 						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->Presupuesto_arquiler_model->count_todas(),
-						"recordsFiltered" => $this->Presupuesto_arquiler_model->count_filtro(),
+						"recordsTotal" => $this->Presupuesto_arquiler_model->count_todas($id = ''),
+						"recordsFiltered" => $this->Presupuesto_arquiler_model->count_filtro($id = ''),
 						"data" => $data,
 				);
 		//output to json format
-		
 		echo json_encode($output);
 	}
 	public function ajax_edit($idArquiler)
@@ -347,16 +438,17 @@ class Presupuesto_arquiler extends CI_Controller {
 	}
 	public function edit_presupuesto($idArquiler)
 	{
+			$this->cart->destroy();
 			$data = array //arreglo para mandar datos a la vista
 			(
 					'titulo1'=> 'Mantenimiento | Productos Arquiler',//mi titulo 
 					'titulo2'=> 'Administrar Productos Arquiler',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Productos Arquiler',//mi titulo 
 					'formulario'=> $this->Presupuesto_arquiler_model->edit_presupuesto($idArquiler),//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
-					'formula' => $this->db->get('empresa')->result_array(),
 			);
+			 // $this->output->enable_profiler(true);
 			//redirecionamos a la vista o llamamos a la vista index
 			$this->parser->parse('Presupuesto_arquiler/presupuesto_arquiler_edit.php',$data, FALSE);	// carga todos las url de estilo i js home	
 			$this->load->view('Presupuesto_arquiler/cart_get.php',$data, FALSE);	// carga todos las url de estilo i js home	
@@ -376,7 +468,7 @@ class Presupuesto_arquiler extends CI_Controller {
 			(
 					'titulo1'=> 'Listados Alquiler',//mi titulo 
 					'titulo2'=> 'Presupuesto ',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Listados Alquiler',//mi titulo 
 					'titulo5'=> 'Productos Arquiler',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
@@ -386,7 +478,7 @@ class Presupuesto_arquiler extends CI_Controller {
 	}
 	public function ajax_list_alquiler()
 	{
-		$list = $this->Presupuesto_arquiler_model->get_alquiler();
+		$list = $this->Presupuesto_arquiler_model->get_alquiler($id = '');
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $alquiler) {
@@ -440,23 +532,16 @@ class Presupuesto_arquiler extends CI_Controller {
 			//add html for action
 			if ($alquiler->Devolucion == 1 || $alquiler->Entrega == 1) {
 				$row[]   = '<div class="pull-right hidden-phone">
-				<form class="form-horizontal" method="post" name="formulario" id="formulario" target="myIframe"  action='.'factura_pdf/'."".$alquiler->idArquiler."".' >
-				<input type="hidden" name="Monto" value='."'".$alquiler->Monto_Alquiler_Presupuesto."'".'>
 				<button type="submit" formtarget="_blank" id="target" class="btn btn-success btn-xs "><i class="fa fa-download"></i> PDF</button>
 				<a class="btn btn-danger btn-xs" href="javascript:void(0);" title="Hapus" onclick="delete_presupuesto('."'".$alquiler->idArquiler."'".')">
 				<i class="fa fa-trash-o "></i></a>
-				</FORM>
 				</div>';
 			} else {
 				$row[]   = '<div class="pull-right hidden-phone">
-				<form class="form-horizontal" method="post" name="formulario" id="formulario" target="myIframe"  action='.'factura_pdf/'."".$alquiler->idArquiler."".' >
-				<input type="hidden" name="Monto" value='."'".$alquiler->Monto_Alquiler_Presupuesto."'".'>
-				<button type="submit" formtarget="_blank" id="target" class="btn btn-success btn-xs "><i class="fa fa-download"></i> PDF</button>
 				<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_presupuesto('."'".$alquiler->idArquiler."'".')">
 				<i class="fa fa-pencil"></i></a>
 				<a class="btn btn-danger btn-xs" href="javascript:void(0);" title="Hapus" onclick="delete_presupuesto('."'".$alquiler->idArquiler."'".')">
 				<i class="fa fa-trash-o "></i></a>
-				</FORM>
 				</div>';
 			}
 			
@@ -465,8 +550,8 @@ class Presupuesto_arquiler extends CI_Controller {
 		}
 		$output = array(
 						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->Presupuesto_arquiler_model->count_alquiler(),
-						"recordsFiltered" => $this->Presupuesto_arquiler_model->count_filter(),
+						"recordsTotal" => $this->Presupuesto_arquiler_model->count_alquiler($id = ''),
+						"recordsFiltered" => $this->Presupuesto_arquiler_model->count_filter($id = ''),
 						"data" => $data,
 				);
 		//output to json format
@@ -492,6 +577,113 @@ class Presupuesto_arquiler extends CI_Controller {
 	public function load()
 	{
 	$this->load->view('Presupuesto_arquiler/load.php');	// carga todos las url de estilo i js home	
+	}
+	public function mapaload($idGeo_posicion)
+	{
+		if ($idGeo_posicion == '0') {
+			$this->load->view('Presupuesto_arquiler/mapa.php');	// carga todos las url de estilo i js home	
+		} else {
+			$this->db->select('*');
+			$this->db->where('idGeo_posicion', $idGeo_posicion);
+			$query = $this->db->get('geo_posicion');
+			$data = array('formulario1' => $query->result());
+			$this->parser->parse('Presupuesto_arquiler/mapa_edit.php',$data, FALSE);	// carga todos las url de estilo i js home	
+
+		}
+
+	
+	}
+	public function verificar_item($value='')
+	{
+		$Fecha_Pre_Arqui  = $this->security->xss_clean( $this->input->post('Fecha_Pre_Arqui'));
+		$Fecha_Devolucion = $this->security->xss_clean( $this->input->post('Fecha_Devolucion'));
+		$Devolucio_date = '31/03/2016';
+		$Pre_Arqui_hr   = '9:39';
+		$Devolucio_hr   = '9:39';
+		$datalista = array();
+		$i = 1;
+			foreach ($this->cart->contents() as $items) {
+			$data = '';
+			$Cantidad   = $items['qty'];
+			$idProducto = $items['id'];
+			$name =  $items['name'];
+
+
+			
+				$query = $this->db->select('
+						ps.Nombre,da.Cantidad,pr.Arquiler_Presupuesto,pr.Fecha_Pre_Arqui,pr.Fecha_Devolucion,st.Cantidad_stock,
+						st.Producto_Servicio_idProducto_Servicio as stock_idproduct,
+						da.Producto_Servicio_idProducto_Servicio as detalle_idstock,
+						Presupuesto_Arquiler_idArquiler')
+						->from('producto_servicio ps,stock st,presupuesto_arquiler pr')
+						->join('detalle_arquiler da', 'st.idStock = da.Producto_Servicio_idProducto_Servicio', 'INNER')
+						->where('pr.idArquiler = da.Presupuesto_Arquiler_idArquiler')
+						->where('st.Producto_Servicio_idProducto_Servicio = ps.idProducto_Servicio')
+						->where('pr.Fecha_Devolucion >=',$Fecha_Pre_Arqui)
+						// ->where("pr.Fecha_Devolucion >= '$Fecha_Pre_Arqui'")
+						->where('da.Producto_Servicio_idProducto_Servicio',$idProducto )
+						->where('pr.Arquiler_Presupuesto',1 )
+					->get();
+					$this->output->enable_profiler(true);
+					if ($query->num_rows() == '') {
+					$consul = $this->db->select('Cantidad_stock')
+							->where('idStock',$idProducto )
+							->get('stock');
+							foreach ($consul->result() as $key => $value) {
+								if ($Cantidad > $value->Cantidad_stock) {
+									$data=
+									'<tr ><td><h5>'.$name.'&nbsp;&nbsp;stock &nbsp;&nbsp;<span class="label  label-info">'.$value->Cantidad_stock.'</span></h5></td>
+									<td><h5>&nbsp;&nbsp; Disponibli para alquilar &nbsp;&nbsp;<span class="label label-danger">'.$value->Cantidad_stock.'</span></h5></td></tr>
+									';
+								} 
+							}
+
+					} else {
+							foreach ($query->result() as $row)
+							{
+								$fecha1 = $row->Fecha_Pre_Arqui;
+								$fecha2 =  $row->Fecha_Devolucion;
+								$result = $row->Cantidad_stock - $row->Cantidad;
+								if ($Cantidad > $result and $Cantidad > $row->Cantidad_stock) {
+									$data=
+									'<tr ><td><h5>'.$name.'&nbsp;&nbsp; Disponible stock. &nbsp;&nbsp;<span class="label  label-info">'.$row->Cantidad_stock.'</span></h5></td>
+									<td><h5>&nbsp;&nbsp; Disponibli para alquilar &nbsp;&nbsp;<span class="label label-danger">'.$result.'</span></h5></td></tr>
+									';
+								}
+								if ($Cantidad > $result and $Cantidad < $row->Cantidad_stock) {
+									$data=
+									'<tr ><td><h5>'.$name.'&nbsp;&nbsp; Disponible <span class="label label-danger">'.$result.'</span>
+									&nbsp;&nbsp; Alquilado <span class="label label-danger">'.$row->Cantidad.'</span></h5></td>
+									<td><h5>
+									&nbsp;&nbsp;Disponible desde &nbsp;&nbsp; '.$fecha2.'</h5></td></tr>
+									';
+								}
+								if ($result == 0) {
+									$data=
+									'<tr ><td><h5>'.$name.'&nbsp;&nbsp; Disponible <span class="label label-danger">'.$result.'</span>
+									&nbsp;&nbsp; Alquilado <span class="label label-danger">'.$row->Cantidad.'</span></h5></td>
+									<td><h5>
+									&nbsp;&nbsp;Disponible desde &nbsp;&nbsp; '.$fecha2.'</h5></td></tr>
+									';
+								}
+
+
+							}
+					}
+				if ($data != '')
+				{
+					$datalista[] = array('res' => $data);
+				}
+
+			$i++;
+			}
+			if ($datalista != []) {
+				echo json_encode($datalista);
+			} else {
+				echo json_encode('complte');
+			}
+			exit;
+
 	}
 
 

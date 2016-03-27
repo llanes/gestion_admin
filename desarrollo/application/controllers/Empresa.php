@@ -22,7 +22,7 @@ class Empresa extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Empresas',//mi titulo 
 					'titulo2'=> 'Administrar Empresa',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Empresa',//mi titulo 
 					'titulo5'=> 'Empresa',//mi titulo 
 					"usuario" => $this->session->userdata('usuario'),
@@ -45,7 +45,7 @@ class Empresa extends CI_Controller {
 				$row[] = $empresa->Direccion;
 				$row[] = $empresa->Telefono;
 				$row[] = $empresa->Email;
-					$row[] = $empresa->Geo_posicion_idGeo_posicion;
+					$row[] = '';
 			//add html for action
 			$row[] = '<div class="pull-right hidden-phone">
 			<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_person('."'".$empresa->idEmpresa."'".')">
@@ -103,7 +103,7 @@ class Empresa extends CI_Controller {
 					'Direccion'                   => $this->security->xss_clean( $this->input->post('Direccion',FALSE)),
 					'Telefono'                   => $this->security->xss_clean( $this->input->post('Telefono',FALSE)),
 					'Email'                    => $this->security->xss_clean( $this->input->post('Email',FALSE)),
-					'R_U_C'                       => $this->security->xss_clean( $this->input->post('R_U_C',FALSE)),
+					'R_U_D'                       => $this->security->xss_clean( $this->input->post('R_U_C',FALSE)),
 					'Timbrado'                       => $this->security->xss_clean( $this->input->post('Timbrado',FALSE)),
 					'Series'                       => $this->security->xss_clean( $this->input->post('Series',FALSE)),
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)
@@ -141,7 +141,7 @@ class Empresa extends CI_Controller {
 					'Direccion'                   => $this->security->xss_clean( $this->input->post('Direccion',FALSE)),
 					'Telefono'                   => $this->security->xss_clean( $this->input->post('Telefono',FALSE)),
 					'Email'                    => $this->security->xss_clean( $this->input->post('Email',FALSE)),
-					'R_U_C'                       => $this->security->xss_clean( $this->input->post('R_U_C',FALSE)),
+					'R_U_D'                       => $this->security->xss_clean( $this->input->post('R_U_C',FALSE)),
 					'Timbrado'                       => $this->security->xss_clean( $this->input->post('Timbrado',FALSE)),
 					'Series'                       => $this->security->xss_clean( $this->input->post('Series',FALSE)),
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)

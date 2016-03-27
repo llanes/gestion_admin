@@ -25,7 +25,7 @@ class Agenda extends CI_Controller
 			(
 					'titulo2'=> 'Listados',//mi titulo 
 					'titulo1'=> 'Agenda de Eventos',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Agenda',//mi tit-ulo 
 			);
 			$this->parser->parse('Agenda/agenda_vista.php',$data, FALSE);	

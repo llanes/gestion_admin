@@ -1,4 +1,5 @@
   <script type="text/javascript">
+   $('#form_cobrar').validator();
     var save_method; //for save method string
     var table_Cobranzas;
     var table_Cobrados;
@@ -68,7 +69,9 @@
     }
     function item_cobrar(idCredito)
     {
-      $("#2,#nombre,.modal-title,.C,.D").html("").css({"display":"none"});
+      $("#12,#nombre,.modal-title,.C").html("").css({"display":"none"});
+        $( "#reset_Des" ).removeClass("has-success");
+        $( "#yty" ).removeClass("glyphicon-ok");
       $("#cobros_aler").hide();
       $('#form_cobrar')[0].reset(); // reset form on modals
       $(".modal-body,.modal-header").show();
@@ -79,13 +82,13 @@
         dataType: "JSON",
         success: function(data)
         {
-         
-            $("#nombre").append('<strong class="text-danger"></strong> &nbsp;&nbsp;'+ data.Nombres + '&nbsp;&nbsp;'+ data.Apellidos + '').css({"display":"block"});
-             $("#2").append('<strong class="text-danger"></strong> &nbsp;&nbsp;'+ data.impor + '').css({"display":"block"});
-            $('[name="Importe"]').val(data.impor);
-            $('[name="idCredito"]').val(data.idCredito);
-            $('[name="Estado_Pago"]').val(data.Estado_Pago);
-            $(".modal-title").append('<strong class="text-danger">CUOTA N° :</strong> &nbsp;&nbsp;'+ data.Num_cuota + '').css({"display":"block"});
+        $("#nombre").append('<strong class="text-danger"></strong> &nbsp;&nbsp;'+ data.Nombres + '&nbsp;&nbsp;'+ data.Apellidos + '').css({"display":"block"});
+        $("#2").append('<strong class="text-danger"></strong> &nbsp;&nbsp;'+ data.impor + '').css({"display":"block"});
+        $('[name="Importe"]').val(data.impor);
+        $('#Imp').text(data.impor);
+        $('[name="idCredito"]').val(data.idCredito);
+        $('[name="Estado_Pago"]').val(data.Estado_Pago);
+        $(".modal-title").append('<strong class="text-danger">CUOTA N° :</strong> &nbsp;&nbsp;'+ data.Num_cuota + '').css({"display":"block"});
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -101,8 +104,13 @@
           $("#cobrar").click(function(){
           $('#cobros_vista').show()
           $("#cobros_vista").load('<?php echo base_url("index.php/Cobros")?>');
+
+
+   $('#Descripcion').keyup(function(){
+    $("#12").html("").css({"display":"none"});
+    });
           });
-    $('#form_cobrar').submit(function(e) {
+      $('#form_cobrar').validator().on('submit', function (e) {
       var url = "<?php echo site_url('index.php/Cobros/cobrar_credito'); ?>";
            $.ajax({
                       type : 'POST',
@@ -110,10 +118,12 @@
                       data: $(this).serialize(), // serilizo el formulario
                       success : function(data) {
                          var json = JSON.parse(data);// parseo la dada devuelta por json
-                          $(".D").html("").css({"display":"none"});
+                          $("#12").html("").css({"display":"none"});
                           if (json.res == "error") {
                             if (json.Descripcion) {
-                               $(".1").append(json.Descripcion).css({"display":"block"}); // mostrar validation de iten usuario
+                                $( "#reset_Des" ).addClass("has-error has-danger");
+                               $( "#yty" ).addClass("glyphicon-remove");
+                               $("#12").append(json.Descripcion).css({"display":"block"}); // mostrar validation de iten usuario
                             }
                           }else{ 
                                         $(".modal-body,.modal-header").hide();
@@ -125,6 +135,8 @@
                                             },2000);
                                         $('#form_cobrar')[0].reset(); // reset form on modals
                                         table_Listado_cobrar.ajax.reload(null,false);
+                                      $( "#reset_Des" ).removeClass("has-success");
+                                      $( "#yty" ).removeClass("glyphicon-ok");
                            }
                      },
                       // código a ejecutar si la petición falla;

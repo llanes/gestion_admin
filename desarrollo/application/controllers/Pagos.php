@@ -23,7 +23,7 @@ class Pagos extends CI_Controller {
 			(
 					'titulo1'=> 'Mantenimiento | Pagos',//mi titulo 
 					'titulo2'=> 'Administrar Pagos',//mi titulo 
-					'titulo3'=> 'Home',//mi titulo 
+					'titulo3'=> 'Inicio',//mi titulo 
 					'titulo4'=> 'Pagos',//mi titulo 
 			);
 			$this->parser->parse('Pagos_cobros/pagos_vista.php',$data, FALSE);	
@@ -47,10 +47,10 @@ class Pagos extends CI_Controller {
 		foreach ($list as $pagos) {
 			$no++;
 			$row = array();
-			$row[] = '<i style="text-align:left"><strong>'.$pagos->Descripcion.'</strong></i>';
-			$row[] = '<i style="text-align:left"><strong>'.$pagos->Tipos_Pagos.'</strong></i>';
-			$row[] = '<i style="text-align:left"><strong>'.$pagos->Monto.'</strong></i>';
-			$row[] = '<i style="text-align:left"><strong>'.$pagos->Fecha.'</strong>
+			$row[] = '<i style="text-align:left">'.$pagos->Descripcion.'</i>';
+			$row[] = '<i style="text-align:left">'.$pagos->Tipos_Pagos.'</i>';
+			$row[] = '<i style="text-align:left">'.$pagos->Monto.'</i>';
+			$row[] = '<i style="text-align:left">'.$pagos->Fecha.'
 			&nbsp;&nbsp;&nbsp;'.$pagos->Hora.'</i>';
 			//add html for action
 			$row[] = '<div class="pull-right hidden-phone">
@@ -92,10 +92,11 @@ class Pagos extends CI_Controller {
 				if ($this->input->is_ajax_request()) {
 				$hora = date("H:i:s");
 				$fecha = date("Y-m-d");
-				$this->form_validation->set_error_delimiters('*','');
+				$this->form_validation->set_error_delimiters('<ul class="list-unstyled"><li>','</li></ul>');
 				$idEmpleado = $this->security->xss_clean( $this->input->post('idEmpleado',FALSE));
-				switch ($idEmpleado) {
-					case '1':
+				$ver = $this->security->xss_clean( $this->input->post('ver',FALSE));
+				switch ($ver) {
+					case '0':
 						if ($this->form_validation->run('registro_pagos_1') == FALSE)
 						{
 							$data         = array(
@@ -108,25 +109,7 @@ class Pagos extends CI_Controller {
 						}else{
 
 							$ultimo = $this->ultimoCaja();
-							$Tipos_Pagos = $this->security->xss_clean( $this->input->post('Tipos_Pagos',FALSE));
-							switch ($Tipos_Pagos) {
-								case '1':
-									$tipos    =  'Pagos de Empleado';
-									$empleado =	$idEmpleado;
-									break;
-								case '2':
-									$tipos    =  'Pago de Agua';
-									$empleado = '';
-									break;
-								case '3':
-									$tipos    =  'Pago de Luz';
-									$empleado = '';
-									break;
-								case '4':
-									$tipos    =  'Extras';
-									$empleado = '';
-									break;
-							}
+							$tipos = 'Pagos de Empleado';
 							$data                         = array(
 								'Descripcion' => $this->security->xss_clean( $this->input->post('Descripcion',FALSE)),
 								'Monto'       => $this->security->xss_clean( $this->input->post('Monto',FALSE)),
@@ -134,7 +117,7 @@ class Pagos extends CI_Controller {
 								'Hora'        => $hora,
 								'Tipos_Pagos' => $tipos,
 								'Caja_idCaja' => $ultimo,
-								'Empleado_idEmpleado'  =>  $empleado
+								'Empleado_idEmpleado'  =>  $idEmpleado
 								);
 							$insert = $this->Pagos_model->add_pagos($data);
 							echo json_encode(array("status" => TRUE));
@@ -153,10 +136,6 @@ class Pagos extends CI_Controller {
 							$ultimo = $this->ultimoCaja();
 							$Tipos_Pagos = $this->security->xss_clean( $this->input->post('Tipos_Pagos',FALSE));
 							switch ($Tipos_Pagos) {
-								case '1':
-									$tipos    =  'Pagos de Empleado';
-									$empleado =	$idEmpleado;
-									break;
 								case '2':
 									$tipos    =  'Pago de Agua';
 									$empleado = '';

@@ -31,12 +31,12 @@
                           <div class="panel-body">
                               <div id="" class="tab-content">
                                   <div id="Cobranzas" class="tab-pane active">
-                                  <div id="my-tab-content" class="tab-content">
-                                        <section class="content">
-                                              <table id="table_Cobranzas" class="table table-striped " cellspacing="0" width="100%">
+                                    <div id="my-tab-content" class="tab-content">
+                                          <section class="content panel panel-success panel-body">
+                                              <table id="table_Cobranzas" class="table table-striped table-bordered">
                                                 <thead>
                                                   <tr class="success">
-                                                    <th class ="text-danger" style="width:120px;"><i class="fa fa-list-ol"></i>  Cantidad Cuota</th>
+                                                    <th class ="text-danger" style="width:125px;"><i class="fa fa-list-ol"></i>  Cantidad Cuota</th>
                                                     <th class ="text-danger" ><i class="fa fa-user"></i> Cliente</th>
                                                     <th class ="text-danger" ><i class="fa fa-usd"></i>  Monto Total</th>
                                                      <th class ="text-danger" ><i class="fa fa-usd"></i>  Monto Peniente</th>
@@ -50,9 +50,9 @@
                                   </div>
                                   </div>
                                   <div id="Cobrados" class="tab-pane">
-                                  <div id="my-tab-content" class="tab-content">
-                                        <section class="content">
-                                              <table id="table_Cobrados" class="table table-striped " cellspacing="0" width="100%">
+                                    <div id="my-tab-content" class="tab-content">
+                                          <section class="content panel panel-success panel-body">
+                                              <table id="table_Cobrados" class="table table-striped table-bordered">
                                                 <thead>
                                                   <tr class="success">
                                                     <th class ="text-danger" ><i class="fa fa-th-list"></i>  Cuota N°</th>
@@ -70,9 +70,9 @@
                                   </div>
                                   </div>
                                   <div id="Listado_cobrar" class="tab-pane">
-                                  <div id="my-tab-content" class="tab-content">
-                                        <section class="content">
-                                              <table id="table_Listado_cobrar" class="table table-striped " cellspacing="0" width="100%">
+                                    <div id="my-tab-content" class="tab-content">
+                                          <section class="content panel panel-success panel-body">
+                                              <table id="table_Listado_cobrar" class="table table-striped table-bordered">
                                                 <thead>
                                                   <tr class="success">
                                                     <th class ="text-danger" ><i class="fa fa-th-list"></i>  Cuota N°</th>
@@ -129,19 +129,24 @@
                           <span class ="C text-danger"></span>
                           <div class="form-group has-feedback">
                             <input   type ="hidden" id="Importe" name="Importe" class="form-control " placeholder="Importe" size='45' title="Importe" pattern="[0-9]{1,10}"  >
-                            <div id="2"></div>
+                            <div id="Imp"></div>
                           </div>
                         </td>
                       </tr> 
                       <tr id="transparente" class="transparente">
                        <td style="width: 110px;">
+                       <br>
                             <label for="" class="control-label text-danger">Descripcion</label>
                         </td>
-                        <td style="width: 210px;">
-                          <span class ="D text-danger"></span>
-                          <div class="form-group has-feedback">
-                            <textarea required name='Descripcion' id='Descripcion' class="form-control " rows="2" placeholder="" title="Descripcion " autofocus></textarea>
-                          </div>
+                        <td style="">
+                                  <div class="form-group has-feedback " id="reset_Des">
+                                      <label for="" class="control-label"></label>
+                                      <div class="">
+                                          <textarea required maxlength="50"  name='Descripcion' id='Descripcion' class="form-control " rows="2" placeholder="" title="Descripcion " autofocus></textarea>
+                                      </div>
+                                      <span class="glyphicon form-control-feedback" id="yty" aria-hidden="true"></span>
+                                      <div class="help-block with-errors" id="12"></div>
+                                    </div>
                         </td>
                       </tr> 
                   </tbody>

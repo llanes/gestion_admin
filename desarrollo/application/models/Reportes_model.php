@@ -253,6 +253,12 @@ class Reportes_model extends CI_Model {
 		}
     }
 
+	/**
+	 * [stock_reporte description]
+	 * @param  [type] $rango [description]
+	 * @param  [type] $id    [description]
+	 * @return [type]        [description]
+	 */
     public function stock_reporte($rango,$id)
     {
 		switch ($rango) {
@@ -321,9 +327,10 @@ class Reportes_model extends CI_Model {
 		return  $query->result();
     }
 
-    public function generar_factura($id)
+    public function ge_empleado()
     {
-    	
+		$query = $this->db->get('empresa');
+		return  $query->result();
     }
 
 
@@ -340,10 +347,9 @@ class Reportes_model extends CI_Model {
 
 
 
-	//////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////
-	/////////////funciones privadas///////////////////////////
-	//////////////////////////////////////////////////////////
+	///////////////////////
+	//FUNCIONES PRIVADAS //
+	///////////////////////
 
      private function _rango_alquiler_presu($rango)
     {

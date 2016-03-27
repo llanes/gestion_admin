@@ -16,7 +16,7 @@
 
                                           <tr >
 
-                                                  <?php echo form_hidden(array('style'=> 'border: none;','class' => 'row_id', 'name' => $i.'[qty]', 'value' => $items['qty'], 'data-id'=> $items['rowid'], 'maxlength' => '3', 'size' => '5')); ?>
+                                                  <?php echo form_hidden(array('style'=> 'border: none;','class' => 'row_id', 'name' => $i.'[qty]', 'value' => $items['qty'], 'data-id'=> $items['rowid'], 'maxlength' => '5', 'size' => '5')); ?>
 
                                                   <td colspan="1">
                                                   <?php echo  $items['qty']; ?>
