@@ -3,7 +3,7 @@
 class Home_client_model extends CI_Model {
     var $column = array('idProducto_Servicio','Nombre','Precio_Unitario','Codigo');
     var $order = array('idProducto_Servicio' => 'desc');
-    var $where = '(Arquiler_Presupuesto = 1) OR (Arquiler_Presupuesto = 0)';
+    var $where = 'Arquiler_Presupuesto = 1';
     const TABLA = 'presupuesto_arquiler pre';
     const TABLE_P_S = 'producto_servicio';
 

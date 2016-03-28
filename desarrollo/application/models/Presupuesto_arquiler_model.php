@@ -6,7 +6,7 @@ class Presupuesto_arquiler_model extends CI_Model {
 	var $da = 'detalle_arquiler';
 	var $select = 'pa.Monto_Alquiler_Presupuesto,pa.Arquiler_Presupuesto ,pa.idArquiler ,pa.fecha_expedicion ,pa.Nombre_servicio ,pa.Entrega ,pa.Devolucion ,c.idCliente ,c.Nombres,c.Apellidos  ';
 	var $where = 'Arquiler_Presupuesto = 2';
-	var $where2 = '(Arquiler_Presupuesto = 1) OR (Arquiler_Presupuesto = 0)';
+	var $where2 = 'Arquiler_Presupuesto = 1';
 	var $column = array('Entrega','Devolucion','Monto_Alquiler_Presupuesto','idArquiler','fecha_expedicion','Nombre_servicio','idCliente','Nombres');
 	var $order = array('Entrega  ,Devolucion' => 'desc');
 

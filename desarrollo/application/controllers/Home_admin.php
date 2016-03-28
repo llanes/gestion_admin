@@ -17,7 +17,30 @@ class Home_admin extends CI_Controller {
 
 	public function index()
 	{
-		$hora_actual = strftime( "%H:%M:%S", time() );
+
+
+		
+		$this->output->enable_profiler(TRUE);
+		if ($this->db->count_all_results('empresa') == 0) {
+					$data = array //arreglo para mandar datos a la vista
+			(
+					'titulo'      => 'Sietema | Administrativa',//mi titulo 
+					"usuario"     => $this->session->userdata('usuario'),
+					'num_cliente' => '',
+					'num_empleado' => '',
+					'num_productos' => '',
+
+			);
+			//redirecionamos a la vista o llamamos a la vista index
+			$this->parser->parse('Home_admin/head.php',$data, FALSE);	// carga todos las url de estilo i js home	
+			$this->parser->parse('Home_admin/header.php',$data, FALSE); // esta seria la barra de navegacion horizontal
+			$this->parser->parse('Home_admin/aside.php',$data, FALSE);
+			$this->parser->parse('Home_admin/section.php',$data, FALSE); // este seria todo el contenido central
+			$this->parser->parse('Home_admin/footer.php',$data, FALSE); // este seria todo el contenido central
+			$this->parser->parse('Home_admin/sidebar.php',$data, FALSE); // este seria todo el contenido central
+			$this->load->view('Home_admin/pie_js1.php'); // pie con los js
+		} else {
+				$hora_actual = strftime( "%H:%M:%S", time() );
 		$maximo = '20:00:00';
 		if ($hora_actual > $maximo ) {
 			$verificar_caja = $this->verificar_caja();
@@ -120,6 +143,8 @@ class Home_admin extends CI_Controller {
 			$this->parser->parse('Home_admin/footer.php',$data, FALSE); // este seria todo el contenido central
 			$this->parser->parse('Home_admin/sidebar.php',$data, FALSE); // este seria todo el contenido central
 			$this->load->view('Home_admin/pie_js.php'); // pie con los js
+		}
+
 	}
 
 	private function verificar_caja($value='')
