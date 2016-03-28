@@ -20,7 +20,7 @@ class Home_admin extends CI_Controller {
 
 
 		
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 		if ($this->db->count_all_results('empresa') == 0) {
 					$data = array //arreglo para mandar datos a la vista
 			(
