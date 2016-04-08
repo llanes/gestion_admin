@@ -7,7 +7,7 @@
     <div class="modal fade bs-example-modal-lg" id="snnip">
           <div style="text-align: center">
             <br><br><br><br><br><br><br><br><br><br><br><br>
-             <h1 class="text-danger">Cargando....</h1>
+             <h1 class="text-danger">Cargando..</h1>
             <p class="text-danger"><i class="fa fa-spinner fa-spin fa-5x"></i></p>
           </div>
     </div>
