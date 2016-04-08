@@ -4,6 +4,13 @@
 <style type="text/css" media="screen">
 .User,.Pass{display: none;}
 </style>
+    <div class="modal fade bs-example-modal-lg" id="snnip">
+          <div style="text-align: center">
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+             <h1 class="text-danger">Cargando....</h1>
+            <p class="text-danger"><i class="fa fa-spinner fa-spin fa-5x"></i></p>
+          </div>
+    </div>
    <div class="container">
       <form class="form-signin" id="for_login" action="<?= site_url('index.php/Login/logeo')?> ">
         <h2 class="form-signin-heading">Inicio de Sesion</h2>
@@ -99,12 +106,14 @@
                     if (json.password) {
                        $("#Pass").append(json.password).css({"display":"block"}); /// mostar validation  de iten pass
                     }
-                  }else{ // si pasa la validation redireccionar al ligin del control de acceso
-                      var url = "<?= site_url('index.php/Login')?>";
+                  }else{
+                       $('#snnip').modal('show'); // show bootstrap modal
+                   // si pasa la validation redireccionar al ligin del control de acceso
+                      // var url = "<?= site_url('index.php/Login')?>";
                       // $(location).attr('href',url);
                       // setTimeout($(location).attr('href',url), 10000); 
                       $("#for_login").hide();
-                     setTimeout('document.location.reload()',500);
+                     setTimeout('document.location.reload()',1000);
                    }
              },
               // código a ejecutar si la petición falla;

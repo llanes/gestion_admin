@@ -40,13 +40,14 @@ class Home_admin extends CI_Controller {
 			$this->parser->parse('Home_admin/sidebar.php',$data, FALSE); // este seria todo el contenido central
 			$this->load->view('Home_admin/pie_js1.php'); // pie con los js
 		} else {
-				$hora_actual = strftime( "%H:%M:%S", time() );
-		$maximo = '20:00:00';
-		if ($hora_actual > $maximo ) {
+			$hora_actual = strftime( "%H:%M:%S", time() );
+			$fecha_actual = date("Y-m-d");
+			$fecha = $this->fecha();
+			$maximo = '20:00:00';
+		if ($hora_actual > $maximo or $fecha_actual > $fecha) {
 			$verificar_caja = $this->verificar_caja();
 			if ($verificar_caja == "abierto") {
 				# cerrar caja...
-							$fecha = $this->fecha();
 							$list = $this->Caja_model->get_caja($fecha);
 							// echo json_encode($list);
 							$recordsFiltered = $this->Caja_model->count_filter($fecha);
@@ -107,11 +108,10 @@ class Home_admin extends CI_Controller {
 								$monto_final =  number_format($monto_inicial + $as,0,'.',',');
 							}
 							$Importe         =  str_replace($this->config->item('caracteres'),"",$monto_final);
-										$hora = strftime( "%H:%M:%S", time() );
 										$data               = array(
 											'Monto_final'       => $Importe,
 											'Fecha_cierre'      => $fecha ,
-											'Hora_cierre'       => $hora,
+											'Hora_cierre'       => $maximo,
 											'Cierre'            => '1'
 
 											);
