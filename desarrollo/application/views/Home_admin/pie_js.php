@@ -1,5 +1,3 @@
-
- 
     <!-- datetimepicker-->
     <script src="<?php echo base_url();?>admin_stilo/pikear/js/moment.js"></script>
     <script src="<?php echo base_url();?>admin_stilo/pikear/es.js"></script>
@@ -68,18 +66,23 @@ $(function() {
 });
 $(function () {
         $("#agenda").click(function(){
+        $('#snnip').modal('show'); // show bootstrap modal
         $.ajax({
                 url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
                 type: "POST",
                 dataType: "JSON",
                 data: {param1: 'value1'},
          })
-         .done(function(data) {
-            // $('#skin').removeClass('sidebar-collapse');
+        .done(function(data) {
+        $("#agenda_vista").load('<?php echo base_url("index.php/Agenda")?>');
+        $("#conte_repo,#cliente_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
+        $('.acor,.acor_pa,.admi').hide();
+         setTimeout(function() {
             $('#agenda_vista').show();
-            $("#conte_repo,#cliente_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
-            $("#agenda_vista").load('<?php echo base_url("index.php/Agenda")?>');
-            $('.acor,.acor_pa,.admi').hide();
+
+            $('#snnip').modal('hide'); // show bootstrap modal
+        },800);
+
          })
          .fail(function(data) {
               location.reload();
@@ -87,6 +90,7 @@ $(function () {
         });
 
         $("#cliente").click(function(){
+        $('#snnip').modal('show'); // show bootstrap modal
         $.ajax({
                 url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
                 type: "POST",
@@ -95,16 +99,21 @@ $(function () {
          })
          .done(function(data) {
                  // $('#skin').removeClass('sidebar-collapse');
-            $('#cliente_vista').show();
-            $("#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
             $("#cliente_vista").load('<?php echo base_url("index.php/Cliente")?>');
+            $("#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#caja_vista,#servicios_vista,#presupuesto_vista,#stock_vista,#home,#empleado_vista,#productos_vista").hide();
             $('.acor,.acor_pa,.admi').hide();
+
+        setTimeout(function() {
+            $('#cliente_vista').show();
+            $('#snnip').modal('hide'); // show bootstrap modal
+        },800);
          })
          .fail(function(data) {
               location.reload();
          });
         });
         $("#empleado").click(function(){
+             $('#snnip').modal('show'); // show bootstrap modal
         $.ajax({
                 url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
                 type: "POST",
@@ -113,10 +122,15 @@ $(function () {
          })
          .done(function(data) {
                  // $('#skin').removeClass('sidebar-collapse');
-            $('#empleado_vista').show();
-            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#productos_vista,#caja_vista').hide();
-            $("#empleado_vista").load('<?php echo base_url("index.php/Empleado")?>');
-            $('.acor,.acor_pa,.admi').hide();
+                $("#empleado_vista").load('<?php echo base_url("index.php/Empleado")?>');
+                $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#productos_vista,#caja_vista').hide();
+                $('.acor,.acor_pa,.admi').hide();
+
+            setTimeout(function() {
+                $('#empleado_vista').show();
+
+                $('#snnip').modal('hide'); // show bootstrap modal
+            },800);
          })
          .fail(function(data) {
               location.reload();
@@ -125,6 +139,7 @@ $(function () {
         });
 
          $("#productos").click(function(){
+         $('#snnip').modal('show'); // show bootstrap modal
         $.ajax({
                 url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
                 type: "POST",
@@ -132,11 +147,14 @@ $(function () {
                 data: {param1: 'value1'},
          })
          .done(function(data) {
+            $("#productos_vista").load('<?php echo base_url("index.php/Productos")?>');
+            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+            $('.acor,.acor_pa,.admi').hide();
+            setTimeout(function() {
              // $('#skin').removeClass('sidebar-collapse');
             $('#productos_vista').show();
-            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
-            $("#productos_vista").load('<?php echo base_url("index.php/Productos")?>');
-            $('.acor,.acor_pa,.admi').hide();
+            $('#snnip').modal('hide'); // show bootstrap modal
+        },800);
          })
          .fail(function(data) {
               location.reload();
@@ -145,6 +163,7 @@ $(function () {
         });
 
          $("#Stock").click(function(){
+              $('#snnip').modal('show'); // show bootstrap modal
         $.ajax({
                 url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
                 type: "POST",
@@ -152,11 +171,14 @@ $(function () {
                 data: {param1: 'value1'},
          })
          .done(function(data) {
+            $("#stock_vista").load('<?php echo base_url("index.php/Stock")?>');
+           $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+            $('.acor,.acor_pa').hide();
+            setTimeout(function() {
              // $('#skin').removeClass('sidebar-collapse');
             $('#stock_vista').show();
-            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
-            $("#stock_vista").load('<?php echo base_url("index.php/Stock")?>');
-            $('.acor,.acor_pa').hide();
+            $('#snnip').modal('hide'); // show bootstrap modal
+        },800);
          })
          .fail(function(data) {
               location.reload();
@@ -165,6 +187,7 @@ $(function () {
         });
 
          $("#servicios").click(function(){
+              $('#snnip').modal('show'); // show bootstrap modal
         $.ajax({
                 url : "<?php echo site_url('index.php/Verificar_sesion/index'); ?>",
                 type: "POST",
@@ -172,11 +195,14 @@ $(function () {
                 data: {param1: 'value1'},
          })
          .done(function(data) {
+            $("#servicios_vista").load('<?php echo base_url("index.php/Servicios")?>');
+            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+            $('.acor,.acor_pa,.admi').hide();
+            setTimeout(function() {
              // $('#skin').removeClass('sidebar-collapse');
             $('#servicios_vista').show();
-            $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#presupuesto_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
-            $("#servicios_vista").load('<?php echo base_url("index.php/Servicios")?>');
-            $('.acor,.acor_pa,.admi').hide();
+            $('#snnip').modal('hide'); // show bootstrap modal
+        },800);
          })
          .fail(function(data) {
               location.reload();
@@ -184,7 +210,8 @@ $(function () {
         });
 
          $("#presupuesto").click(function(){
-          $.ajax({
+               $('#presupuesto_vista').hide();
+            $.ajax({
                 url : "<?php echo site_url('index.php/Caja/verificar_caja'); ?>",
                 type: "POST",
                 dataType: "JSON",
@@ -194,11 +221,15 @@ $(function () {
                     if (data == 'cerrada') {
                         swal('Caja Cerrada','')
                     }else{
+                        $('#snnip').modal('show'); // show bootstrap modal
                         $('#skin').addClass('sidebar-collapse');
-                        $('#presupuesto_vista').show();
-                        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
                         $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler")?>');
+                        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
                         $('.acor,.acor_pa,.admi').hide();
+                        setTimeout(function() {
+                        $('#presupuesto_vista').show();
+                        $('#snnip').modal('hide'); // show bootstrap modal
+                        },800);
                     }
 
                 },

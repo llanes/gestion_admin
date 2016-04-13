@@ -41,10 +41,10 @@
                                         </h3>
                                 </td>
                              </div>
-                             <div class="col-xs-3">
+                             <div class="col-xs-1">
                                 <td>
                                     <h5>
-                                        <input required type="text" name="" id="input" class="form-control input-lg" value="{monto_inicio}" placeholder="Introducir" pattern="[0-9]{0,11}" min="0" maxlength="11"  title="insertar" >
+                                        <input required type="text" name="" id="input" class=" input-lg" value="{monto_inicio}" placeholder="Introducir" pattern="[0-9]{0,11}" min="0" maxlength="11"  title="insertar" >
                                     </h5>
                                 </td>
                              </div>
