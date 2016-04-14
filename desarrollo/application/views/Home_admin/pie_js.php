@@ -210,6 +210,7 @@ $(function () {
         });
 
          $("#presupuesto").click(function(){
+               $('#home').show();
                $('#presupuesto_vista').hide();
             $.ajax({
                 url : "<?php echo site_url('index.php/Caja/verificar_caja'); ?>",
@@ -224,12 +225,13 @@ $(function () {
                         $('#snnip').modal('show'); // show bootstrap modal
                         $('#skin').addClass('sidebar-collapse');
                         $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler")?>');
-                        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#productos_vista,#home,#cliente_vista,#empleado_vista,#caja_vista').hide();
+                        $('#conte_repo,#agenda_vista,#cobros_vista,#pagos_vista,#servicios_vista,#productos_vista,#cliente_vista,#empleado_vista,#caja_vista').hide();
                         $('.acor,.acor_pa,.admi').hide();
                         setTimeout(function() {
                         $('#presupuesto_vista').show();
+                        $('#home').hide();
                         $('#snnip').modal('hide'); // show bootstrap modal
-                        },800);
+                        },1000);
                     }
 
                 },

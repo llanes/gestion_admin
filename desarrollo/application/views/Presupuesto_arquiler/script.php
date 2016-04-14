@@ -1,25 +1,37 @@
- 
 <script type="text/javascript">
   $('#listados_presupuesto,#listados_alquiler').hide();
   $(function () {
-         $("#presupuesto1").click(function(){
-        $('#presupuesto_vista').show()
-        $('#listados_presupuesto,#listados_alquiler,#listados_presupuesto,#home,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
-        $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler"); ?>');
+        $("#presupuesto1").click(function(){
+        $('#snnip').modal('show'); // show bootstrap modal
+        $('#presupuesto_alquiler,#listados_presupuesto,#listados_alquiler,#listados_presupuesto,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
+
+                 setTimeout(function() {
+          $('#snnip').modal('hide'); // show bootstrap modal
+          $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler"); ?>');
+          $('#presupuesto_vista').show()
+        },800);
         });
 });
     $(function () {
-         $("#lista_presus").click(function(){
-        $('#listados_presupuesto').show();
+        $("#lista_presus").click(function(){
+        $('#snnip').modal('show'); // show bootstrap modal
         $('#listados_alquiler,#presupuesto_alquiler,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
         $("#listados_presupuesto").load('<?php echo base_url("index.php/Presupuesto_arquiler/listados_presupuesto"); ?>');
+                 setTimeout(function() {
+            $('#listados_presupuesto').show();
+            $('#snnip').modal('hide'); // show bootstrap modal
+        },800);
         });
 });
         $(function () {
-         $("#lista_alqui").click(function(){
-        $('#listados_alquiler').show();
+        $("#lista_alqui").click(function(){
+        $('#snnip').modal('show'); // show bootstrap modal
         $('#presupuesto_alquiler,#listados_presupuesto,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
         $("#listados_alquiler").load('<?php echo base_url("index.php/Presupuesto_arquiler/listados_alquiler"); ?>');
+                 setTimeout(function() {
+            $('#listados_alquiler').show();
+            $('#snnip').modal('hide'); // show bootstrap modal
+        },800);
         });
 });
     function mapa(rowid) {
@@ -432,10 +444,5 @@ $(function() {
             $("#datetimepicker7").on("dp.change", function (e) {
                 $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
             });
-
-            
-        }); 
-
-
-
+        });
 </script>
