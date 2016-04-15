@@ -39,4 +39,10 @@
             <!-- <p class="text-danger"><i class="fa fa-spinner fa-spin fa-5x"></i></p> -->
           </div>
     </div>
- 
+     <div class="modal fade bs-example-modal-lg" id="snnipProcesando">
+          <div style="text-align: center">
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+             <h1 class="text-danger">Procesando....</h1>
+            <p class="text-danger"><i class="fa fa-spinner fa-spin fa-5x"></i></p>
+          </div>
+    </div>

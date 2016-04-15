@@ -299,16 +299,14 @@ $(function() {
 
     function edit_presupuesto(idArquiler)
     {    
-          $('#snnipppp,#snnippp').modal('show'); // show bootstrap modal
+          $('#snnipProcesando').modal('show'); // show bootstrap modal
+          $('#home').show();
+          $('#presupuesto_vista,#listados_presupuesto').hide();
+          $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler/edit_presupuesto"); ?>/' + idArquiler);
           setTimeout(function() {
-             $('.modal').modal('hide'); // show bootstrap modal
-          },1000);
-          setTimeout(function() {
-             $('#snnippp').modal('hide'); // show bootstrap modal
-              $('#presupuesto_vista').show()
-              $('#listados_presupuesto,#listados_alquiler,#listados_presupuesto,#home,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
-              $("#presupuesto_vista").load('<?php echo base_url("index.php/Presupuesto_arquiler/edit_presupuesto"); ?>/' + idArquiler);
-               // $( "#detalle" ).load( "<?php echo site_url('index.php/Presupuesto_arquiler/loader');?>" );
+              $('#listados_alquiler,#listados_presupuesto,#home,#cliente_vista,#empleado_vista,#productos_vista,#stock_vista,#servicios_vista').hide();
+             $('#snnipProcesando').modal('hide'); // show bootstrap modal
+             $('#presupuesto_vista').show()
           },1500);
 
 

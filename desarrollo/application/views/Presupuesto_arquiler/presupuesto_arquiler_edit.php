@@ -30,15 +30,8 @@
                               </ul>
                           </header>
                           <div class="panel-body">
-                              <div id="" class="tab-content"> <div id="presupuesto_alquiler" class="tab-pane active">  
+     <div id="" class="tab-content"> <div id="presupuesto_alquiler" class="tab-pane active">  
                           <!-- comienzo de presupuesto -->
-    <div class="modal fade bs-example-modal-lg" id="snnip">
-          <div style="text-align: center">
-            <br><br><br><br><br><br><br><br><br><br><br><br>
-             <h1 class="text-danger">Procesando....</h1>
-            <p class="text-danger"><i class="fa fa-spinner fa-spin fa-5x"></i></p>
-          </div>
-    </div>
         <section class=''>
           <div class="roww">
              <div  style="height: 300px;  "> 
