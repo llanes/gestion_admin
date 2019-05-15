@@ -132,12 +132,23 @@
                           </div>
                           </td>
                          <td >
-                            <a> Descripcion </a>
+                            <a> Perdida </a>
                          </td>
                           <td>
+                           <span class ="IMG text-danger"></span>
+                          <div class="form-group has-feedback" id="Img">
+                                <input  required type ="text" id="Img" name="Img" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Monto" pattern="[0-9]{0,10}" min="3" maxlength="10"  autofocus >
+                          </div>
+                          </td>
+                       </tr>
+                       <tr id="transparente">
+                         <td >
+                            <a> Descripcion </a>
+                         </td>
+                          <td colspan="3">
                            <span class ="PF text-danger"></span>
                           <div class="form-group has-feedback" id="PF">
-                             <textarea required  rows="2" class="form-control has-feedback"  autofocus="autofocus"   placeholder=""  id='Descripcion' name='Descripcion'  title="Ingrese una Descripcion" type="textarea" pattern="[A-Za-z ]{5,50}" maxlength="50" ></textarea>
+                             <textarea required  rows="1" class="form-control has-feedback"  autofocus="autofocus"   placeholder=""  id='Descripcion' name='Descripcion'  title="Ingrese una Descripcion" type="textarea" pattern="[A-Za-z ]{5,50}" maxlength="50" ></textarea>
                           </div>
                           </td>
                        </tr>

@@ -101,15 +101,15 @@ class Empleado extends CI_Controller {
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)
 					);
 					$insert = $this->Empleado_model->save($data);
-					$Empleado_idEmpleado = $this->	ultimoempleado();
-					$Permiso_idPermiso   = 1;
-					$data                = array(
-					'usuario'             => $this->security->xss_clean($this->input->post('usuario',FALSE)),
-					'password'            => $this->security->xss_clean($this->input->post('password',FALSE)),
-					'Empleado_idEmpleado' => $this->security->xss_clean($Empleado_idEmpleado),
-					'Permiso_idPermiso'   =>$this->security->xss_clean($Permiso_idPermiso),
-					);
-					$insert = $this->Empleado_model->save2($data);
+					// $Empleado_idEmpleado = $this->	ultimoempleado();
+					// $Permiso_idPermiso   = 1;
+					// $data                = array(
+					// 'usuario'             => $this->security->xss_clean($this->input->post('usuario',FALSE)),
+					// 'password'            => $this->security->xss_clean($this->input->post('password',FALSE)),
+					// 'Empleado_idEmpleado' => $this->security->xss_clean($Empleado_idEmpleado),
+					// 'Permiso_idPermiso'   =>$this->security->xss_clean($Permiso_idPermiso),
+					// );
+					// $insert = $this->Empleado_model->save2($data);
 					echo json_encode(array("status" => TRUE));
 				}
         }else{
@@ -147,15 +147,15 @@ class Empleado extends CI_Controller {
 					'Geo_posicion_idGeo_posicion' => $this->security->xss_clean( $Geo_posicion_idGeo_posicion)
 					);
 					$this->Empleado_model->update(array('idEmpleado' => $this->input->post('idEmpleado')), $data);
-					$Permiso_idPermiso   = 1;
-					$data                = array(
-					'usuario'             => $this->security->xss_clean($this->input->post('usuario',FALSE)),
-					'password'            => $this->security->xss_clean($this->input->post('password',FALSE)),
-					'Empleado_idEmpleado' => $this->security->xss_clean($this->input->post('idEmpleado',FALSE)),
-					'Permiso_idPermiso'   =>$this->security->xss_clean($Permiso_idPermiso),
-					);
-					$idEmpleado = $this->security->xss_clean($this->input->post('idEmpleado',FALSE));
-					$this->Empleado_model->update2($idEmpleado,$data);
+					// $Permiso_idPermiso   = 1;
+					// $data                = array(
+					// 'usuario'             => $this->security->xss_clean($this->input->post('usuario',FALSE)),
+					// 'password'            => $this->security->xss_clean($this->input->post('password',FALSE)),
+					// 'Empleado_idEmpleado' => $this->security->xss_clean($this->input->post('idEmpleado',FALSE)),
+					// 'Permiso_idPermiso'   =>$this->security->xss_clean($Permiso_idPermiso),
+					// );
+					// $idEmpleado = $this->security->xss_clean($this->input->post('idEmpleado',FALSE));
+					// $this->Empleado_model->update2($idEmpleado,$data);
 					echo json_encode(array("status" => TRUE));
 				}
         }else{

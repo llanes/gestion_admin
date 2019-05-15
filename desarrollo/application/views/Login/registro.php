@@ -19,7 +19,7 @@
               <div class="form-group has-feedback">
                 <label for="" class="control-label"></label>
                 <div class="">
-                <textarea maxlength="50" id="Direccion" name="Direccion" autofocus class="form-control"  placeholder="Direccion" rows="2" required="required" title="ingrese Direccion" pattern="[A-Za-z ]{5,50}"></textarea>
+                  <input maxlength="35" required type ="text" id="Direccion" name="Direccion" class="form-control " placeholder="Direccion" size='45' title="ingrese Nombre"pattern="[A-Za-z ]{4,50}" maxlength="50" maxlength="30"  autofocus   >
                 </div>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors" id="C"></div>
@@ -35,7 +35,7 @@
               <div class="form-group has-feedback">
                 <label for="" class="control-label"></label>
                 <div class="">
-                    <input maxlength="35" required type ="Email" id="Email" name="Email" class="form-control" placeholder="Correo" title="ejemplo@correo.com" onfocus="autofocus" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" autofocus  >
+                    <input maxlength="35"  type ="Email" id="Email" name="Email" class="form-control" placeholder="Correo" title="ejemplo@correo.com" onfocus="autofocus" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" autofocus  >
                 </div>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors" id="E"></div>
@@ -43,7 +43,7 @@
               <div class="form-group has-feedback">
                 <label for="" class="control-label"></label>
                 <div class="">
-                     <input maxlength="35" required type ="text" id="ci_ruc" name="ci_ruc" class="form-control" placeholder="Cedula R-U-c" size='45'   title="ingrese ci_ruc" pattern="[0-9]{10,15}" min="10" maxlength="15"  autofocus  >
+                     <input maxlength="35" required type ="text" id="ci_ruc" name="ci_ruc" class="form-control" placeholder="Cedula o R-U-C" size='45'   title="ingrese ci_ruc" pattern="[0-9]{10,15}" min="10" maxlength="15"  autofocus  >
                 </div>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors" id="ci"></div>

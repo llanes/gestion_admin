@@ -63,7 +63,7 @@
                 $('[name="usuario"]').val(data.Usuario);
                 $('[name="Descuento"]').val(data.Descuento);
                 $('[name="Iva"]').val(data.Iva);
-                // $('[name="Img"]').val(data.Img);
+                $('[name="Img"]').val(data.Img);
                 $('[name="Categoria"]').val(data.Categoria);
                 $('[name="idCategoria"]').val(data.idCategoria);
             $('#modal_form_productos').modal('show'); // show bootstrap modal when complete loaded
@@ -124,9 +124,9 @@
                             if (json.Iva) {
                                $(".P").append(json.Iva).css({"display":"block"}); /// mostar validation  de iten pass
                             }
-                           // if (json.Img) {
-                           //     $(".IMG").append(json.Img).css({"display":"block"}); /// mostar validation  de iten pass
-                           //  }
+                           if (json.Img) {
+                               $(".IMG").append(json.Img).css({"display":"block"}); /// mostar validation  de iten pass
+                            }
                               if (json.idCategoria) {
                                $(".cate").append(json.idCategoria).css({"display":"block"}); /// mostar validation  de iten pass
                             }

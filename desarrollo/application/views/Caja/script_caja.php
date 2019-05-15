@@ -153,7 +153,7 @@
                         alert('Error');
                     }
                 })
-          swal("Deleted!", "Abierta Correctamente.", "success");
+          swal("OK!", "Abierta Correctamente.", "success");
         } else {
           swal("Cancelled", "Sin accion:)", "error");
         }

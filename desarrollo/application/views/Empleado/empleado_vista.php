@@ -113,7 +113,7 @@
                         <td>
                           <span class ="S text-danger"></span>
                         <div class="form-group has-feedback">
-                          <input required   type ="text" id="Sueldo" name="Sueldo" class="form-control" placeholder="Correo" title="Precio" onfocus="autofocus" pattern="[0-9]{3,10}" autofocus  >
+                          <input required   type ="text" id="Sueldo" name="Sueldo" class="form-control" placeholder="Sueldo" title="Precio" onfocus="autofocus" pattern="[0-9]{3,10}" autofocus  >
                           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </div>
                         </td>
@@ -123,44 +123,11 @@
                         <td>
                         <span class ="C text-danger"></span>
                         <div class="form-group has-feedback">
-                          <input required   type ="text" id="Cargo" name="Cargo" class="form-control" placeholder="cargo" title="cargo" onfocus="autofocus" pattern="[A-Za-z ]{5,50}" autofocus  >
+                          <input    type ="text" id="Cargo" name="Cargo" class="form-control" placeholder="cargo" title="cargo" onfocus="autofocus" pattern="[A-Za-z ]{5,50}" autofocus  >
                           <span class="glyphicon glyphicon-compressed form-control-feedback"></span>
                         </div>
                         </td>
                       </tr> 
-                      <tr id="transparente"> 
-                        <td >
-                          <a> Usuario </a>
-                        </td>
-                        <td>
-                        <span class ="U text-danger"></span>
-                        <div class="form-group has-feedback">
-                          <input required  type ="text" id="usuario" name="usuario" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Usuario" pattern="[A-Za-z ]{3,100}"   >
-                          <span class="glyphicon glyphicon-magnet form-control-feedback"></span>
-                        </div>
-                        </td>
-                        <td >
-                          <a> Contraseña </a>
-                        </td>
-                        <td>
-                        <span class ="P text-danger"></span>
-                        <div class="form-group has-feedback">
-                               <input required   type ="password" id="password" name="password" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Contraseña"   pattern="(?=.*[a-z]).{6,}"  >
-                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        </div>
-                        </td>
-                        </tr> 
-                        <tr id="transparente"> 
-                        <td >
-                          <a> Confirmar </a>
-                        </td>
-                        <td>
-                         <span class ="PF text-danger"></span>
-                        <div class="form-group has-feedback" id="PF">
-                            <input required   type ="password" id="passconf" name="passconf" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Repetir Contraseña"  pattern="(?=.*[a-z]).{6,}">
-                          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-                        </div>
-                        </td>
                      </tr>
                   </tbody>
                 </table>

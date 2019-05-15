@@ -17,7 +17,7 @@
                   <i class="menu-icon fa fa-birthday-cake bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-                    <p>Will be 23 on April 24th</p>
+                    <p>Will be 23 on April 2018</p>
                   </div>
                 </a>
               </li>
@@ -104,7 +104,7 @@
           <!-- Settings tab content -->
           <div class="tab-pane" id="control-sidebar-settings-tab">            
             <form method="post">
-              <h3 class="control-sidebar-heading">General Settings</h3>
+              <h3 class="control-sidebar-heading">General configuraciones</h3>
               <div class="form-group">
                 <label class="control-sidebar-subheading">
                   Report panel usage

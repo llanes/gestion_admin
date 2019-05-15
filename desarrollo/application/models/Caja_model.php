@@ -160,6 +160,9 @@ class Caja_Model extends CI_Model {
 		UNION ALL
 		(SELECT Fecha as fecha_cobro, Descripcion as descripcion, Monto as debe, Null as haber from caja_cobros
 		WHERE Fecha ='".$unix."' AND  Caja_idCaja ='".$id."')
+		UNION ALL
+		(SELECT Fecha as fecha_cobro, 'Cobro Recibo' as descripcion, sum(Monto) as haber, Null as debe from perdidas
+		WHERE Fecha ='".$unix."' AND  Caja_idCaja ='".$id."' GROUP BY Detalle_Arquiler_Presupuesto_Arquiler_idArquiler)
 
 		";
 
@@ -178,6 +181,9 @@ class Caja_Model extends CI_Model {
 		UNION ALL
 		(SELECT Fecha as fecha_cobro, Descripcion as descripcion, Monto as debe, Null as haber from caja_cobros
 		WHERE Fecha ='".$unix."' AND  Caja_idCaja ='".$id."')
+		UNION ALL
+		(SELECT Fecha as fecha_cobro, 'Cobro Recibo' as descripcion, sum(Monto) as haber, Null as debe from perdidas
+		WHERE Fecha ='".$unix."' AND  Caja_idCaja ='".$id."' GROUP BY Detalle_Arquiler_Presupuesto_Arquiler_idArquiler)
 
 		";
 
@@ -196,6 +202,9 @@ class Caja_Model extends CI_Model {
 		UNION ALL
 		(SELECT Fecha as fecha_cobro, Descripcion as descripcion, Monto as debe, Null as haber from caja_cobros
 		WHERE Fecha ='".$unix."' AND  Caja_idCaja ='".$id."')
+		UNION ALL
+		(SELECT Fecha as fecha_cobro, 'Cobro Recibo' as descripcion, sum(Monto) as haber, Null as debe from perdidas
+		WHERE Fecha ='".$unix."' AND  Caja_idCaja ='".$id."' GROUP BY Detalle_Arquiler_Presupuesto_Arquiler_idArquiler)
 
 		";
 		$query = $this->db->query($consult);

@@ -178,11 +178,11 @@
       } else if (cn > 50){
         $(".transparente,.bg-green").show();
           $('.bg-green').text(cn);
-          alert($(".bg-green").html());
+          // alert($(".bg-green").html());
       }else{
         $(".transparente,.bg-blue").show();
           $('.bg-blue').text(cn);
-          alert($(".bg-blue").html());
+          // alert($(".bg-blue").html());
       }
 
       }

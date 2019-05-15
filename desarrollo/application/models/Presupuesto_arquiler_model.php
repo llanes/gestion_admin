@@ -425,6 +425,142 @@ class Presupuesto_arquiler_model extends CI_Model {
 		return $query->result();
 
 	}
+	public function perdidasrecibo($idArquiler)
+	{   
+		$this->db->select('pr.Nombre,per.Cantidad,per.Monto,idPerdidas,da.Iva');
+		$this->db->from('perdidas per');
+		$this->db->join('detalle_arquiler da', 'per.Detalle_Arquiler_idDetalle_Arquiler = da.idDetalle_Arquiler', '');
+		$this->db->join('producto_servicio pr', 'da.Producto_Servicio_idProducto_Servicio = pr.idProducto_Servicio', '');
+		$this->db->where('da.Presupuesto_Arquiler_idArquiler',$idArquiler);
+		$this->db->where('Pagado_si_no = 1');
+		// $this->db->group_by('Nombres,Apellidos,ci_ruc,');
+		$query = $this->db->get();
+
+		foreach ($query->result_array() as $items)
+		{
+					$opciones =  array('Importe' => $items['Iva']);
+				$data = array(
+							'id'      => $items['idPerdidas'],
+							'qty'     => $items['Cantidad'],
+							'price'   => $items['Monto'],
+							'name'    => $items['Nombre'],
+							'options' => $opciones
+						);
+						$this->cart->insert($data); 
+		}
+		$this->db->select('Nombres,Apellidos,ci_ruc');
+		$this->db->from('cliente cl,empresa');
+		$this->db->join('presupuesto_arquiler pr', 'cl.idCliente = pr.Cliente_idCliente ', 'INNER');
+		$this->db->where('idArquiler',$idArquiler);
+		$query = $this->db->get();
+		return $query->result();
+
+	}
+
+	public function ajax_edit_($idArquiler)
+	{
+		$this->db->select('ps.Img,ps.Nombre,ps.Precio_Unitario,da.Cantidad, da.Iva,st.idStock, st.Producto_Servicio_idProducto_Servicio as stock_idproduct,da.Producto_Servicio_idProducto_Servicio as detalle_idstock,da.idDetalle_Arquiler, Presupuesto_Arquiler_idArquiler');
+		$this->db->from('producto_servicio ps,stock st');
+		$this->db->join('detalle_arquiler da', 'st.idStock = da.Producto_Servicio_idProducto_Servicio', 'INNER');
+		$this->db->where('st.Producto_Servicio_idProducto_Servicio = ps.idProducto_Servicio');
+		$this->db->where('Presupuesto_Arquiler_idArquiler',$idArquiler);
+		$query1 = $this->db->get();
+		foreach ($query1->result_array() as $items)
+		{
+					$opciones =  array('Importe' => $items['idDetalle_Arquiler']);
+				$data = array(
+							'id'      => $items['idStock'],
+							'qty'     => $items['Cantidad'],
+							'price'   => $items['Img'],
+							'name'    => $items['Nombre'],
+							'options' => $opciones
+						);
+						$this->cart->insert($data); 
+		}
+		$this->db->select('idCliente as id,');
+		$this->db->from('cliente cl,empresa');
+		$this->db->join('presupuesto_arquiler pr', 'cl.idCliente = pr.Cliente_idCliente ', 'INNER');
+		$this->db->where('idArquiler',$idArquiler);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function recibir($idArquiler,$cliente )
+	{
+
+			$this->db->set('Devolucion', 1);
+			$this->db->where('idArquiler', $idArquiler);
+			$this->db->update($this->table);
+									$i = 1;
+						foreach ($this->cart->contents() as $items) {
+								foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
+																$d_a_i =	$option_value;
+								}
+								$id = $items['id'];
+								$qty = $items['qty'];
+								$monto = $items['price'];
+								$consult ="UPDATE `Stock` SET `Cantidad_stock` = `Cantidad_stock` -'$qty' WHERE `idStock` = '$id'";
+								$query = $this->db->query($consult);
+								if ($qty > 0) {
+									$object = array(
+									'Pagado_si_no'                                     => '2',
+									'Cantidad'                                         => $qty,
+									'Monto'                                            => $qty * $monto ,
+									'Fecha'                                            => date("Y-m-d"),
+									'Cliente_idCliente'                                => $cliente,
+									'Detalle_Arquiler_idDetalle_Arquiler'              => $d_a_i,
+									'Caja_idCaja'                                      => $this->select_max(),
+									'Detalle_Arquiler_Presupuesto_Arquiler_idArquiler' =>$idArquiler);
+									$this->db->insert('perdidas', $object);
+								}
+
+						$i++;
+						}
+
+	}
+
+	public function recibir_cobrar($idArquiler,$cliente )
+	{
+
+			$this->db->set('Devolucion', 1);
+			$this->db->where('idArquiler', $idArquiler);
+			$this->db->update($this->table);
+									$i = 1;
+						foreach ($this->cart->contents() as $items) {
+								foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
+																$d_a_i =	$option_value;
+								}
+								$id = $items['id'];
+								$qty = $items['qty'];
+								$monto = $items['price'];
+								$consult ="UPDATE `Stock` SET `Cantidad_stock` = `Cantidad_stock` -'$qty' WHERE `idStock` = '$id'";
+								$query = $this->db->query($consult);
+								if ($qty > 0) {
+									$object = array(
+										'Pagado_si_no'                                     => '1',
+										'Cantidad'                                         => $qty,
+										'Monto'                                            => $qty * $monto ,
+										'Fecha'                                            => date("Y-m-d"),
+										'Cliente_idCliente'                                => $cliente,
+										'Detalle_Arquiler_idDetalle_Arquiler'              => $d_a_i,
+										'Caja_idCaja'                                      => $this->select_max(),
+										'Detalle_Arquiler_Presupuesto_Arquiler_idArquiler' =>$idArquiler);
+									$this->db->insert('perdidas', $object);
+								}
+
+						$i++;
+						}
+			return $idArquiler;
+	}
+	public function select_max()
+	{
+		$this->db->select_max('idCaja');
+		$query = $this->db->get('caja');  // Produces: SELECT MAX(age) as age FROM members
+				foreach($query->result_array() as $d)
+		{
+			return( $d['idCaja']);
+		}
+	}
 
 	public function get_empre_client()
 	{

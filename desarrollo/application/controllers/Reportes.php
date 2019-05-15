@@ -1597,7 +1597,7 @@ class Reportes extends CI_Controller {
 						$this->pdf->Cell(70,7,'Direccion : '.$key->Direccion ,'',0,'L');
 
 						$this->pdf->SetFont('Arial','B',12);
-						$this->pdf->Cell(70,7,'R.U.D : '.$key->R_U_D ,'TL R',0,'C');
+						$this->pdf->Cell(70,7,'R.U.C : '.$key->R_U_D ,'TL R',0,'C');
 						$this->pdf->Ln(7);
 
 						$this->pdf->Cell(52);	
@@ -1694,10 +1694,136 @@ class Reportes extends CI_Controller {
 							$this->pdf->Output('pdf.pdf','F');  //save pdf
 							$this->pdf->Output('pdf.pdf', 'I'); // show pdf
 
-		
 
 
 	}
+
+/**
+ * { function_description }
+ *
+ * @return     <type>  ( description_of_the_return_value )
+ */
+
+
+	public function recibo($id_)
+	{
+		$this->output->enable_profiler(TRUE);
+			$idArquiler= $this->uri->segment(2);
+			$nombre = 'Recibo N:'.'000'.$idArquiler;
+			$this->cart->destroy();
+			$this->load->model('Presupuesto_arquiler_model');
+			$objeto = $this->Presupuesto_arquiler_model->perdidasrecibo($idArquiler);
+			$empleado = $this->Reportes_model->ge_empleado();
+			// echo var_dump($objeto);
+			// Creacion del PDF
+			/*
+			* Se crea un objeto de la clase Pdf, recuerda que la clase Pdf
+			* heredó todos las variables y métodos de fpdf
+			*/
+			$this->load->library('factura');
+			$this->pdf = new Factura();
+
+			// Agregamos una página
+			$this->pdf->AddPage();
+			// Define el alias para el número de página que se imprimirá en el pie
+			$this->pdf->AliasNbPages();
+			$this->pdf->SetTitle('Alquiler');
+						foreach ($empleado as $key ) {
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(40,7,$key->Nombre,'',0,'L');
+						$this->pdf->SetFont('Arial','B',9);
+						$this->pdf->Cell(12);
+						$this->pdf->Cell(70,7,'Direccion : '.$key->Direccion ,'',0,'L');
+
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(70,7,' ' ,'TL R',0,'C');
+						$this->pdf->Ln(7);
+
+						$this->pdf->Cell(52);	
+						$this->pdf->SetFont('Arial','B',9);
+						$this->pdf->Cell(70,7,'Telefono : '.$key->Telefono ,'',0,'L');
+
+						$this->pdf->SetTextColor(250, 0, 0);
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(70,7,$nombre,'L R',0,'C');
+
+						$this->pdf->SetTextColor(0, 0, 0);
+						$this->pdf->Ln(7);
+						$this->pdf->Cell(52);	
+						$this->pdf->SetFont('Arial','B',9);
+						$this->pdf->Cell(70,7,'Correo  : '.$key->Email ,'',0,'L');
+						$this->pdf->SetFont('Arial','B',12);
+						$this->pdf->Cell(70,7,'    '.' ','L BR',0,'C');
+						}
+			$this->pdf->Ln(10);
+
+			$this->pdf->SetLeftMargin(10);
+			$this->pdf->SetRightMargin(10);
+			$this->pdf->SetFillColor(250,250,250);
+			$this->pdf->SetFont('Arial', 'B', 9);
+			foreach ($objeto as $alias) {
+
+			$this->pdf->Cell(80,6,'Cliente             : '.$alias->Nombres.' '.$alias->Apellidos,'TL',0,'L');
+			$this->pdf->Cell(43,6,'Pago : Contado','T',0,'L');
+			$this->pdf->Cell(69,6,'C.I/R.U.C:  : '.$alias->ci_ruc,'T R',0,'C');
+			$this->pdf->Ln(6);
+			$this->pdf->Cell(192,6,'','L R',0,'L');
+			$this->pdf->Ln(6);
+			$this->pdf->Cell(192,6,'Direccion         : ','L R',0,'L');
+			$this->pdf->Ln(6);
+			$this->pdf->Cell(43,6,'Fecha Emision : '.date('Y-d-m'),'BL ','',0,'L');
+			$this->pdf->Cell(80,6,'','B',0,'C');
+			$this->pdf->Cell(69,6,'','B R',0,'L');
+			$this->pdf->Ln(10);
+			/* Se define el titulo, márgenes izquierdo, derecho y
+			* el color de relleno predeterminado*/
+			$this->pdf->SetFillColor(150,250,150);
+
+			// Se define el formato de fuente: Arial, negritas, tamaño 9
+			/*
+			* TITULOS DE COLUMNAS
+			*
+			* $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
+			*/
+			$this->pdf->Cell(12,7,'#','TBL',0,'C','1');
+			$this->pdf->Cell(30,7,'Can. Perdida','TBL',0,'C','1');
+			$this->pdf->Cell(90,7,'Nombre','TBL',0,'L','1');
+			$this->pdf->Cell(30,7,'Precio Perdida','TBL',0,'L','1');
+			$this->pdf->Cell(30,7,'Subtotal','TBL BR',0,'L','1');
+			$this->pdf->Ln(7);
+			$i = 0;
+			foreach ($this->cart->contents() as $items) {
+				foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value) {
+				$iva =	$option_value;
+				}
+				// se imprime el numero actual y despues se incrementa el valor de $x en uno
+				$this->pdf->Cell(12,6,$i,' ',0,'C',0);
+				// Se imprimen los datos de cada cliente
+				$this->pdf->Cell(30,6,$items['qty'],'',0,'C',0);
+				$this->pdf->Cell(90,6,$items['name'],'',0,'L',0);
+				$this->pdf->Cell(30,6,number_format($items['price'],0,',','.'),'',0,'C',0);
+				$this->pdf->Cell(30,6,number_format($items['subtotal'],0,',','.'),'  ',0,'L',0);
+				//Se agrega un salto de linea
+				$this->pdf->Ln(6);
+				$i++;
+			}
+				$this->pdf->Ln(6);
+				$this->pdf->SetFillColor(0, 27, 0, 1);
+				$this->pdf->SetDrawColor(0, 27, 0, 1);
+				$this->pdf->SetTextColor(0, 27, 0, 1);
+				$this->pdf->SetFont('Arial', 'B',10);
+				$this->pdf->Cell(48,5,'',' ',0,'L',0);
+				$this->pdf->Cell(48,5,'',' ',0,'L',0);
+				$this->pdf->Cell(30,5,'',' ',0,'L',0);
+				$this->pdf->Cell(30,5,' Monto Total a Pagar:     '.number_format($this->cart->total(),0,',','.').'  Gs.',' ',0,'L',0);
+		}
+							$this->pdf->Output('pdf.pdf','F');  //save pdf
+							$this->pdf->Output('pdf.pdf', 'I'); // show pdf
+
+
+
+	}
+
 
 
 

@@ -75,7 +75,7 @@
                                              <label for="" class="control-label text-danger">Cantidad</label>
                                          </td>
                                                <td style="width: 90px; text-align:right">
-                                                <input  type='number' id='cantidad' name="cantidad" class="form-control input-sm" value="" title="catidad"/>
+                                                <input  type='text' id='cantidad' name="cantidad" class="form-control input-sm" value="" title="catidad"/>
                                             </td>
 
                                             <td >

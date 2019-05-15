@@ -21,7 +21,7 @@
                            <th class ="text-danger"><i class="fa fa-road"></i>  Direccion</th>
                            <th class ="text-danger"><i class="fa fa-mobile"></i> Telefono</th>
                            <th class ="text-danger"><i class="fa fa-envelope"></i> Correo</th>
-                           <th class ="text-danger"><i class="fa fa-newspaper-o"></i>  Lugar Mapa</th>
+                           <th class ="text-danger"><i class="fa fa-newspaper-o"></i>  R.U.C</th>
                            <th class ="text-danger" style="width:125px;"><i class="fa fa-cogs"></i> Acciones</th>
                         </tr>
                       </thead>
@@ -103,7 +103,7 @@
                             </div>
                         </td>
                                                 <td >
-                          <a> R.U.D </a>
+                          <a> R.U.C</a>
                         </td>
                         <td>
                             <span class ="RU text-danger"></span>
@@ -134,18 +134,6 @@
                         </div>
                         </td>
                       </tr> 
-                      <tr id="transparente"> 
-                        <td >
-                          <a> Mapa </a>
-                        </td>
-                        <td>
-                         <span class ="MP text-danger"></span>
-                        <div class="form-group has-feedback" id="PF">
-                            <!-- <button type="button" id="mapa" class="btn btn-success btn-sm">Mostrar</button> -->
-                          <span class=""></span>
-                        </div>
-                        </td>
-                     </tr>
                   </tbody>
                 </table>
               </div>

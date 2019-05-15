@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Home';
 $route['factura_pdf/(:num)'] = 'Reportes/factura_pdf/$i';
 $route['boleta/(:num)'] = 'Reportes/boleta/$i';
+$route['Recibo/(:num)'] = 'Reportes/Recibo/$i';
 $route['1'] = 'Home_cliente';
 $route['Gestion'] = 'Home_admin';
 $route['pag/(:num)'] = 'Home_cliente/servicios/$i';

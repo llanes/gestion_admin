@@ -34,6 +34,12 @@ class Presupuesto_arquiler extends CI_Controller {
 	{
 		$this->load->view('Presupuesto_arquiler/cart_get.php');	// carga todos las url de estilo i js home	
 	}
+
+
+	public function devol_load($value='')
+	{
+		$this->load->view('Presupuesto_arquiler/cart_devol.php');	// carga todos las url de estilo i js home	
+	}
 	/**
 	* [agregar_carrito description]
 	* @return [type] [description]
@@ -436,6 +442,15 @@ class Presupuesto_arquiler extends CI_Controller {
 		echo json_encode($data);
 		// $this->output->enable_profiler(true);
 	}
+
+	public function ajax_edit_($idArquiler)
+	{
+		if ($this->input->is_ajax_request()) {
+			$this->cart->destroy();
+			$data = $this->Presupuesto_arquiler_model->ajax_edit_($idArquiler);
+			echo json_encode($data);
+		}
+	}
 	public function edit_presupuesto($idArquiler)
 	{
 			$this->cart->destroy();
@@ -512,7 +527,7 @@ class Presupuesto_arquiler extends CI_Controller {
 				} else {
 						$row[] ='<div class="btn-group btn-group-xs" tabindex="0">
 									<a class="btn  active btn-danger"><i class="fa fa-times"></i> no</a>
-                           <a class ="btn  btn-default" href="javascript:void(0);" title="Devolucion"	onclick="devolucion('."'".$alquiler->idArquiler."'".','."'".$alquiler->Devolucion."'".')">
+                           <a class ="btn  btn-default" href="javascript:void(0);" title="Devolucion"	onclick="devolucion('."'".$alquiler->idArquiler."'".')">
 									<i class="fa fa-check"></i>Recibir</a>
 						</div>';
 				}
@@ -571,8 +586,28 @@ class Presupuesto_arquiler extends CI_Controller {
 		$idArquiler = $this->input->post('id');
 		$devolucion   = $this->input->post('si_no');
 		$this->Presupuesto_arquiler_model->update_devolucion($idArquiler,$devolucion);
-		// echo json_encode(array("status" => TRUE));
-		$this->output->enable_profiler(true);
+		echo json_encode(array("status" => TRUE));
+		// $this->output->enable_profiler(true);
+	}
+
+	public function recibir($value='')
+	{
+		$data = $this->input->post();
+		$data2 = $this->cart->update($data);
+		$idArquiler = $this->input->post('id');
+		$cliente = $this->input->post('cliente');
+		$this->Presupuesto_arquiler_model->recibir($idArquiler,$cliente );
+		echo json_encode(array("status" => TRUE));
+	}
+
+	public function recibir_cobrar()
+	{
+		$data = $this->input->post();
+		$data2 = $this->cart->update($data);
+		$idArquiler = $this->input->post('id');
+		$cliente = $this->input->post('cliente');
+		$data = $this->Presupuesto_arquiler_model->recibir_cobrar($idArquiler,$cliente );
+		echo json_encode($data);
 	}
 	public function load()
 	{

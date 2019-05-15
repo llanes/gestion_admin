@@ -62,8 +62,6 @@ class Cliente_model extends CI_Model {
 	public function get_by_id($id)
 	{
 		$this->db->from($this->table);
-		$this->db->from($this->user);
-		$this->db->where($this->where);
 		$this->db->where('idCliente',$id);
 		$query = $this->db->get();
 

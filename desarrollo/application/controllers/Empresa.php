@@ -45,7 +45,7 @@ class Empresa extends CI_Controller {
 				$row[] = $empresa->Direccion;
 				$row[] = $empresa->Telefono;
 				$row[] = $empresa->Email;
-					$row[] = '';
+					$row[] = $empresa->R_U_D;
 			//add html for action
 			$row[] = '<div class="pull-right hidden-phone">
 			<a class="btn btn-primary btn-xs" href="javascript:void(0);" title="Edit" onclick="edit_person('."'".$empresa->idEmpresa."'".')">

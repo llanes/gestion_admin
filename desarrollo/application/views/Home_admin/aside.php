@@ -104,8 +104,8 @@
               <ul class="treeview-menu admi">
                 <li id="Stock"><a href="#" ><i class="fa fa-circle-o"></i> Stock</a></li>
                 <li id="empresa"><a href="#"><i class="fa fa-circle-o"></i> Empresa</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> </a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i>Usuario</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i>Categoria</a></li>
               </ul>
             </li>
 

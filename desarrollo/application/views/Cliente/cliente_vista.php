@@ -121,17 +121,17 @@
                         <td>
                         <span class ="U text-danger"></span>
                         <div class="form-group has-feedback">
-                          <input required  type ="text" id="usuario" name="usuario" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Usuario" pattern="[A-Za-z ]{3,100}"   >
+                          <input   type ="text" id="usuario" name="usuario" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Usuario" pattern="[A-Za-z ]{3,100}"   >
                           <span class=""></span>
                         </div>
-                        </td>                        
+                        </td>
                         <td >
                           <a> Contraseña </a>
                         </td>
                         <td>
                         <span class ="P text-danger"></span>
                         <div class="form-group has-feedback">
-                               <input required   type ="password" id="password" name="password" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Contraseña"   pattern="(?=.*[a-z]).{6,}"  >
+                               <input    type ="password" id="password" name="password" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Contraseña"   pattern="(?=.*[a-z]).{6,}"  >
                           <span class=""></span>
                         </div>
                         </td>
@@ -143,7 +143,7 @@
                         <td>
                          <span class ="PF text-danger"></span>
                         <div class="form-group has-feedback" id="PF">
-                            <input required   type ="password" id="passconf" name="passconf" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Repetir Contraseña"  pattern="(?=.*[a-z]).{6,}">
+                            <input    type ="password" id="passconf" name="passconf" class="form-control" onfocus="autofocus" autocomplete="off"  placeholder="Repetir Contraseña"  pattern="(?=.*[a-z]).{6,}">
                           <span class=""></span>
                         </div>
                         </td>
